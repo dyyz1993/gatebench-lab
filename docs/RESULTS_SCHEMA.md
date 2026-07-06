@@ -55,15 +55,20 @@
 
 ## 文件组织
 
+每份报告按「日期 + 机器」命名,不同机器各自独立、不混在一起:
+
 ```
-results/<YYYY-MM-DD>/
+results/<YYYY-MM-DD>-<host>/
   raw/              # gitignored,k6/wrk 原始输出
     <impl>-<scenario>-c<concurrency>-<variant>-run<N>.json
   normalized/       # 进版本
     <scenario>.json   # 该场景下所有 impl/并发/变体的数组
-  env.lock          # 进版本,环境与依赖快照
+  env.lock          # 进版本,环境与依赖快照(含机器规格)
   report.html       # 进版本,最终报告
 ```
+
+例:`results/2026-07-15-xyz-mac/`、`results/2026-08-01-prod-host/`。
+**各报告独立成立**,跨报告(跨机器)只看趋势,不比绝对值。
 
 `normalized/<scenario>.json` 是数组:
 
