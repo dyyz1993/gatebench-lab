@@ -1,0 +1,253 @@
+{
+  "scenario": "H1",
+  "records": [
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "jd",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 4696.110960203043,
+        "min": 4696.110960203043,
+        "max": 4696.110960203043
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "jd",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 47138.69081292588,
+        "min": 47138.69081292588,
+        "max": 47138.69081292588
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "jd",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 4106.077935285759,
+        "min": 4106.077935285759,
+        "max": 4106.077935285759
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "jd",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 50674.851467619636,
+        "min": 50674.851467619636,
+        "max": 50674.851467619636
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    }
+  ]
+}

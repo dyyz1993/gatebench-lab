@@ -1,0 +1,377 @@
+{
+  "scenario": "H7",
+  "records": [
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 5103.100819784842,
+        "min": 5103.100819784842,
+        "max": 5103.100819784842
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 39136.29959559453,
+        "min": 39136.29959559453,
+        "max": 39136.29959559453
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 2733.3530328147012,
+        "min": 2733.3530328147012,
+        "max": 2733.3530328147012
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 38145.0665744557,
+        "min": 38145.0665744557,
+        "max": 38145.0665744557
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 3992.8959185130575,
+        "min": 3992.8959185130575,
+        "max": 3992.8959185130575
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 35024.99828870149,
+        "min": 35024.99828870149,
+        "max": 35024.99828870149
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    }
+  ]
+}

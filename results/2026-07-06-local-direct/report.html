@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gateway Benchmark Report — local-direct</title>
+<style>body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  margin: 2em auto;
+  max-width: 1200px;
+  padding: 0 1em;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: 0.3em; }
+h2 { font-size: 1.4em; margin-top: 2em; color: #2c3e50; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+h3 { font-size: 1.1em; margin-top: 1.5em; color: #34495e; }
+h4 { font-size: 1em; margin-top: 1em; color: #555; }
+table {
+  border-collapse: collapse;
+  margin: 0.8em 0 1.5em;
+  width: 100%;
+  font-size: 0.9em;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+th, td {
+  border: 1px solid #d0d0d0;
+  padding: 8px 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+th {
+  background: #f0f4f8;
+  font-weight: 600;
+  color: #2c3e50;
+}
+td:first-child, th:first-child {
+  text-align: left;
+}
+tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+tr:hover td {
+  background: #eef3f7;
+}
+.bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bar {
+  display: inline-block;
+  height: 18px;
+  border-radius: 3px;
+  vertical-align: middle;
+  transition: width 0.2s;
+  min-width: 2px;
+}
+.range {
+  color: #888;
+  font-size: 0.85em;
+}
+.meta {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1em 1.5em;
+  margin: 1em 0;
+}
+.meta dt { font-weight: 600; margin-top: 0.5em; }
+.meta dd { margin-left: 1em; color: #555; }
+footer {
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid #ddd;
+  font-size: 0.85em;
+  color: #888;
+}
+.summary-card {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.8em 1.2em;
+  margin: 0.3em;
+  text-align: center;
+}
+.summary-card .num { font-size: 1.6em; font-weight: 700; color: #2c3e50; display: block; }
+.summary-card .label { font-size: 0.8em; color: #888; }</style>
+</head>
+<body>
+
+<h1>Gateway Benchmark Report</h1>
+
+<div class="meta">
+<dl>
+  <dt>Machine</dt><dd>local-direct</dd>
+  <dt>Results directory</dt><dd>../results/2026-07-06-local-direct</dd>
+  <dt>Generated</dt><dd>2026-07-06T02:45:10.577Z</dd>
+  <dt>Implementations</dt><dd>upstream-direct</dd>
+  <dt>Scenarios</dt><dd>3</dd>
+  <dt>Total records</dt><dd>6</dd>
+  <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of 5 runs, min/max retained. Warm-up 30s excluded. Cross-machine comparison not applicable.</dd>
+</dl>
+</div>
+
+<h2>Executive Summary</h2>
+<p>
+  This report compares gateway implementations (upstream-direct)
+  across 3 benchmark scenarios on machine <strong>local-direct</strong>.
+  Each cell shows the median value across repeated runs, with min–max range in parentheses.
+  Bar lengths are scaled relative to the best (highest RPS / lowest latency) within each table.
+</p>
+<section id="scenario-H1">
+<h2>Scenario: H1</h2>
+<p>2 record(s), 2 concurrency level(s), 1 implementation(s)</p>
+<h3>Streaming vs Buffered</h3>
+<p>Comparison of <code>buffered</code> (full in-memory) vs <code>streaming</code> (chunked) variants.</p><table>
+<thead>
+  <tr>
+    <th>Implementation</th>
+    <th>Concurrency</th>
+    <th colspan="2">RPS</th>
+    <th colspan="2">P95 Latency (ms)</th>
+    <th colspan="2">P99 Latency (ms)</th>
+  </tr>
+  <tr>
+    <th></th><th></th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+  </tr>
+</thead>
+<tbody><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>10</td>
+      <td>57,270.09</td>
+      <td>—</td>
+      <td>0.3</td>
+      <td>—</td>
+      <td>48.7</td>
+      <td>—</td>
+    </tr><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>100</td>
+      <td>51,115.42</td>
+      <td>—</td>
+      <td>4.6</td>
+      <td>—</td>
+      <td>142.3</td>
+      <td>—</td>
+    </tr></tbody></table><h3>Throughput (RPS) — Higher is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td><span class="bar" style="width:100%;background:#4caf50"></span>57,270.09</td><td><span class="bar" style="width:89.25325593167393%;background:#4caf50"></span>51,115.42</td></tr></tbody></table><h3>P50 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.1 <span class="range">(0.1–0.1)</span></td><td>1.0 <span class="range">(1.0–1.0)</span></td></tr></tbody></table><h3>P95 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.3 <span class="range">(0.3–0.3)</span></td><td>4.6 <span class="range">(4.6–4.6)</span></td></tr></tbody></table><h3>P99 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>48.7 <span class="range">(48.7–48.7)</span></td><td>142.3 <span class="range">(142.3–142.3)</span></td></tr></tbody></table><h3>Error Rate — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>100.000%</td><td>100.000%</td></tr></tbody></table></section><section id="scenario-H2">
+<h2>Scenario: H2</h2>
+<p>2 record(s), 2 concurrency level(s), 1 implementation(s)</p>
+<h3>Streaming vs Buffered</h3>
+<p>Comparison of <code>buffered</code> (full in-memory) vs <code>streaming</code> (chunked) variants.</p><table>
+<thead>
+  <tr>
+    <th>Implementation</th>
+    <th>Concurrency</th>
+    <th colspan="2">RPS</th>
+    <th colspan="2">P95 Latency (ms)</th>
+    <th colspan="2">P99 Latency (ms)</th>
+  </tr>
+  <tr>
+    <th></th><th></th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+  </tr>
+</thead>
+<tbody><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>10</td>
+      <td>54,544.72</td>
+      <td>—</td>
+      <td>0.3</td>
+      <td>—</td>
+      <td>26.2</td>
+      <td>—</td>
+    </tr><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>100</td>
+      <td>80,602.29</td>
+      <td>—</td>
+      <td>3.0</td>
+      <td>—</td>
+      <td>34.5</td>
+      <td>—</td>
+    </tr></tbody></table><h3>Throughput (RPS) — Higher is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td><span class="bar" style="width:67.67142720138597%;background:#4caf50"></span>54,544.72</td><td><span class="bar" style="width:100%;background:#4caf50"></span>80,602.29</td></tr></tbody></table><h3>P50 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.1 <span class="range">(0.1–0.1)</span></td><td>0.8 <span class="range">(0.8–0.8)</span></td></tr></tbody></table><h3>P95 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.3 <span class="range">(0.3–0.3)</span></td><td>3.0 <span class="range">(3.0–3.0)</span></td></tr></tbody></table><h3>P99 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>26.2 <span class="range">(26.2–26.2)</span></td><td>34.5 <span class="range">(34.5–34.5)</span></td></tr></tbody></table><h3>Error Rate — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>100.000%</td><td>100.000%</td></tr></tbody></table></section><section id="scenario-H3">
+<h2>Scenario: H3</h2>
+<p>2 record(s), 2 concurrency level(s), 1 implementation(s)</p>
+<h3>Streaming vs Buffered</h3>
+<p>Comparison of <code>buffered</code> (full in-memory) vs <code>streaming</code> (chunked) variants.</p><table>
+<thead>
+  <tr>
+    <th>Implementation</th>
+    <th>Concurrency</th>
+    <th colspan="2">RPS</th>
+    <th colspan="2">P95 Latency (ms)</th>
+    <th colspan="2">P99 Latency (ms)</th>
+  </tr>
+  <tr>
+    <th></th><th></th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+    <th>Buffered</th><th>Streaming</th>
+  </tr>
+</thead>
+<tbody><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>10</td>
+      <td>3,966.09</td>
+      <td>—</td>
+      <td>0.2</td>
+      <td>—</td>
+      <td>26.9</td>
+      <td>—</td>
+    </tr><tr>
+      <td><strong>upstream-direct</strong></td>
+      <td>100</td>
+      <td>8,701.15</td>
+      <td>—</td>
+      <td>0.4</td>
+      <td>—</td>
+      <td>163.4</td>
+      <td>—</td>
+    </tr></tbody></table><h3>Throughput (RPS) — Higher is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td><span class="bar" style="width:45.58121627600949%;background:#4caf50"></span>3,966.09</td><td><span class="bar" style="width:100%;background:#4caf50"></span>8,701.15</td></tr></tbody></table><h3>P50 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.0 <span class="range">(0.0–0.0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>P95 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>0.2 <span class="range">(0.2–0.2)</span></td><td>0.4 <span class="range">(0.4–0.4)</span></td></tr></tbody></table><h3>P99 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>26.9 <span class="range">(26.9–26.9)</span></td><td>163.4 <span class="range">(163.4–163.4)</span></td></tr></tbody></table><h3>Error Rate — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>upstream-direct</strong></td><td>100.000%</td><td>100.000%</td></tr></tbody></table></section>
+<h2>Controlled Variables</h2>
+<ul>
+  <li>Worker count fixed to machine logical cores per BENCHMARK_SPEC §3</li>
+  <li>All builds in release/production mode</li>
+  <li>Dependency versions locked in env.lock</li>
+  <li>Warm-up period not counted in metrics</li>
+  <li>Each (impl × scenario × concurrency) run 5 times, median reported</li>
+</ul>
+
+<h2>Known Limitations</h2>
+<ul>
+  <li><strong>Single-machine self-pressure</strong> (if applicable): k6 and gateway share resources;
+      absolute RPS values may be lower than cross-machine setup. Relative comparisons remain valid.</li>
+  <li><strong>CPU/MEM/GC/FD data</strong> depend on sidecar monitoring (pidstat, /proc) and may be absent
+      in early runs. These fields are filled as the monitoring pipeline matures.</li>
+  <li><strong>Cross-machine comparison:</strong> Reports from different machines are independent.
+      Only compare trends, not absolute values, across machines.</li>
+</ul>
+
+<footer>
+<p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T02:45:10.577Z</p>
+<p>Source: <code>../results/2026-07-06-local-direct</code></p>
+</footer>
+
+</body>
+</html>

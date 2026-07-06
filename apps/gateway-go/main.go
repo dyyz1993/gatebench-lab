@@ -46,8 +46,13 @@ func main() {
 	mux.HandleFunc("GET /response/text", proxyHandler)
 	mux.HandleFunc("GET /response/bin", proxyHandler)
 
-	log.Printf("Gateway starting on :8080 (mode=%s, upstream=%s)", gatewayMode, upstreamBaseURL)
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Printf("Gateway starting on :%s (mode=%s, upstream=%s)", port, gatewayMode, upstreamBaseURL)
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatalf("server error: %v", err)
 	}
 }

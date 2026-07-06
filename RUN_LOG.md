@@ -23,7 +23,7 @@
 
 | 总轮数 | 完成 | 进行中 | 计划 | 失败 |
 |--------|------|--------|------|------|
-| 1 | 1 | 0 | 0 | 0 |
+| 4 | 4 | 0 | 0 | 0 |
 
 ---
 
@@ -45,7 +45,7 @@
 |--------|------|------|---------|
 | P0 规格冻结 | BENCHMARK_SPEC/DESIGN/schema | ✅ | 2026-07-06 |
 | P1 upstream+gateways+scripts | 代码实现 | ✅ | 2026-07-06 |
-| P1 首次压测报告 | 第一轮结果 | ✅ | 2026-07-06 |
+| P1 全量压测报告 | 59 runs across 3 machines | ✅ | 2026-07-06 |
 | P1 xyz-mac 重场景 | H4-H7 streaming+buffered | ⬜ | |
 | P1 jd 轻场景 | H1-H2 跨机对照 | ⬜ | |
 | P1 环境就绪 | 两台机器 ulimit/依赖调优到位 | ⬜ | |
@@ -55,3 +55,7 @@
 | P1 第一版报告 | HTML 报告 + 相对结论 | ⬜ | |
 | P2 WebSocket | W1-W7 + WS 专项报告 | ⬜ | |
 | P3 真实网关能力 | 限流/重试/熔断/metrics + 重测 | ⬜ | |
+
+| 2026-07-06 | R2 | P1 | local | jd | go, rust | H1, H2 | 10/100 | ✅ | `results/2026-07-06-jd/report.html` | 跨机:本地打jd;4种实现×2场景 |
+| 2026-07-06 | R2 | P1 | local | xyz-mac | go, rust, python | H3, H5-H7 | 10/100 | ✅ | `results/2026-07-06-xyz-mac/report.html` | 跨机:本地打xyz-mac;8081端口;H4上传因内存跳过 |
+| 2026-07-06 | R2 | P1 | local | local | upstream-direct | H1-H3 | 10/100 | ✅ | `results/2026-07-06-local-direct/report.html` | 无网关基线对照 |
