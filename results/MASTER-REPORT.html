@@ -440,7 +440,63 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
         }
       });
-      </script><h3>详细数据</h3>
+      </script><h3>📊 能力雷达图(被压机 MacBook-Pro, c=100)</h3>
+    <p style="color:#888;font-size:0.85em;margin-top:-0.5em">每个场景归一化到该组最高RPS=100%。越接近外圈越好。</p>
+    <div class="chart-container" style="height:400px"><canvas id="radar-2026-07-06-MacBook-Pro"></canvas></div>
+    <script>
+    new Chart(document.getElementById('radar-2026-07-06-MacBook-Pro'), {
+      type: 'radar',
+      data: {
+        labels: ["H1","H2","H3","H4"],
+        datasets: [{
+          label: 'go',
+          data: [100,13.520238461491385,39.93825077241689,66.9316271314294],
+          backgroundColor: '#00add822',
+          borderColor: '#00add8',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#00add8',
+        },{
+          label: 'node',
+          data: [46.9368545575211,95.28753359679908,100,100],
+          backgroundColor: '#68a06322',
+          borderColor: '#68a063',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#68a063',
+        },{
+          label: 'python',
+          data: [51.26048207638606,92.95383392067757,90.19804187379484,68.06284531479344],
+          backgroundColor: '#30699822',
+          borderColor: '#306998',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#306998',
+        },{
+          label: 'rust',
+          data: [52.43323279730121,100,36.95547499424706,17.281790323155278],
+          backgroundColor: '#b33dc622',
+          borderColor: '#b33dc6',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#b33dc6',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            ticks: { stepSize: 25, callback: v => v + '%' },
+            grid: { color: '#ddd' },
+            angleLines: { color: '#ddd' },
+          }
+        }
+      }
+    });
+    </script><h3>详细数据</h3>
     <div style="overflow-x:auto"><table class="detail-table">
     <thead><tr>
       <th>实现</th><th>场景</th><th>c</th><th>RPS</th><th>MB/s</th>
@@ -1137,7 +1193,63 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
         }
       });
-      </script><h3>详细数据</h3>
+      </script><h3>📊 能力雷达图(被压机 xyz-mac, c=100)</h3>
+    <p style="color:#888;font-size:0.85em;margin-top:-0.5em">每个场景归一化到该组最高RPS=100%。越接近外圈越好。</p>
+    <div class="chart-container" style="height:400px"><canvas id="radar-2026-07-06-xyz-mac"></canvas></div>
+    <script>
+    new Chart(document.getElementById('radar-2026-07-06-xyz-mac'), {
+      type: 'radar',
+      data: {
+        labels: ["H3","H4","H5","H6","H7"],
+        datasets: [{
+          label: 'go',
+          data: [100,57.46082865960441,100,96.60753892945326,98.8085994276165],
+          backgroundColor: '#00add822',
+          borderColor: '#00add8',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#00add8',
+        },{
+          label: 'node',
+          data: [0,79.38886849478884,91.30881908182964,100,100],
+          backgroundColor: '#68a06322',
+          borderColor: '#68a063',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#68a063',
+        },{
+          label: 'python',
+          data: [75.1301429762384,51.606491259459695,63.71772939593819,80.43831001399312,96.30600343522077],
+          backgroundColor: '#30699822',
+          borderColor: '#306998',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#306998',
+        },{
+          label: 'rust',
+          data: [61.468931069461604,100,64.43425775483071,90.43784119448804,88.42867265485745],
+          backgroundColor: '#b33dc622',
+          borderColor: '#b33dc6',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#b33dc6',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            ticks: { stepSize: 25, callback: v => v + '%' },
+            grid: { color: '#ddd' },
+            angleLines: { color: '#ddd' },
+          }
+        }
+      }
+    });
+    </script><h3>详细数据</h3>
     <div style="overflow-x:auto"><table class="detail-table">
     <thead><tr>
       <th>实现</th><th>场景</th><th>c</th><th>RPS</th><th>MB/s</th>
@@ -1845,6 +1957,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T04:51:25.986Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T04:55:03.342Z</footer>
 </body>
 </html>
