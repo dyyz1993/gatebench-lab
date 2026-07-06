@@ -1,11 +1,14 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 import httpx
+import websockets
+import asyncio
 
 app = FastAPI()
 
 UPSTREAM_BASE_URL = os.getenv("UPSTREAM_BASE_URL", "http://localhost:9000")
+WS_UPSTREAM_BASE = UPSTREAM_BASE_URL.replace("http://", "ws://").replace("https://", "wss://")
 GATEWAY_MODE = os.getenv("GATEWAY_MODE", "")
 
 # Global HTTP client with connection pooling for forwarding requests
@@ -149,6 +152,57 @@ async def response_bin(size: str = "10mb"):
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+# ---------------------------------------------------------------------------
+# WebSocket 代理
+# ---------------------------------------------------------------------------
+
+async def ws_proxy(websocket: WebSocket, upstream_path: str):
+    await websocket.accept()
+    try:
+        async with websockets.connect(f"{WS_UPSTREAM_BASE}{upstream_path}") as upstream_ws:
+            async def upstream_to_client():
+                async for msg in upstream_ws:
+                    if isinstance(msg, bytes):
+                        await websocket.send_bytes(msg)
+                    else:
+                        await websocket.send_text(msg)
+
+            async def client_to_upstream():
+                while True:
+                    try:
+                        data = await websocket.receive()
+                        if data.get("type") == "websocket.disconnect":
+                            break
+                        if "bytes" in data:
+                            await upstream_ws.send(data["bytes"])
+                        elif "text" in data:
+                            await upstream_ws.send(data["text"])
+                    except WebSocketDisconnect:
+                        break
+
+            await asyncio.gather(
+                upstream_to_client(),
+                client_to_upstream(),
+            )
+    except Exception:
+        pass
+
+
+@app.websocket("/ws/echo")
+async def ws_echo(websocket: WebSocket):
+    await ws_proxy(websocket, "/ws/echo")
+
+
+@app.websocket("/ws/broadcast")
+async def ws_broadcast(websocket: WebSocket):
+    await ws_proxy(websocket, "/ws/broadcast")
+
+
+@app.websocket("/ws/heartbeat")
+async def ws_heartbeat(websocket: WebSocket):
+    await ws_proxy(websocket, "/ws/heartbeat")
 
 
 @app.on_event("shutdown")

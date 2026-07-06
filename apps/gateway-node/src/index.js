@@ -120,6 +120,39 @@ fastify.get('/response/bin', async (req, reply) => {
 });
 
 // ---------------------------------------------------------------------------
+// WebSocket 路由
+// ---------------------------------------------------------------------------
+const WS_UPSTREAM = UPSTREAM_BASE_URL.replace(/^http/, 'ws');
+
+fastify.register(require('@fastify/websocket'), {
+  options: { maxPayload: 50 * 1024 * 1024 },
+});
+
+function wsProxy(upstreamPath) {
+  return (socket, req) => {
+    const url = `${WS_UPSTREAM}${upstreamPath}`;
+    const ws = new (require('ws'))(url);
+    
+    ws.on('open', () => {
+      socket.on('message', (data) => {
+        if (ws.readyState === ws.OPEN) ws.send(data);
+      });
+      ws.on('message', (data) => {
+        if (socket.readyState === socket.OPEN) socket.send(data);
+      });
+    });
+    
+    ws.on('error', () => {});
+    socket.on('close', () => ws.close());
+    ws.on('close', () => socket.close());
+  };
+}
+
+fastify.get('/ws/echo', { websocket: true }, wsProxy('/ws/echo'));
+fastify.get('/ws/broadcast', { websocket: true }, wsProxy('/ws/broadcast'));
+fastify.get('/ws/heartbeat', { websocket: true }, wsProxy('/ws/heartbeat'));
+
+// ---------------------------------------------------------------------------
 // 启动服务
 // ---------------------------------------------------------------------------
 const start = async () => {
