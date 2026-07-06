@@ -1,0 +1,389 @@
+{
+  "scenario": "H4",
+  "records": [
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 294.2257252624179,
+        "min": 294.2257252624179,
+        "max": 294.2257252624179
+      },
+      "throughput_mbps": {
+        "median": 3085.355111008457,
+        "min": 3085.355111008457,
+        "max": 3085.355111008457
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 31.623,
+          "min": 31.623,
+          "max": 31.623
+        },
+        "p95": {
+          "median": 39.5691,
+          "min": 39.5691,
+          "max": 39.5691
+        },
+        "p99": {
+          "median": 168.569,
+          "min": 168.569,
+          "max": 168.569
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 228.4552330305635,
+        "min": 228.4552330305635,
+        "max": 228.4552330305635
+      },
+      "throughput_mbps": {
+        "median": 2395.662446710982,
+        "min": 2395.662446710982,
+        "max": 2395.662446710982
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 321.153,
+          "min": 321.153,
+          "max": 321.153
+        },
+        "p95": {
+          "median": 988.9759999999995,
+          "min": 988.9759999999995,
+          "max": 988.9759999999995
+        },
+        "p99": {
+          "median": 6024.661,
+          "min": 6024.661,
+          "max": 6024.661
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 309.07808782268313,
+        "min": 309.07808782268313,
+        "max": 309.07808782268313
+      },
+      "throughput_mbps": {
+        "median": 3241.1022425517444,
+        "min": 3241.1022425517444,
+        "max": 3241.1022425517444
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 30.184,
+          "min": 30.184,
+          "max": 30.184
+        },
+        "p95": {
+          "median": 37.8821,
+          "min": 37.8821,
+          "max": 37.8821
+        },
+        "p99": {
+          "median": 71.619,
+          "min": 71.619,
+          "max": 71.619
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 232.99849414668753,
+        "min": 232.99849414668753,
+        "max": 232.99849414668753
+      },
+      "throughput_mbps": {
+        "median": 2443.304691089093,
+        "min": 2443.304691089093,
+        "max": 2443.304691089093
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 338.933,
+          "min": 338.933,
+          "max": 338.933
+        },
+        "p95": {
+          "median": 958.5582999999999,
+          "min": 958.5582999999999,
+          "max": 958.5582999999999
+        },
+        "p99": {
+          "median": 3470.447,
+          "min": 3470.447,
+          "max": 3470.447
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 290.1427045387893,
+        "min": 290.1427045387893,
+        "max": 290.1427045387893
+      },
+      "throughput_mbps": {
+        "median": 3042.539110311151,
+        "min": 3042.539110311151,
+        "max": 3042.539110311151
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 31.3535,
+          "min": 31.3535,
+          "max": 31.3535
+        },
+        "p95": {
+          "median": 44.462900000000005,
+          "min": 44.462900000000005,
+          "max": 44.462900000000005
+        },
+        "p99": {
+          "median": 145.309,
+          "min": 145.309,
+          "max": 145.309
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H4",
+      "machine": "valid",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 193.45571652420745,
+        "min": 193.45571652420745,
+        "max": 193.45571652420745
+      },
+      "throughput_mbps": {
+        "median": 2028.645126796489,
+        "min": 2028.645126796489,
+        "max": 2028.645126796489
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 389.923,
+          "min": 389.923,
+          "max": 389.923
+        },
+        "p95": {
+          "median": 1104.639399999999,
+          "min": 1104.639399999999,
+          "max": 1104.639399999999
+        },
+        "p99": {
+          "median": 6237.557,
+          "min": 6237.557,
+          "max": 6237.557
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    }
+  ]
+}

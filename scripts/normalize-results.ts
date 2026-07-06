@@ -485,10 +485,12 @@ function main() {
     const { group, firstMeta, firstData } = entry;
     const aggregated = aggregateGroup(group);
 
-	    const reasons: string[] = [];
-	    if (aggregated.error_rate.median >= 0.05) {
-	      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
-	    }
+		    const reasons: string[] = [];
+		    // H5 (instant upload) has intentional cache miss rate = error
+		    const errorThreshold = firstMeta.scenario === 'H5' ? 0.95 : 0.05;
+		    if (aggregated.error_rate.median >= errorThreshold) {
+		      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
+		    }
 	    if (aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
 	      reasons.push('p95/p99=0 (k6 data collection issue)');
 	    }
