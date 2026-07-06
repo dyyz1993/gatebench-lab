@@ -1,0 +1,46 @@
+# === 本地敏感/环境信息(永远不提交) ===
+# AGENTS.md 存放测试机凭据、ssh 别名、任务追踪等本地信息
+AGENTS.md
+
+# === 压测原始结果(体积大,只归一化后的进版本) ===
+results/*/raw/
+
+# === 各语言构建产物 ===
+# Rust
+**/target/
+Cargo.lock
+
+# Go
+*.exe
+*.test
+*.out
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# === 日志与临时文件 ===
+*.log
+*.pid
+*.tmp
+.DS_Store
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
