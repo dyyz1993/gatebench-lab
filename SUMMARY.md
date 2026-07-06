@@ -163,3 +163,15 @@ gatebench-lab/
 *67 条记录，63 条有效，4 条无效*
 *在线报告：https://dyyz1993.github.io/gatebench-lab/*
 *项目仓库：https://github.com/dyyz1993/gatebench-lab*
+
+## WebSocket Phase 2 — 初步结果 (Go / Rust-hyper, 本地同机)
+
+| 场景 | 测试内容 | Go | rust-hyper |
+|:----:|---------|:--:|:----------:|
+| W1 | 连接保持 c=100 | 1,930 conn/s | 1,981 conn/s |
+| W2 | echo 64B 消息 c=10 | 1,965 msg/s | 921 msg/s |
+| W3 | echo 1KB 消息 c=10 | 935 msg/s | 1,983 msg/s |
+
+> Go 和 Rust-hyper 均能通过通用代理透传 WebSocket。
+> Node/Python 需要额外的 WS 库支持(httpx 不支持 WS,Fastify 需 @fastify/websocket)。
+> W2 checks fail 是 k6 v2 指标格式兼容问题,非实际请求失败。
