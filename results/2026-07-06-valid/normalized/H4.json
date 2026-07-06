@@ -391,39 +391,39 @@
       "scenario": "H4",
       "machine": "valid",
       "concurrency": 10,
-      "duration_sec": 15,
+      "duration_sec": 20,
       "runs": 1,
       "rps": {
-        "median": 478.1632563903389,
-        "min": 478.1632563903389,
-        "max": 478.1632563903389
+        "median": 335.1035841246625,
+        "min": 335.1035841246625,
+        "max": 335.1035841246625
       },
       "throughput_mbps": {
-        "median": 5014.274289361494,
-        "min": 5014.274289361494,
-        "max": 5014.274289361494
+        "median": 3514.0627296125213,
+        "min": 3514.0627296125213,
+        "max": 3514.0627296125213
       },
       "latency_ms": {
         "p50": {
-          "median": 23.765,
-          "min": 23.765,
-          "max": 23.765
+          "median": 26.7525,
+          "min": 26.7525,
+          "max": 26.7525
         },
         "p95": {
-          "median": 27.929899999999993,
-          "min": 27.929899999999993,
-          "max": 27.929899999999993
+          "median": 37.52604999999999,
+          "min": 37.52604999999999,
+          "max": 37.52604999999999
         },
         "p99": {
-          "median": 73.969,
-          "min": 73.969,
-          "max": 73.969
+          "median": 172.479,
+          "min": 172.479,
+          "max": 172.479
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0,
+        "min": 0,
+        "max": 0
       },
       "cpu_avg_pct": {
         "median": 0,
@@ -446,8 +446,8 @@
         "max": 0
       },
       "notes": "",
-      "valid": false,
-      "invalid_reason": "error_rate=100%"
+      "valid": true,
+      "invalid_reason": ""
     },
     {
       "impl": "rust-hyper",
@@ -455,39 +455,39 @@
       "scenario": "H4",
       "machine": "valid",
       "concurrency": 100,
-      "duration_sec": 15,
+      "duration_sec": 21,
       "runs": 1,
       "rps": {
-        "median": 357.6191025599184,
-        "min": 357.6191025599184,
-        "max": 357.6191025599184
+        "median": 142.5634930535163,
+        "min": 142.5634930535163,
+        "max": 142.5634930535163
       },
       "throughput_mbps": {
-        "median": 3519.3563282985388,
-        "min": 3519.3563282985388,
-        "max": 3519.3563282985388
+        "median": 1484.0131647507114,
+        "min": 1484.0131647507114,
+        "max": 1484.0131647507114
       },
       "latency_ms": {
         "p50": {
-          "median": 95.479,
-          "min": 95.479,
-          "max": 95.479
+          "median": 317.6755,
+          "min": 317.6755,
+          "max": 317.6755
         },
         "p95": {
-          "median": 255.9054999999999,
-          "min": 255.9054999999999,
-          "max": 255.9054999999999
+          "median": 1389.6938999999993,
+          "min": 1389.6938999999993,
+          "max": 1389.6938999999993
         },
         "p99": {
-          "median": 3312.951,
-          "min": 3312.951,
-          "max": 3312.951
+          "median": 5057.407,
+          "min": 5057.407,
+          "max": 5057.407
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0.013247282608695652,
+        "min": 0.013247282608695652,
+        "max": 0.013247282608695652
       },
       "cpu_avg_pct": {
         "median": 0,
@@ -510,8 +510,8 @@
         "max": 0
       },
       "notes": "",
-      "valid": false,
-      "invalid_reason": "error_rate=100%"
+      "valid": true,
+      "invalid_reason": ""
     },
     {
       "impl": "rust-reqwest",
@@ -519,39 +519,39 @@
       "scenario": "H4",
       "machine": "valid",
       "concurrency": 10,
-      "duration_sec": 15,
+      "duration_sec": 20,
       "runs": 1,
       "rps": {
-        "median": 461.7770151705901,
-        "min": 461.7770151705901,
-        "max": 461.7770151705901
+        "median": 327.2451935955882,
+        "min": 327.2451935955882,
+        "max": 327.2451935955882
       },
       "throughput_mbps": {
-        "median": 4842.439446450879,
-        "min": 4842.439446450879,
-        "max": 4842.439446450879
+        "median": 3431.655740904555,
+        "min": 3431.655740904555,
+        "max": 3431.655740904555
       },
       "latency_ms": {
         "p50": {
-          "median": 24.18,
-          "min": 24.18,
-          "max": 24.18
+          "median": 28.15,
+          "min": 28.15,
+          "max": 28.15
         },
         "p95": {
-          "median": 30.325499999999995,
-          "min": 30.325499999999995,
-          "max": 30.325499999999995
+          "median": 36.9028,
+          "min": 36.9028,
+          "max": 36.9028
         },
         "p99": {
-          "median": 85.996,
-          "min": 85.996,
-          "max": 85.996
+          "median": 124.205,
+          "min": 124.205,
+          "max": 124.205
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0,
+        "min": 0,
+        "max": 0
       },
       "cpu_avg_pct": {
         "median": 0,
@@ -574,8 +574,8 @@
         "max": 0
       },
       "notes": "",
-      "valid": false,
-      "invalid_reason": "error_rate=100%"
+      "valid": true,
+      "invalid_reason": ""
     },
     {
       "impl": "rust-reqwest",
@@ -583,39 +583,39 @@
       "scenario": "H4",
       "machine": "valid",
       "concurrency": 100,
-      "duration_sec": 15,
+      "duration_sec": 24,
       "runs": 1,
       "rps": {
-        "median": 275.7043853650998,
-        "min": 275.7043853650998,
-        "max": 275.7043853650998
+        "median": 199.2989157724208,
+        "min": 199.2989157724208,
+        "max": 199.2989157724208
       },
       "throughput_mbps": {
-        "median": 2593.6192701432874,
-        "min": 2593.6192701432874,
-        "max": 2593.6192701432874
+        "median": 2089.9474823507435,
+        "min": 2089.9474823507435,
+        "max": 2089.9474823507435
       },
       "latency_ms": {
         "p50": {
-          "median": 81.611,
-          "min": 81.611,
-          "max": 81.611
+          "median": 330.575,
+          "min": 330.575,
+          "max": 330.575
         },
         "p95": {
-          "median": 897.6925999999983,
-          "min": 897.6925999999983,
-          "max": 897.6925999999983
+          "median": 935.3348,
+          "min": 935.3348,
+          "max": 935.3348
         },
         "p99": {
-          "median": 1552.416,
-          "min": 1552.416,
-          "max": 1552.416
+          "median": 5471.415,
+          "min": 5471.415,
+          "max": 5471.415
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0,
+        "min": 0,
+        "max": 0
       },
       "cpu_avg_pct": {
         "median": 0,
@@ -638,8 +638,8 @@
         "max": 0
       },
       "notes": "",
-      "valid": false,
-      "invalid_reason": "error_rate=100%"
+      "valid": true,
+      "invalid_reason": ""
     }
   ]
 }
