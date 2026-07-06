@@ -1,0 +1,377 @@
+{
+  "scenario": "H1",
+  "records": [
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 58128.32807507887,
+        "min": 58128.32807507887,
+        "max": 58128.32807507887
+      },
+      "throughput_mbps": {
+        "median": 11.2768956465653,
+        "min": 11.2768956465653,
+        "max": 11.2768956465653
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.117,
+          "min": 0.117,
+          "max": 0.117
+        },
+        "p95": {
+          "median": 0.257,
+          "min": 0.257,
+          "max": 0.257
+        },
+        "p99": {
+          "median": 19.698,
+          "min": 19.698,
+          "max": 19.698
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 79437.8028045901,
+        "min": 79437.8028045901,
+        "max": 79437.8028045901
+      },
+      "throughput_mbps": {
+        "median": 15.410933744090478,
+        "min": 15.410933744090478,
+        "max": 15.410933744090478
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.732,
+          "min": 0.732,
+          "max": 0.732
+        },
+        "p95": {
+          "median": 3.057,
+          "min": 3.057,
+          "max": 3.057
+        },
+        "p99": {
+          "median": 48.713,
+          "min": 48.713,
+          "max": 48.713
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 39192.48835805629,
+        "min": 39192.48835805629,
+        "max": 39192.48835805629
+      },
+      "throughput_mbps": {
+        "median": 10.03327701966241,
+        "min": 10.03327701966241,
+        "max": 10.03327701966241
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.191,
+          "min": 0.191,
+          "max": 0.191
+        },
+        "p95": {
+          "median": 0.409,
+          "min": 0.409,
+          "max": 0.409
+        },
+        "p99": {
+          "median": 7.647,
+          "min": 7.647,
+          "max": 7.647
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 37285.605966080875,
+        "min": 37285.605966080875,
+        "max": 37285.605966080875
+      },
+      "throughput_mbps": {
+        "median": 9.545115127316704,
+        "min": 9.545115127316704,
+        "max": 9.545115127316704
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 2.582,
+          "min": 2.582,
+          "max": 2.582
+        },
+        "p95": {
+          "median": 3.432,
+          "min": 3.432,
+          "max": 3.432
+        },
+        "p99": {
+          "median": 127.041,
+          "min": 127.041,
+          "max": 127.041
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 41069.759566090994,
+        "min": 41069.759566090994,
+        "max": 41069.759566090994
+      },
+      "throughput_mbps": {
+        "median": 10.513858448919294,
+        "min": 10.513858448919294,
+        "max": 10.513858448919294
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.183,
+          "min": 0.183,
+          "max": 0.183
+        },
+        "p95": {
+          "median": 0.387,
+          "min": 0.387,
+          "max": 0.387
+        },
+        "p99": {
+          "median": 7.486,
+          "min": 7.486,
+          "max": 7.486
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H1",
+      "machine": "MacBook-Pro",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 40720.20066852181,
+        "min": 40720.20066852181,
+        "max": 40720.20066852181
+      },
+      "throughput_mbps": {
+        "median": 10.424371371141582,
+        "min": 10.424371371141582,
+        "max": 10.424371371141582
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 2.36,
+          "min": 2.36,
+          "max": 2.36
+        },
+        "p95": {
+          "median": 2.964,
+          "min": 2.964,
+          "max": 2.964
+        },
+        "p99": {
+          "median": 24.307,
+          "min": 24.307,
+          "max": 24.307
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    }
+  ]
+}

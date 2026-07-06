@@ -44,3 +44,4 @@ env/
 .vscode/
 .idea/
 *.swp
+results/*/raw/

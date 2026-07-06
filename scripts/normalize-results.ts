@@ -235,16 +235,7 @@ function parseFilename(filename: string): FileMeta | null {
 /**
  * Extract raw metric values from a k6 JSON summary output.
  *
- * The k6 JSON summary has a `metrics` dict where each key is a metric name.
- * Standard metric names:
- *   - http_reqs
- *   - http_req_duration
- *   - http_req_failed
- *   - data_sent
- *   - data_received
- *   - iterations
- *
- * Each metric has `type`, `contains`, and `values` (flat dict).
+ * Supports both k6 v1 (metrics nested in `values` field) and k6 v2 (flat).
  */
 function parseK6Summary(filePath: string): {
   rps: number;
@@ -260,40 +251,57 @@ function parseK6Summary(filePath: string): {
   const summary: K6Summary = JSON.parse(content);
   const m = summary.metrics;
 
-  // --- RPS: from http_reqs.rate (per-second count) ---
-  const rps = m.http_reqs?.values?.rate ?? 0;
+  // Helper: get from values or flat
+  function v(obj: Record<string, unknown> | undefined, key: string): number | undefined {
+    if (!obj) return undefined;
+    // Try flat key first (k6 v2)
+    const flatVal = obj[key];
+    if (flatVal !== undefined && typeof flatVal === 'number') return flatVal;
+    // Try nested values (k6 v1): obj.values.key
+    const inner = (obj as Record<string, unknown>)['values'] as Record<string, unknown> | undefined;
+    if (inner) {
+      const innerVal = inner[key];
+      if (innerVal !== undefined && typeof innerVal === 'number') return innerVal;
+    }
+    return undefined;
+  }
 
-  // --- Throughput: (data_sent + data_received) / duration ---
-  // k6 data_sent/data_received values.count are absolute bytes.
-  // We compute rate = (sent + received) bytes / duration in seconds, then /1e6 for MB/s.
-  const sent = m.data_sent?.values?.count ?? 0;
-  const recv = m.data_received?.values?.count ?? 0;
-  // Get actual test duration from iteration count / rate, or fallback to http_reqs timing
-  const iterCount = m.iterations?.values?.count ?? 0;
-  const iterRate = m.iterations?.values?.rate ?? 0;
-  // Duration estimate: if we have iteration count and rate, duration = count / rate
-  let durationSec = 60; // default fallback
+  // --- RPS ---
+  const rps = v(m.http_reqs as Record<string, unknown>, 'rate') ?? 0;
+
+  // --- Throughput ---
+  const sent = v(m.data_sent as Record<string, unknown>, 'count') ?? 0;
+  const recv = v(m.data_received as Record<string, unknown>, 'count') ?? 0;
+  const iterCount = v(m.iterations as Record<string, unknown>, 'count') ?? 0;
+  const iterRate = v(m.iterations as Record<string, unknown>, 'rate') ?? 0;
+  let durationSec = 60;
   if (iterRate > 0 && iterCount > 0) {
     durationSec = iterCount / iterRate;
-  } else if (rps > 0 && m.http_reqs?.values?.count) {
-    durationSec = m.http_reqs.values.count / rps;
+  } else if (rps > 0) {
+    const reqCount = v(m.http_reqs as Record<string, unknown>, 'count') ?? 0;
+    if (reqCount > 0) durationSec = reqCount / rps;
   }
   const totalBytes = sent + recv;
   const throughputMbps = durationSec > 0
     ? (totalBytes / durationSec) / 1_000_000
     : 0;
 
-  // --- Latency percentiles from http_req_duration ---
-  const durValues = m.http_req_duration?.values;
-  const p50 = extractPercentile(durValues as Record<string, unknown> | undefined, 'p(50)')
-    ?? durValues?.avg ?? 0;
-  const p95 = extractPercentile(durValues as Record<string, unknown> | undefined, 'p(95)')
-    ?? durValues?.avg ?? 0;
-  const p99 = extractPercentile(durValues as Record<string, unknown> | undefined, 'p(99)')
-    ?? durValues?.max ?? 0;
+  // --- Latency percentiles ---
+  // k6 v1: metrics.http_req_duration.values.{med, p(50), p(95), p(99)}
+  // k6 v2: metrics.http_req_duration.{med, p(90), p(95)}
+  // Work with the raw metric object directly
+  const durRaw = m.http_req_duration as Record<string, unknown> | undefined;
+  const durValues = (durRaw?.values as Record<string, unknown>) ?? durRaw ?? {};
+
+  const p50 = extractPercentile(durValues, 'p(50)') ?? numVal(durValues['med']) ?? 0;
+  const p95 = extractPercentile(durValues, 'p(95)') ?? 0;
+  const p99 = extractPercentile(durValues, 'p(99)') ?? numVal(durValues['max']) ?? 0;
 
   // --- Error rate ---
-  const errorRate = m.http_req_failed?.values?.rate ?? 0;
+  // k6 v1: http_req_failed.values.rate
+  // k6 v2: http_req_failed.value
+  const errRaw = m.http_req_failed as Record<string, unknown> | undefined;
+  const errorRate = v(errRaw, 'rate') ?? numVal(errRaw?.value) ?? 0;
 
   return {
     rps: numVal(rps),
