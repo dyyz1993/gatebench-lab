@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const fastify = require('fastify')({ logger: true });
 
+const PORT = parseInt(process.env.PORT || '8080', 10);
 const UPSTREAM_BASE_URL = process.env.UPSTREAM_BASE_URL || 'http://localhost:9000';
 const GATEWAY_MODE = process.env.GATEWAY_MODE || 'proxy';
 
@@ -116,8 +117,8 @@ fastify.get('/response/bin', async (req, reply) => {
 // ---------------------------------------------------------------------------
 const start = async () => {
   try {
-    await fastify.listen({ port: 8080, host: '0.0.0.0' });
-    console.log(`🚀 Gateway (mode=${GATEWAY_MODE}) listening on 8080`);
+    await fastify.listen({ port: PORT, host: '0.0.0.0' });
+    console.log(`🚀 Gateway (mode=${GATEWAY_MODE}) listening on ${PORT}`);
     console.log(`   UPSTREAM_BASE_URL = ${UPSTREAM_BASE_URL}`);
   } catch (err) {
     fastify.log.error(err);

@@ -50,7 +50,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 
 <div class="header">
   <h1>🏗️ Gateway Benchmark Report</h1>
-  <p>Machine: <strong>local-direct</strong> — 6 data points across 3 scenarios · 1 implementations</p>
+  <p>Machine: <strong>local-direct</strong> — 12 data points across 6 scenarios · 1 implementations</p>
 </div>
 
 <div class="container">
@@ -59,26 +59,29 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
   <dl>
     <dt>Machine</dt><dd>local-direct</dd>
     <dt>Results directory</dt><dd>../results/2026-07-06-local-direct</dd>
-    <dt>Generated</dt><dd>2026-07-06T03:04:35.755Z</dd>
+    <dt>Generated</dt><dd>2026-07-06T03:43:37.551Z</dd>
     <dt>Implementations</dt><dd>upstream-direct</dd>
-    <dt>Scenarios</dt><dd>H1, H2, H3</dd>
-    <dt>Total records</dt><dd>6</dd>
+    <dt>Scenarios</dt><dd>H1, H2, H3, H5, H6, H7</dd>
+    <dt>Total records</dt><dd>12</dd>
     <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of runs, warm-up excluded, min/max retained. Cross-machine comparison not applicable.</dd>
   </dl>
 </div>
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
     <div class="card"><span class="card-num">1</span><span class="card-label">Implementations</span></div>
-    <div class="card"><span class="card-num">3</span><span class="card-label">Scenarios</span></div>
-    <div class="card"><span class="card-num">6</span><span class="card-label">Data Points</span></div>
-    <div class="card"><span class="card-num">80,602.29</span><span class="card-label">Peak RPS (upstream-direct)</span></div>
+    <div class="card"><span class="card-num">6</span><span class="card-label">Scenarios</span></div>
+    <div class="card"><span class="card-num">12</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">93,695.80</span><span class="card-label">Peak RPS (upstream-direct)</span></div>
   </div>
 
 <div class="toc">
   <h2>📋 Scenarios</h2>
   <ul><li><a href="#scenario-H1">H1</a> (2 records)</li>
 <li><a href="#scenario-H2">H2</a> (2 records)</li>
-<li><a href="#scenario-H3">H3</a> (2 records)</li></ul>
+<li><a href="#scenario-H3">H3</a> (2 records)</li>
+<li><a href="#scenario-H5">H5</a> (2 records)</li>
+<li><a href="#scenario-H6">H6</a> (2 records)</li>
+<li><a href="#scenario-H7">H7</a> (2 records)</li></ul>
 </div>
 
 <section id="scenario-H1">
@@ -483,6 +486,408 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>163.4</td>
         <td>100.00%</td>
       </tr></tbody></table></div></section>
+<section id="scenario-H5">
+<h2>Scenario: H5</h2>
+<p>2 data point(s), 2 concurrency level(s), 1 implementation(s)</p><div class="chart-container">
+    <canvas id="chart-H5"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H5'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [55009.8227897923,76297.61555660778],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H5: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H5-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H5-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.11,0.793],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H5: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H5-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H5-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.245,3.208],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H5: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H5-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H5-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [23.404,57.843],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H5: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:72.09900648727174%"></div><span>55,009.82</span></div></td>
+        <td>19.9 MB/s</td>
+        <td>0.1</td>
+        <td>0.2</td>
+        <td>23.4</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>76,297.62</span></div></td>
+        <td>27.5 MB/s</td>
+        <td>0.8</td>
+        <td>3.2</td>
+        <td>57.8</td>
+        <td>100.00%</td>
+      </tr></tbody></table></div></section>
+<section id="scenario-H6">
+<h2>Scenario: H6</h2>
+<p>2 data point(s), 2 concurrency level(s), 1 implementation(s)</p><div class="chart-container">
+    <canvas id="chart-H6"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H6'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [60932.204293763614,93695.79988184004],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H6: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H6-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H6-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.116,0.679],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H6: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H6-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H6-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.244,2.651],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H6: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H6-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H6-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [14.122,41.963],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H6: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:65.03194846578538%"></div><span>60,932.20</span></div></td>
+        <td>16.4 MB/s</td>
+        <td>0.1</td>
+        <td>0.2</td>
+        <td>14.1</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>93,695.80</span></div></td>
+        <td>25.2 MB/s</td>
+        <td>0.7</td>
+        <td>2.7</td>
+        <td>42.0</td>
+        <td>100.00%</td>
+      </tr></tbody></table></div></section>
+<section id="scenario-H7">
+<h2>Scenario: H7</h2>
+<p>2 data point(s), 2 concurrency level(s), 1 implementation(s)</p><div class="chart-container">
+    <canvas id="chart-H7"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H7'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [61164.2121863501,91345.34344184688],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H7: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H7-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H7-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.116,0.687],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H7: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H7-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H7-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [0.244,2.687],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H7: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H7-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H7-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "upstream-direct",
+        data: [15.757,28.326],
+        backgroundColor: '#88844',
+        borderColor: '#888',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H7: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:66.95931054798544%"></div><span>61,164.21</span></div></td>
+        <td>16.4 MB/s</td>
+        <td>0.1</td>
+        <td>0.2</td>
+        <td>15.8</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>upstream-direct</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>91,345.34</span></div></td>
+        <td>24.5 MB/s</td>
+        <td>0.7</td>
+        <td>2.7</td>
+        <td>28.3</td>
+        <td>100.00%</td>
+      </tr></tbody></table></div></section>
 
 <h2 style="color:#0f3460;margin-top:2em">📌 Known Limitations</h2>
 <div class="meta">
@@ -497,7 +902,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 <footer>
-  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:04:35.755Z</p>
+  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:43:37.552Z</p>
 </footer>
 
 </body>

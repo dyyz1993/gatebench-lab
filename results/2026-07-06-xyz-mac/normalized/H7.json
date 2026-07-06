@@ -126,6 +126,130 @@
       "notes": ""
     },
     {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 4163.664035016962,
+        "min": 4163.664035016962,
+        "max": 4163.664035016962
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "xyz-mac",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 39608.19181964453,
+        "min": 39608.19181964453,
+        "max": 39608.19181964453
+      },
+      "throughput_mbps": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
       "impl": "python",
       "variant": "buffered",
       "scenario": "H7",

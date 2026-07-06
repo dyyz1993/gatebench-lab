@@ -372,6 +372,130 @@
         "max": 0
       },
       "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H3",
+      "machine": "MacBook-Pro",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 4242.50799647225,
+        "min": 4242.50799647225,
+        "max": 4242.50799647225
+      },
+      "throughput_mbps": {
+        "median": 2207.4938596874654,
+        "min": 2207.4938596874654,
+        "max": 2207.4938596874654
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.013,
+          "min": 0.013,
+          "max": 0.013
+        },
+        "p95": {
+          "median": 1.5984999999999971,
+          "min": 1.5984999999999971,
+          "max": 1.5984999999999971
+        },
+        "p99": {
+          "median": 32.148,
+          "min": 32.148,
+          "max": 32.148
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H3",
+      "machine": "MacBook-Pro",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 903.1439301866551,
+        "min": 903.1439301866551,
+        "max": 903.1439301866551
+      },
+      "throughput_mbps": {
+        "median": 63.94308238555523,
+        "min": 63.94308238555523,
+        "max": 63.94308238555523
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0.026,
+          "min": 0.026,
+          "max": 0.026
+        },
+        "p99": {
+          "median": 4216.887,
+          "min": 4216.887,
+          "max": 4216.887
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
     }
   ]
 }
