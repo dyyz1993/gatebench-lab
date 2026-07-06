@@ -491,7 +491,11 @@ function main() {
 		    if (aggregated.error_rate.median >= errorThreshold) {
 		      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
 		    }
-	    if (aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
+		    // rps=0: no completed requests (hung gateway / timeout / mem pressure)
+		    if (aggregated.rps.median === 0) {
+		      reasons.push('rps=0 (no completed requests)');
+		    }
+		    if (aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
 	      reasons.push('p95/p99=0 (k6 data collection issue)');
 	    }
 

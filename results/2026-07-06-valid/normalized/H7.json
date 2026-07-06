@@ -384,6 +384,262 @@
       "notes": "",
       "valid": true,
       "invalid_reason": ""
+    },
+    {
+      "impl": "rust-hyper",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "valid",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 217.6851341544516,
+        "min": 217.6851341544516,
+        "max": 217.6851341544516
+      },
+      "throughput_mbps": {
+        "median": 2282.6511058165306,
+        "min": 2282.6511058165306,
+        "max": 2282.6511058165306
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 45.5445,
+          "min": 45.5445,
+          "max": 45.5445
+        },
+        "p95": {
+          "median": 49.26345,
+          "min": 49.26345,
+          "max": 49.26345
+        },
+        "p99": {
+          "median": 81.97,
+          "min": 81.97,
+          "max": 81.97
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust-hyper",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "valid",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 190.67018092358524,
+        "min": 190.67018092358524,
+        "max": 190.67018092358524
+      },
+      "throughput_mbps": {
+        "median": 1999.371711908695,
+        "min": 1999.371711908695,
+        "max": 1999.371711908695
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 525.3745,
+          "min": 525.3745,
+          "max": 525.3745
+        },
+        "p95": {
+          "median": 628.0502499999999,
+          "min": 628.0502499999999,
+          "max": 628.0502499999999
+        },
+        "p99": {
+          "median": 885.173,
+          "min": 885.173,
+          "max": 885.173
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust-reqwest",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "valid",
+      "concurrency": 10,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 169.33480342802255,
+        "min": 169.33480342802255,
+        "max": 169.33480342802255
+      },
+      "throughput_mbps": {
+        "median": 1775.6484741119198,
+        "min": 1775.6484741119198,
+        "max": 1775.6484741119198
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 53.827,
+          "min": 53.827,
+          "max": 53.827
+        },
+        "p95": {
+          "median": 88.893,
+          "min": 88.893,
+          "max": 88.893
+        },
+        "p99": {
+          "median": 176.765,
+          "min": 176.765,
+          "max": 176.765
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust-reqwest",
+      "variant": "buffered",
+      "scenario": "H7",
+      "machine": "valid",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 200.15711747705666,
+        "min": 200.15711747705666,
+        "max": 200.15711747705666
+      },
+      "throughput_mbps": {
+        "median": 2098.8519373210006,
+        "min": 2098.8519373210006,
+        "max": 2098.8519373210006
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 498.91999999999996,
+          "min": 498.91999999999996,
+          "max": 498.91999999999996
+        },
+        "p95": {
+          "median": 558.189,
+          "min": 558.189,
+          "max": 558.189
+        },
+        "p99": {
+          "median": 1244.949,
+          "min": 1244.949,
+          "max": 1244.949
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
     }
   ]
 }

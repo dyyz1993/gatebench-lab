@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -122,35 +123,21 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// Pre-generated large text payload for H6 — avoids per-request chunk+flush loop.
+var textPayload []byte
+
+func init() {
+	line := []byte("the quick brown fox jumps over the lazy dog\n")
+	const targetSize = 10 * 1024 * 1024
+	textPayload = bytes.Repeat(line, targetSize/len(line))
+}
+
 // --- large text response ---
 
 func textHandler(w http.ResponseWriter, r *http.Request) {
-	sizeStr := r.URL.Query().Get("size")
-	size := 10 * 1024 * 1024 // default 10MB
-	if sizeStr != "" {
-		if p, err := strconv.Atoi(sizeStr); err == nil && p > 0 {
-			size = p
-		}
-	}
-
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	w.Header().Set("Content-Length", strconv.Itoa(size))
-
-	// Stream the response in chunks
-	chunk := make([]byte, 64*1024)
-	line := []byte("the quick brown fox jumps over the lazy dog\n")
-	written := 0
-	for written < size {
-		n := copy(chunk, line)
-		if written+n > size {
-			n = size - written
-		}
-		w.Write(chunk[:n])
-		written += n
-		if f, ok := w.(http.Flusher); ok {
-			f.Flush()
-		}
-	}
+	w.Header().Set("Content-Length", strconv.Itoa(len(textPayload)))
+	w.Write(textPayload)
 }
 
 // --- binary response ---

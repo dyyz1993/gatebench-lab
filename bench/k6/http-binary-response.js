@@ -10,6 +10,6 @@ export let options = {
 const BASE = __ENV.TARGET_URL || 'http://localhost:8080';
 
 export default function () {
-  const res = http.get(`${BASE}/response/bin?size=10mb`);
+  const res = http.get(`${BASE}/response/bin?size=10mb`, { responseType: 'binary' });
   check(res, { 'status 200': (r) => r.status === 200 });
 }

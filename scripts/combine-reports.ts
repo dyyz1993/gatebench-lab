@@ -284,7 +284,6 @@ ${sceneHtml}
 
 ${groupHtml}
 
-<h2>📐 开发效率评分</h2>
 ${devEfficiencyHtml}
 
 <h2>🔮 Phase 2: 实时与四层网络服务语言选型</h2>

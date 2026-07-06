@@ -22,24 +22,22 @@
 
 | 阶段 | 范围 | 状态 |
 |------|------|------|
-| **Phase 1a** HTTP 基础场景 | H1 GET / H2 代理 GET / H3 JSON 1MB | ✅ **完成（24 条有效数据）** |
-| Phase 1b HTTP 重场景 | H4 上传 / H5 秒传 / H6 大文本 / H7 大二进制 | ⏳ 待跑 |
+| **Phase 1** HTTP 场景 | H1-H7 全部覆盖 | ✅ **完成（67 条记录，63 有效）** |
 | Phase 2 WebSocket | W1-W8 连接保持/echo/广播/soak | ⏳ 脚本就绪，待网络直连 |
 | Phase 3 TCP / UDP / QUIC | ⬜ 未开始 |
 | Phase 4 真实网关能力 | 限流/熔断/metrics/日志/trace | ⬜ 未开始 |
 
 ### 覆盖矩阵
 
-| 实现 | H1 GET | H2 代理 | H3 JSON 1MB | H4 上传 | H5 秒传 | H6 大文本 | H7 大二进制 |
-|:----:|:------:|:-------:|:-----------:|:-------:|:-------:|:---------:|:----------:|
-| **Go** (ReverseProxy) | ✅ 有效 | ✅ 有效 | ✅ 有效 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 |
-| **Python** (FastAPI+httpx) | ✅ 有效 | ✅ 有效 | ✅ 有效 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 |
-| **Node** (Fastify+undici) | ✅ 有效 | ✅ 有效 | ✅ 有效 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 |
-| **Rust-hyper** (hyper直连) | ✅ 有效 | ✅ 有效 | ✅ 有效 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 | ⏳ 待跑 |
-| Rust-reqwest (baseline) | ✅ 已测 | ✅ 已测 | ✅ 已测 | ❌ 跳过 | ❌ 跳过 | ❌ 跳过 | ❌ 跳过 |
+| 实现 | H1 GET | H2 代理 | H3 JSON | H4 上传 | H5 秒传 | H6 大文本 | H7 大二进制 |
+|:----:|:------:|:-------:|:-------:|:-------:|:-------:|:---------:|:----------:|
+| **Go** (ReverseProxy) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Node** (Fastify+undici) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Python** (FastAPI+httpx) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Rust-reqwest** (axum+reqwest) | ✅ | ✅ | ✅ | ❌4 | ✅ | ✅ | ✅ |
+| **Rust-hyper** (axum+hyper直连) | ✅ | ✅ | ✅ | ❌4 | ✅ | ✅ | ✅ |
 
-> **5 个实现：** Go / Python / Node / **Rust-reqwest（baseline）** / **Rust-hyper（optimized）**
-> 核心排名仅使用 Rust-hyper（optimized 版），Rust-reqwest 作为实现差异对比参考，不参与语言排名。
+> 4. Rust 两版本的 H4(上传)返回 error_rate=100%。极可能是 Rust 网关不兼容 Go upstream-echo 的 multipart 处理方式,Phase 1c 时排查。
 
 ## 三、HTTP 基础场景初步结论（基于 H1-H3 的 24 条有效数据）
 
@@ -61,19 +59,20 @@ Rust-hyper：optimized 版显著优于 reqwest 版，H1 提升 68%。
            适合后续验证高性能上限，但当前尚未在所有场景追平 Go。
 ```
 
-### 3.2 性能数据（c=100，本地同机）
+### 3.2 性能数据（c=100，本地同机，63 条有效）
 
-| 场景 | 1st | 2nd | 3rd | 4th |
-|:----:|:---:|:---:|:---:|:---:|
-| H1 GET /ping | **Go 91,128** | Python 90,593 | rust-hyper 80,256 | Node 75,539 |
-| H2 代理GET 1KB | **Python 27,810** | Go 27,102 | Node 24,637 | rust-hyper 23,920 |
-| H3 POST JSON 1MB | **Go 969** | rust-hyper 902 | Python 876 | Node 817 |
+| 场景 | Go | Node | Python | rust-reqwest | rust-hyper |
+|:----:|:--:|:----:|:------:|:------------:|:----------:|
+| H1 GET /ping | **91,128** | 75,539 | 90,593 | 89,148 | 84,412 |
+| H2 代理GET 1KB | 27,102 | 24,637 | **27,810** | 28,369 | 46,211* |
+| H3 POST JSON 1MB | **969** | 817 | 876 | 699 | 945 |
+| H4 上传 10MB | **228** | 233 | 193 | ❌ | ❌ |
+| H5 秒传 50%命中 | **58,674** | 58,893 | 43,487 | 12,957 | 20,088 |
+| H6 大文本 10MB | **250** | 196 | 197 | 157 | 200 |
+| H7 二进制 10MB | **222** | 211 | 191 | 200 | 191 |
 
-**初步解读：**
-- 四个语言在 H1 上最大差距约 20%（75k~91k RPS）；H3 缩小到约 15%
-- Python 在 H1/H2 上表现明显好于预期，和 Go 接近
-- 在瓶颈不在 CPU 的场景下（如同机 I/O 等待），语言差异缩小
-- **当前差距主要来自实现策略而非语言运行时**（Go ReverseProxy vs Rust reqwest vs Node undici vs Python httpx）
+> *rust-hyper H2 数据异常偏高(46k vs 正常 24-28k),疑似同机自压噪点,需跨机复跑确认。
+> 4 条 Rust × H4 数据 error_rate=100%,已从排行榜排除。
 
 ### 3.3 数据可信度
 
@@ -160,6 +159,7 @@ gatebench-lab/
 
 ---
 
-*报告版本：Phase 1a / 2026-07-06*
+*报告版本：Phase 1 / 2026-07-06*
+*67 条记录，63 条有效，4 条无效*
 *在线报告：https://dyyz1993.github.io/gatebench-lab/*
 *项目仓库：https://github.com/dyyz1993/gatebench-lab*
