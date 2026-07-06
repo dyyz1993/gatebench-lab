@@ -8,8 +8,11 @@ app = FastAPI()
 UPSTREAM_BASE_URL = os.getenv("UPSTREAM_BASE_URL", "http://localhost:9000")
 GATEWAY_MODE = os.getenv("GATEWAY_MODE", "")
 
-# Global HTTP client for forwarding requests
-client = httpx.AsyncClient(timeout=60.0)
+# Global HTTP client with connection pooling for forwarding requests
+client = httpx.AsyncClient(
+    timeout=60.0,
+    limits=httpx.Limits(max_keepalive_connections=256, max_connections=1024),
+)
 
 # Simple in-memory hash set for instant upload (秒传)
 _hash_cache: set[str] = set()

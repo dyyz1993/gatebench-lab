@@ -15,7 +15,14 @@ const GATEWAY_MODE = process.env.GATEWAY_MODE || 'proxy';
 // ---------------------------------------------------------------------------
 fastify.register(require('@fastify/reply-from'), {
   base: UPSTREAM_BASE_URL,
-  undici: true,
+  undici: {
+    connections: 256,
+    pipelining: 10,
+    headersTimeout: 30000,
+    bodyTimeout: 60000,
+  },
+  http2: false,
+  cacheURLs: 1000,
 });
 
 // ---------------------------------------------------------------------------
