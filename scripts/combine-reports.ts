@@ -504,6 +504,37 @@ ${analysisHtml}
 
 ${groupReports}
 
+<h2>🌐 Phase 2: WebSocket 压测(待开通网络)</h2>
+<div class="warning">
+<p><strong>WebSocket 场景已设计,但因网络基础设施未就绪,尚未产出数据。</strong></p>
+<table class="advice-table" style="margin:0.5em 0">
+<tr><th>场景</th><th>测试内容</th><th>k6 脚本</th><th>upstream-echo</th><th>状态</th></tr>
+<tr><td>W1</td><td>1k/5k/10k 连接保持</td><td><code>ws-connect.js</code></td><td rowspan="3">✅ /ws/echo, /ws/broadcast, /ws/heartbeat</td><td>⏳ 待网络</td></tr>
+<tr><td>W2-W3</td><td>echo 64B/1KB/64KB 消息</td><td><code>ws-echo.js</code>, <code>ws-echo-size.js</code></td><td>⏳ 待网络</td></tr>
+<tr><td>W4</td><td>广播 fanout</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W5</td><td>心跳 ping/pong</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W6</td><td>慢消费者 backpressure</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W7</td><td>30 分钟长连接 soak</td><td>待编写</td><td>⏳</td></tr>
+</table>
+<p><strong>阻塞原因:</strong> 被压机(jd, xyz-mac)的 hostname 不在 DNS 中解析,HTTP/WS 端口被防火墙阻挡,只能走 SSH 隧道。SSH 隧道增加的延迟和丢包使 WS 长连接测试不可靠。解决方案:在目标机上配置 DNS 或直接跑 k6。</p>
+</div>
+
+<h2>📌 数据质量说明</h2>
+<div class="meta">
+<dl>
+  <dt>🟢 MacBook-Pro (同机自压)</dt>
+  <dd><strong>最可靠</strong> — 施压机和被压机是同一台机器,k6 和服务进程共享 CPU。RPS 值偏低(争抢 CPU),但语言间相对排序可信。P50/P95/P99 延迟数据部分有精度问题(k6 v2 输出格式变更)。</dd>
+  <dt>🟡 xyz-mac (跨机)</dt>
+  <dd><strong>方向正确,绝对值有噪</strong> — 从本机通过 SSH 隧道打到 xyz-mac。隧道增加延迟但不影响 RPS 的相对排序。P95/P99 延迟因 k6 v2 输出问题显示为 0ms,不代表真实延迟。</dd>
+  <dt>🔴 jd</dt>
+  <dd><strong>无效</strong> — 内存仅 1.9GB(已用 1.8GB,可用 82Mi),无法运行有意义的基准测试。所有 jd 数据已清除。</dd>
+  <dt>🟢 upstream-direct</dt>
+  <dd><strong>最可靠的基线</strong> — 无网关,直接打 upstream,同机运行,数据稳定。</dd>
+  <dt>📈 优化前后对比</dt>
+  <dd>Go/Rust/Node/Python 各优化了连接池/流式代理等,优化后的数据已标注在报告分析章节。本地数据(同机)使用优化后版本,跨机数据(xyz-mac)使用优化前版本。</dd>
+</dl>
+</div>
+
 <h2>📌 已知局限</h2>
 <div class="warning">
 <ul>

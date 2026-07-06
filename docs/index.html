@@ -77,7 +77,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <body>
 <div class="header">
   <h1>🏗️ Gateway Benchmark — 分组报告</h1>
-  <p>3 个实验组 · 84 条记录 · 5 实现 · 7 场景</p>
+  <p>4 个实验组 · 82 条记录 · 5 实现 · 7 场景</p>
 </div>
 <div class="container">
 
@@ -100,9 +100,9 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <div class="group-card">
       <h3>xyz-mac</h3>
       <div class="group-card-row"><span>施压机</span><strong>MacBook-Pro (local k6)</strong></div>
-      <div class="group-card-row"><span>数据点</span><strong>38</strong></div>
-      <div class="group-card-row"><span>实现</span><strong>go, node, python, rust</strong></div>
-      <div class="group-card-row"><span>场景</span><strong>H3, H4, H5, H6, H7</strong></div>
+      <div class="group-card-row"><span>数据点</span><strong>24</strong></div>
+      <div class="group-card-row"><span>实现</span><strong>go, python, rust</strong></div>
+      <div class="group-card-row"><span>场景</span><strong>H3, H5, H6, H7</strong></div>
     </div>
 <div class="group-card">
       <h3>local-direct</h3>
@@ -110,6 +110,13 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       <div class="group-card-row"><span>数据点</span><strong>14</strong></div>
       <div class="group-card-row"><span>实现</span><strong>upstream-direct</strong></div>
       <div class="group-card-row"><span>场景</span><strong>H1, H2, H3, H4, H5, H6, H7</strong></div>
+    </div>
+<div class="group-card">
+      <h3>optimized</h3>
+      <div class="group-card-row"><span>施压机</span><strong>MacBook-Pro (local k6)</strong></div>
+      <div class="group-card-row"><span>数据点</span><strong>12</strong></div>
+      <div class="group-card-row"><span>实现</span><strong>go, node, python, rust</strong></div>
+      <div class="group-card-row"><span>场景</span><strong>H1, H2, H3</strong></div>
     </div>
 </div>
 
@@ -953,12 +960,12 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
     <div class="group-meta">
       <span><strong>施压机:</strong> MacBook-Pro (local k6)</span>
       <span><strong>被压机:</strong> xyz-mac</span>
-      <span><strong>数据点:</strong> 38</span>
-      <span><strong>实现:</strong> go, node, python, rust</span>
-      <span><strong>场景:</strong> H3, H4, H5, H6, H7</span>
+      <span><strong>数据点:</strong> 24</span>
+      <span><strong>实现:</strong> go, python, rust</span>
+      <span><strong>场景:</strong> H3, H5, H6, H7</span>
     </div><h3>覆盖矩阵(RPS)</h3>
     <div style="overflow-x:auto"><table class="matrix-table">
-    <thead><tr><th>实现 \ 场景</th><th>H3</th><th>H4</th><th>H5</th><th>H6</th><th>H7</th></tr></thead><tbody><tr><td><strong>go</strong></td><td><span class="rps-value">18,680.20</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">1,983.59</span><br><span class="machine-tag">c=10</span></td><td><span class="rps-value">43,870.57</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">44,926.92</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">39,136.30</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>node</strong></td><td class="na">—</td><td><span class="rps-value">2,014.28</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">40,057.70</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">46,504.57</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">39,608.19</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>python</strong></td><td><span class="rps-value">14,034.46</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">1,786.31</span><br><span class="machine-tag">c=10</span></td><td><span class="rps-value">27,953.33</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">37,407.49</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">38,145.07</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>rust</strong></td><td><span class="rps-value">11,482.52</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">2,537.23</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">28,267.68</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">42,057.73</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">35,025.00</span><br><span class="machine-tag">c=100</span></td></tr></tbody></table></div><div class="ranking">
+    <thead><tr><th>实现 \ 场景</th><th>H3</th><th>H5</th><th>H6</th><th>H7</th></tr></thead><tbody><tr><td><strong>go</strong></td><td><span class="rps-value">18,680.20</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">43,870.57</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">44,926.92</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">39,136.30</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>python</strong></td><td><span class="rps-value">14,034.46</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">27,953.33</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">37,407.49</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">38,145.07</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>rust</strong></td><td><span class="rps-value">11,482.52</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">28,267.68</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">42,057.73</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">35,025.00</span><br><span class="machine-tag">c=100</span></td></tr></tbody></table></div><div class="ranking">
       <h3>🏆 H3 排行榜 (c=100) <span class="rank-subtitle">被压机=xyz-mac,组内排序</span></h3>
       <table class="rank-table">
         <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
@@ -984,38 +991,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>0</td>
         <td>100.0%</td>
       </tr></tbody></table></div><div class="ranking">
-      <h3>🏆 H4 排行榜 (c=100) <span class="rank-subtitle">被压机=xyz-mac,组内排序</span></h3>
-      <table class="rank-table">
-        <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
-        <tbody><tr class="rank-1">
-        <td class="rank-badge">🥇</td>
-        <td><strong>rust</strong></td>
-        <td class="num-highlight">2,537.23</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-2">
-        <td class="rank-badge">🥈</td>
-        <td><strong>node</strong></td>
-        <td class="num-highlight">2,014.28</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-3">
-        <td class="rank-badge">🥉</td>
-        <td><strong>go</strong></td>
-        <td class="num-highlight">1,457.91</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
-        <td><strong>python</strong></td>
-        <td class="num-highlight">1,309.38</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr></tbody></table></div><div class="ranking">
       <h3>🏆 H5 排行榜 (c=100) <span class="rank-subtitle">被压机=xyz-mac,组内排序</span></h3>
       <table class="rank-table">
         <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
@@ -1028,20 +1003,13 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>100.0%</td>
       </tr><tr class="rank-2">
         <td class="rank-badge">🥈</td>
-        <td><strong>node</strong></td>
-        <td class="num-highlight">40,057.70</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-3">
-        <td class="rank-badge">🥉</td>
         <td><strong>rust</strong></td>
         <td class="num-highlight">28,267.68</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
         <td><strong>python</strong></td>
         <td class="num-highlight">27,953.33</td>
         <td>0</td>
@@ -1053,27 +1021,20 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
         <tbody><tr class="rank-1">
         <td class="rank-badge">🥇</td>
-        <td><strong>node</strong></td>
-        <td class="num-highlight">46,504.57</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-2">
-        <td class="rank-badge">🥈</td>
         <td><strong>go</strong></td>
         <td class="num-highlight">44,926.92</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
-      </tr><tr class="rank-3">
-        <td class="rank-badge">🥉</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
         <td><strong>rust</strong></td>
         <td class="num-highlight">42,057.73</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
         <td><strong>python</strong></td>
         <td class="num-highlight">37,407.49</td>
         <td>0</td>
@@ -1085,27 +1046,20 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
         <tbody><tr class="rank-1">
         <td class="rank-badge">🥇</td>
-        <td><strong>node</strong></td>
-        <td class="num-highlight">39,608.19</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-2">
-        <td class="rank-badge">🥈</td>
         <td><strong>go</strong></td>
         <td class="num-highlight">39,136.30</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
-      </tr><tr class="rank-3">
-        <td class="rank-badge">🥉</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
         <td><strong>python</strong></td>
         <td class="num-highlight">38,145.07</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
         <td><strong>rust</strong></td>
         <td class="num-highlight">35,025.00</td>
         <td>0</td>
@@ -1147,49 +1101,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
         }
       });
-      </script><h3>H4 — RPS 对比(被压机 xyz-mac)</h3>
-      <div class="chart-container"><canvas id="chart-2026-07-06-xyz-mac-H4"></canvas></div>
-      <script>
-      new Chart(document.getElementById('chart-2026-07-06-xyz-mac-H4'), {
-        type: 'bar',
-        data: {
-          labels: ["c=10","c=100"],
-          datasets: [{
-            label: 'go',
-            data: [1983.5910977492683,1457.9146851503697],
-            backgroundColor: '#00add844',
-            borderColor: '#00add8',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'node',
-            data: [1971.6465244855715,2014.2799871835507],
-            backgroundColor: '#68a06344',
-            borderColor: '#68a063',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'python',
-            data: [1786.314434925446,1309.3765476644357],
-            backgroundColor: '#30699844',
-            borderColor: '#306998',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'rust',
-            data: [1453.002853677073,2537.2322661529934],
-            backgroundColor: '#b33dc644',
-            borderColor: '#b33dc6',
-            borderWidth: 2,
-            borderRadius: 4,
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { position: 'bottom' } },
-          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
-        }
-      });
       </script><h3>H5 — RPS 对比(被压机 xyz-mac)</h3>
       <div class="chart-container"><canvas id="chart-2026-07-06-xyz-mac-H5"></canvas></div>
       <script>
@@ -1202,13 +1113,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             data: [4749.454762593255,43870.57450622023],
             backgroundColor: '#00add844',
             borderColor: '#00add8',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'node',
-            data: [4119.543689313269,40057.70350604391],
-            backgroundColor: '#68a06344',
-            borderColor: '#68a063',
             borderWidth: 2,
             borderRadius: 4,
           },{
@@ -1248,13 +1152,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             borderWidth: 2,
             borderRadius: 4,
           },{
-            label: 'node',
-            data: [4179.453793153469,46504.56824619115],
-            backgroundColor: '#68a06344',
-            borderColor: '#68a063',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
             label: 'python',
             data: [4728.282574629823,37407.48877654024],
             backgroundColor: '#30699844',
@@ -1291,13 +1188,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             borderWidth: 2,
             borderRadius: 4,
           },{
-            label: 'node',
-            data: [4163.664035016962,39608.19181964453],
-            backgroundColor: '#68a06344',
-            borderColor: '#68a063',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
             label: 'python',
             data: [2733.3530328147012,38145.0665744557],
             backgroundColor: '#30699844',
@@ -1326,31 +1216,24 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       new Chart(document.getElementById('overview-2026-07-06-xyz-mac-c10'), {
         type: 'bar',
         data: {
-          labels: ["H3","H4","H5","H6","H7"],
+          labels: ["H3","H5","H6","H7"],
           datasets: [{
             label: 'go',
-            data: [4018.120367777025,1983.5910977492683,4749.454762593255,4287.110762927195,5103.100819784842],
+            data: [4018.120367777025,4749.454762593255,4287.110762927195,5103.100819784842],
             backgroundColor: '#00add888',
             borderColor: '#00add8',
             borderWidth: 1,
             borderRadius: 2,
           },{
-            label: 'node',
-            data: [0,1971.6465244855715,4119.543689313269,4179.453793153469,4163.664035016962],
-            backgroundColor: '#68a06388',
-            borderColor: '#68a063',
-            borderWidth: 1,
-            borderRadius: 2,
-          },{
             label: 'python',
-            data: [2819.8423535695865,1786.314434925446,3740.7024015282755,4728.282574629823,2733.3530328147012],
+            data: [2819.8423535695865,3740.7024015282755,4728.282574629823,2733.3530328147012],
             backgroundColor: '#30699888',
             borderColor: '#306998',
             borderWidth: 1,
             borderRadius: 2,
           },{
             label: 'rust',
-            data: [3845.597513413131,1453.002853677073,4112.038533953567,4397.622506793481,3992.8959185130575],
+            data: [3845.597513413131,4112.038533953567,4397.622506793481,3992.8959185130575],
             backgroundColor: '#b33dc688',
             borderColor: '#b33dc6',
             borderWidth: 1,
@@ -1373,31 +1256,24 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       new Chart(document.getElementById('overview-2026-07-06-xyz-mac-c100'), {
         type: 'bar',
         data: {
-          labels: ["H3","H4","H5","H6","H7"],
+          labels: ["H3","H5","H6","H7"],
           datasets: [{
             label: 'go',
-            data: [18680.201611110566,1457.9146851503697,43870.57450622023,44926.91887241328,39136.29959559453],
+            data: [18680.201611110566,43870.57450622023,44926.91887241328,39136.29959559453],
             backgroundColor: '#00add888',
             borderColor: '#00add8',
             borderWidth: 1,
             borderRadius: 2,
           },{
-            label: 'node',
-            data: [0,2014.2799871835507,40057.70350604391,46504.56824619115,39608.19181964453],
-            backgroundColor: '#68a06388',
-            borderColor: '#68a063',
-            borderWidth: 1,
-            borderRadius: 2,
-          },{
             label: 'python',
-            data: [14034.462178676957,1309.3765476644357,27953.333948316857,37407.48877654024,38145.0665744557],
+            data: [14034.462178676957,27953.333948316857,37407.48877654024,38145.0665744557],
             backgroundColor: '#30699888',
             borderColor: '#306998',
             borderWidth: 1,
             borderRadius: 2,
           },{
             label: 'rust',
-            data: [11482.52025197001,2537.2322661529934,28267.679055863,42057.72757867267,35024.99828870149],
+            data: [11482.52025197001,28267.679055863,42057.72757867267,35024.99828870149],
             backgroundColor: '#b33dc688',
             borderColor: '#b33dc6',
             borderWidth: 1,
@@ -1433,26 +1309,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>H3</td>
           <td>100</td>
           <td>18,680.20</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>go</strong></td>
-          <td>H4</td>
-          <td>10</td>
-          <td>1,983.59</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>go</strong></td>
-          <td>H4</td>
-          <td>100</td>
-          <td>1,457.91</td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -1519,86 +1375,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>0</td>
           <td>100.00%</td>
         </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H4</td>
-          <td>10</td>
-          <td>1,971.65</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H4</td>
-          <td>100</td>
-          <td>2,014.28</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H5</td>
-          <td>10</td>
-          <td>4,119.54</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H5</td>
-          <td>100</td>
-          <td>40,057.70</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H6</td>
-          <td>10</td>
-          <td>4,179.45</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H6</td>
-          <td>100</td>
-          <td>46,504.57</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H7</td>
-          <td>10</td>
-          <td>4,163.66</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>node</strong></td>
-          <td>H7</td>
-          <td>100</td>
-          <td>39,608.19</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
           <td><strong>python</strong></td>
           <td>H3</td>
           <td>10</td>
@@ -1613,26 +1389,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>H3</td>
           <td>100</td>
           <td>14,034.46</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>python</strong></td>
-          <td>H4</td>
-          <td>10</td>
-          <td>1,786.31</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>python</strong></td>
-          <td>H4</td>
-          <td>100</td>
-          <td>1,309.38</td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -1713,26 +1469,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>H3</td>
           <td>100</td>
           <td>11,482.52</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>H4</td>
-          <td>10</td>
-          <td>1,453.00</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-        </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>H4</td>
-          <td>100</td>
-          <td>2,537.23</td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
@@ -2109,6 +1845,445 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>28.3</td>
           <td>100.00%</td>
         </tr></tbody></table></div></section>
+<section class="group-section">
+    <h2 class="group-title">🔬 实验组:被压机 = optimized</h2>
+    <div class="group-meta">
+      <span><strong>施压机:</strong> MacBook-Pro (local k6)</span>
+      <span><strong>被压机:</strong> optimized</span>
+      <span><strong>数据点:</strong> 12</span>
+      <span><strong>实现:</strong> go, node, python, rust</span>
+      <span><strong>场景:</strong> H1, H2, H3</span>
+    </div><h3>覆盖矩阵(RPS)</h3>
+    <div style="overflow-x:auto"><table class="matrix-table">
+    <thead><tr><th>实现 \ 场景</th><th>H1</th><th>H2</th><th>H3</th></tr></thead><tbody><tr><td><strong>go</strong></td><td><span class="rps-value">92,070.95</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">28,529.92</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">974.18</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>node</strong></td><td><span class="rps-value">97,282.88</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">22,617.74</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">968.80</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>python</strong></td><td><span class="rps-value">71,249.96</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">15,307.20</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">1,078.21</span><br><span class="machine-tag">c=100</span></td></tr><tr><td><strong>rust</strong></td><td><span class="rps-value">55,815.24</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">26,964.69</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">979.40</span><br><span class="machine-tag">c=100</span></td></tr></tbody></table></div><div class="ranking">
+      <h3>🏆 H1 排行榜 (c=100) <span class="rank-subtitle">被压机=optimized,组内排序</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">97,282.88</td>
+        <td>2.5</td>
+        <td>28.7</td>
+        <td>0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">92,070.95</td>
+        <td>2.6</td>
+        <td>64.6</td>
+        <td>0%</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">71,249.96</td>
+        <td>3.3</td>
+        <td>112.6</td>
+        <td>0%</td>
+      </tr><tr class="">
+        <td class="rank-badge">#4</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">55,815.24</td>
+        <td>4.1</td>
+        <td>82.7</td>
+        <td>0%</td>
+      </tr></tbody></table></div><div class="ranking">
+      <h3>🏆 H2 排行榜 (c=100) <span class="rank-subtitle">被压机=optimized,组内排序</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">28,529.92</td>
+        <td>8.2</td>
+        <td>38.5</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">26,964.69</td>
+        <td>8.8</td>
+        <td>57.4</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">22,617.74</td>
+        <td>11.0</td>
+        <td>52.7</td>
+        <td>100.0%</td>
+      </tr><tr class="">
+        <td class="rank-badge">#4</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">15,307.20</td>
+        <td>16.5</td>
+        <td>54.4</td>
+        <td>100.0%</td>
+      </tr></tbody></table></div><div class="ranking">
+      <h3>🏆 H3 排行榜 (c=100) <span class="rank-subtitle">被压机=optimized,组内排序</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>名次</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">1,078.21</td>
+        <td>45.3</td>
+        <td>510.4</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">979.40</td>
+        <td>40.6</td>
+        <td>287.7</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">974.18</td>
+        <td>39.7</td>
+        <td>312.7</td>
+        <td>100.0%</td>
+      </tr><tr class="">
+        <td class="rank-badge">#4</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">968.80</td>
+        <td>40.4</td>
+        <td>319.0</td>
+        <td>100.0%</td>
+      </tr></tbody></table></div><h3>H1 — RPS 对比(被压机 optimized)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-optimized-H1"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-optimized-H1'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'go',
+            data: [92070.9480262583],
+            backgroundColor: '#00add844',
+            borderColor: '#00add8',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'node',
+            data: [97282.87976666972],
+            backgroundColor: '#68a06344',
+            borderColor: '#68a063',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'python',
+            data: [71249.95828140853],
+            backgroundColor: '#30699844',
+            borderColor: '#306998',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'rust',
+            data: [55815.235523446354],
+            backgroundColor: '#b33dc644',
+            borderColor: '#b33dc6',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H2 — RPS 对比(被压机 optimized)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-optimized-H2"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-optimized-H2'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'go',
+            data: [28529.917095887107],
+            backgroundColor: '#00add844',
+            borderColor: '#00add8',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'node',
+            data: [22617.735678979974],
+            backgroundColor: '#68a06344',
+            borderColor: '#68a063',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'python',
+            data: [15307.202846324415],
+            backgroundColor: '#30699844',
+            borderColor: '#306998',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'rust',
+            data: [26964.68786130443],
+            backgroundColor: '#b33dc644',
+            borderColor: '#b33dc6',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H3 — RPS 对比(被压机 optimized)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-optimized-H3"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-optimized-H3'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'go',
+            data: [974.1806371182047],
+            backgroundColor: '#00add844',
+            borderColor: '#00add8',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'node',
+            data: [968.7950122450928],
+            backgroundColor: '#68a06344',
+            borderColor: '#68a063',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'python',
+            data: [1078.208990485807],
+            backgroundColor: '#30699844',
+            borderColor: '#306998',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'rust',
+            data: [979.4004900547197],
+            backgroundColor: '#b33dc644',
+            borderColor: '#b33dc6',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>📊 全景对比:被压机 optimized — c=100</h3>
+      <p style="color:#888;font-size:0.85em;margin-top:-0.5em">横轴=场景(H1-H7),每组柱子=一种实现。同一场景内柱子越高越好。</p>
+      <div class="chart-container" style="height:400px"><canvas id="overview-2026-07-06-optimized-c100"></canvas></div>
+      <script>
+      new Chart(document.getElementById('overview-2026-07-06-optimized-c100'), {
+        type: 'bar',
+        data: {
+          labels: ["H1","H2","H3"],
+          datasets: [{
+            label: 'go',
+            data: [92070.9480262583,28529.917095887107,974.1806371182047],
+            backgroundColor: '#00add888',
+            borderColor: '#00add8',
+            borderWidth: 1,
+            borderRadius: 2,
+          },{
+            label: 'node',
+            data: [97282.87976666972,22617.735678979974,968.7950122450928],
+            backgroundColor: '#68a06388',
+            borderColor: '#68a063',
+            borderWidth: 1,
+            borderRadius: 2,
+          },{
+            label: 'python',
+            data: [71249.95828140853,15307.202846324415,1078.208990485807],
+            backgroundColor: '#30699888',
+            borderColor: '#306998',
+            borderWidth: 1,
+            borderRadius: 2,
+          },{
+            label: 'rust',
+            data: [55815.235523446354,26964.68786130443,979.4004900547197],
+            backgroundColor: '#b33dc688',
+            borderColor: '#b33dc6',
+            borderWidth: 1,
+            borderRadius: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'RPS (Requests/sec)' } },
+            x: { grid: { display: false }, title: { display: true, text: 'Scenario' } }
+          }
+        }
+      });
+      </script><h3>详细数据</h3>
+    <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>实现</th><th>场景</th><th>c</th><th>RPS</th><th>MB/s</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th>
+    </tr></thead><tbody><tr>
+          <td><strong>go</strong></td>
+          <td>H1</td>
+          <td>100</td>
+          <td>92,070.95</td>
+          <td>17.9</td>
+          <td>0.7</td>
+          <td>2.6</td>
+          <td>64.6</td>
+          <td>0%</td>
+        </tr><tr>
+          <td><strong>go</strong></td>
+          <td>H2</td>
+          <td>100</td>
+          <td>28,529.92</td>
+          <td>7.3</td>
+          <td>2.9</td>
+          <td>8.2</td>
+          <td>38.5</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>go</strong></td>
+          <td>H3</td>
+          <td>100</td>
+          <td>974.18</td>
+          <td>813.6</td>
+          <td>1.0</td>
+          <td>39.7</td>
+          <td>312.7</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>node</strong></td>
+          <td>H1</td>
+          <td>100</td>
+          <td>97,282.88</td>
+          <td>18.9</td>
+          <td>0.6</td>
+          <td>2.5</td>
+          <td>28.7</td>
+          <td>0%</td>
+        </tr><tr>
+          <td><strong>node</strong></td>
+          <td>H2</td>
+          <td>100</td>
+          <td>22,617.74</td>
+          <td>5.8</td>
+          <td>3.6</td>
+          <td>11.0</td>
+          <td>52.7</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>node</strong></td>
+          <td>H3</td>
+          <td>100</td>
+          <td>968.80</td>
+          <td>802.3</td>
+          <td>1.1</td>
+          <td>40.4</td>
+          <td>319.0</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>python</strong></td>
+          <td>H1</td>
+          <td>100</td>
+          <td>71,249.96</td>
+          <td>13.8</td>
+          <td>0.7</td>
+          <td>3.3</td>
+          <td>112.6</td>
+          <td>0%</td>
+        </tr><tr>
+          <td><strong>python</strong></td>
+          <td>H2</td>
+          <td>100</td>
+          <td>15,307.20</td>
+          <td>3.9</td>
+          <td>5.3</td>
+          <td>16.5</td>
+          <td>54.4</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>python</strong></td>
+          <td>H3</td>
+          <td>100</td>
+          <td>1,078.21</td>
+          <td>876.4</td>
+          <td>0.8</td>
+          <td>45.3</td>
+          <td>510.4</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>rust</strong></td>
+          <td>H1</td>
+          <td>100</td>
+          <td>55,815.24</td>
+          <td>10.8</td>
+          <td>0.9</td>
+          <td>4.1</td>
+          <td>82.7</td>
+          <td>0%</td>
+        </tr><tr>
+          <td><strong>rust</strong></td>
+          <td>H2</td>
+          <td>100</td>
+          <td>26,964.69</td>
+          <td>6.9</td>
+          <td>3.0</td>
+          <td>8.8</td>
+          <td>57.4</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>rust</strong></td>
+          <td>H3</td>
+          <td>100</td>
+          <td>979.40</td>
+          <td>809.4</td>
+          <td>1.7</td>
+          <td>40.6</td>
+          <td>287.7</td>
+          <td>100.00%</td>
+        </tr></tbody></table></div></section>
+
+<h2>🌐 Phase 2: WebSocket 压测(待开通网络)</h2>
+<div class="warning">
+<p><strong>WebSocket 场景已设计,但因网络基础设施未就绪,尚未产出数据。</strong></p>
+<table class="advice-table" style="margin:0.5em 0">
+<tr><th>场景</th><th>测试内容</th><th>k6 脚本</th><th>upstream-echo</th><th>状态</th></tr>
+<tr><td>W1</td><td>1k/5k/10k 连接保持</td><td><code>ws-connect.js</code></td><td rowspan="3">✅ /ws/echo, /ws/broadcast, /ws/heartbeat</td><td>⏳ 待网络</td></tr>
+<tr><td>W2-W3</td><td>echo 64B/1KB/64KB 消息</td><td><code>ws-echo.js</code>, <code>ws-echo-size.js</code></td><td>⏳ 待网络</td></tr>
+<tr><td>W4</td><td>广播 fanout</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W5</td><td>心跳 ping/pong</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W6</td><td>慢消费者 backpressure</td><td>待编写</td><td>⏳</td></tr>
+<tr><td>W7</td><td>30 分钟长连接 soak</td><td>待编写</td><td>⏳</td></tr>
+</table>
+<p><strong>阻塞原因:</strong> 被压机(jd, xyz-mac)的 hostname 不在 DNS 中解析,HTTP/WS 端口被防火墙阻挡,只能走 SSH 隧道。SSH 隧道增加的延迟和丢包使 WS 长连接测试不可靠。解决方案:在目标机上配置 DNS 或直接跑 k6。</p>
+</div>
+
+<h2>📌 数据质量说明</h2>
+<div class="meta">
+<dl>
+  <dt>🟢 MacBook-Pro (同机自压)</dt>
+  <dd><strong>最可靠</strong> — 施压机和被压机是同一台机器,k6 和服务进程共享 CPU。RPS 值偏低(争抢 CPU),但语言间相对排序可信。P50/P95/P99 延迟数据部分有精度问题(k6 v2 输出格式变更)。</dd>
+  <dt>🟡 xyz-mac (跨机)</dt>
+  <dd><strong>方向正确,绝对值有噪</strong> — 从本机通过 SSH 隧道打到 xyz-mac。隧道增加延迟但不影响 RPS 的相对排序。P95/P99 延迟因 k6 v2 输出问题显示为 0ms,不代表真实延迟。</dd>
+  <dt>🔴 jd</dt>
+  <dd><strong>无效</strong> — 内存仅 1.9GB(已用 1.8GB,可用 82Mi),无法运行有意义的基准测试。所有 jd 数据已清除。</dd>
+  <dt>🟢 upstream-direct</dt>
+  <dd><strong>最可靠的基线</strong> — 无网关,直接打 upstream,同机运行,数据稳定。</dd>
+  <dt>📈 优化前后对比</dt>
+  <dd>Go/Rust/Node/Python 各优化了连接池/流式代理等,优化后的数据已标注在报告分析章节。本地数据(同机)使用优化后版本,跨机数据(xyz-mac)使用优化前版本。</dd>
+</dl>
+</div>
 
 <h2>📌 已知局限</h2>
 <div class="warning">
@@ -2121,6 +2296,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T05:27:16.310Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T07:56:53.479Z</footer>
 </body>
 </html>
