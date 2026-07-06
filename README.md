@@ -30,6 +30,7 @@ gatebench-lab/
   README.md
   DESIGN.md             # 网关能力设计
   BENCHMARK_SPEC.md     # 冻结的实验规格(核心)
+  RUN_LOG.md            # 压测运行台账(每轮追加:谁压谁/进度/报告)
   AGENTS.md             # [本地,gitignored] 任务追踪/敏感信息
 ```
 
@@ -52,7 +53,11 @@ Phase 1 后将提供:
 - `scripts/run-one.sh <impl> <scenario>` 跑单个场景
 - `scripts/run-all.sh` 跑全量矩阵
 - `scripts/normalize-results.ts` 把 raw 输出归一化为统一 JSON
-- `scripts/generate-report.ts` 生成 `results/<date>/report.html`
+- `scripts/generate-report.ts` 生成 `results/<date>-<host>/report.html`
+
+## 运行台账
+
+每轮压测的「施压机 / 被压机 / 场景 / 进度 / 报告」记录在 **`RUN_LOG.md`**。看项目进度直接看这个文件。
 
 ## 公平性
 
