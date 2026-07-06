@@ -48,7 +48,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <body>
 <div class="header">
   <h1>🏗️ Gateway Master Benchmark Report</h1>
-  <p>56 data points · 5 implementations · 6 scenarios · Machines: MacBook-Pro, jd, xyz-mac, local-direct</p>
+  <p>52 data points · 5 implementations · 6 scenarios · Machines: MacBook-Pro, jd, xyz-mac, local-direct</p>
 </div>
 <div class="container">
 <div class="meta">
@@ -63,7 +63,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
     <div class="card"><span class="card-num">5</span><span class="card-label">Implementations</span></div>
     <div class="card"><span class="card-num">6</span><span class="card-label">Scenarios</span></div>
-    <div class="card"><span class="card-num">56</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">52</span><span class="card-label">Data Points</span></div>
     <div class="card"><span class="card-num">80,602.29</span><span class="card-label">Peak RPS (upstream-direct)</span></div>
   </div>
 <div class="na-legend">— = Not tested (machine limitation, skipped, or pending)</div>
@@ -252,31 +252,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
               <span>38,145.07</span>
             </div>
             <span class="machine-tag">xyz-mac</span>
-          </td></tr><tr><td><strong>rust</strong></td><td>
-            <div class="rps-bar-cell">
-              <div class="rps-bar" style="width:5.168921836101565%"></div>
-              <span>4,106.08</span>
-            </div>
-            <span class="machine-tag">jd</span>
-          </td><td>
-            <div class="rps-bar-cell">
-              <div class="rps-bar" style="width:63.79185939001264%"></div>
-              <span>50,674.85</span>
-            </div>
-            <span class="machine-tag">jd</span>
-          </td><td>
-            <div class="rps-bar-cell">
-              <div class="rps-bar" style="width:5.047249298382801%"></div>
-              <span>4,068.20</span>
-            </div>
-            <span class="machine-tag">jd</span>
-          </td><td>
-            <div class="rps-bar-cell">
-              <div class="rps-bar" style="width:63.466801103874225%"></div>
-              <span>51,155.70</span>
-            </div>
-            <span class="machine-tag">jd</span>
-          </td><td>
+          </td></tr><tr><td><strong>rust</strong></td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>
             <div class="rps-bar-cell">
               <div class="rps-bar" style="width:20.586488269622613%"></div>
               <span>3,845.60</span>
@@ -383,14 +359,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>local-direct</td>
       </tr><tr class="rank-3">
         <td class="rank-badge">🥉</td>
-        <td><strong>rust</strong></td>
-        <td class="num-highlight">50,674.85</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-        <td>jd</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
         <td><strong>go</strong></td>
         <td class="num-highlight">47,138.69</td>
         <td>0</td>
@@ -398,7 +366,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>100.0%</td>
         <td>jd</td>
       </tr><tr class="">
-        <td class="rank-badge">#5</td>
+        <td class="rank-badge">#4</td>
         <td><strong>python</strong></td>
         <td class="num-highlight">40,720.20</td>
         <td>3.0</td>
@@ -406,7 +374,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>0%</td>
         <td>MacBook-Pro</td>
       </tr><tr class="">
-        <td class="rank-badge">#6</td>
+        <td class="rank-badge">#5</td>
         <td><strong>node</strong></td>
         <td class="num-highlight">37,285.61</td>
         <td>3.4</td>
@@ -427,22 +395,14 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>local-direct</td>
       </tr><tr class="rank-2">
         <td class="rank-badge">🥈</td>
-        <td><strong>rust</strong></td>
-        <td class="num-highlight">51,155.70</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-        <td>jd</td>
-      </tr><tr class="rank-3">
-        <td class="rank-badge">🥉</td>
         <td><strong>go</strong></td>
         <td class="num-highlight">48,587.79</td>
         <td>0</td>
         <td>0</td>
         <td>100.0%</td>
         <td>jd</td>
-      </tr><tr class="">
-        <td class="rank-badge">#4</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
         <td><strong>node</strong></td>
         <td class="num-highlight">16,087.10</td>
         <td>7.5</td>
@@ -450,7 +410,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>0%</td>
         <td>MacBook-Pro</td>
       </tr><tr class="">
-        <td class="rank-badge">#5</td>
+        <td class="rank-badge">#4</td>
         <td><strong>python</strong></td>
         <td class="num-highlight">15,693.11</td>
         <td>7.9</td>
@@ -458,7 +418,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>0%</td>
         <td>MacBook-Pro</td>
       </tr><tr class="">
-        <td class="rank-badge">#6</td>
+        <td class="rank-badge">#5</td>
         <td><strong>go</strong></td>
         <td class="num-highlight">2,282.58</td>
         <td>294.1</td>
@@ -639,13 +599,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           borderWidth: 2,
           borderRadius: 4,
         },{
-          label: 'rust',
-          data: [4106.077935285759,50674.851467619636],
-          backgroundColor: '#b33dc644',
-          borderColor: '#b33dc6',
-          borderWidth: 2,
-          borderRadius: 4,
-        },{
           label: 'upstream-direct',
           data: [57270.09101767681,51115.41875874553],
           backgroundColor: '#88844',
@@ -686,13 +639,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             data: [0.387,2.964],
             backgroundColor: '#30699844',
             borderColor: '#306998',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'rust',
-            data: [0,0],
-            backgroundColor: '#b33dc644',
-            borderColor: '#b33dc6',
             borderWidth: 2,
             borderRadius: 4,
           },{
@@ -739,13 +685,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             borderWidth: 2,
             borderRadius: 4,
           },{
-            label: 'rust',
-            data: [0,0],
-            backgroundColor: '#b33dc644',
-            borderColor: '#b33dc6',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
             label: 'upstream-direct',
             data: [48.736,142.331],
             backgroundColor: '#88844',
@@ -786,13 +725,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           data: [5820.474979024024,15693.11113094138],
           backgroundColor: '#30699844',
           borderColor: '#306998',
-          borderWidth: 2,
-          borderRadius: 4,
-        },{
-          label: 'rust',
-          data: [4068.1986561905505,51155.69683594251],
-          backgroundColor: '#b33dc644',
-          borderColor: '#b33dc6',
           borderWidth: 2,
           borderRadius: 4,
         },{
@@ -839,13 +771,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             borderWidth: 2,
             borderRadius: 4,
           },{
-            label: 'rust',
-            data: [0,0],
-            backgroundColor: '#b33dc644',
-            borderColor: '#b33dc6',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
             label: 'upstream-direct',
             data: [0.266,3.036],
             backgroundColor: '#88844',
@@ -886,13 +811,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             data: [17.944,53.3],
             backgroundColor: '#30699844',
             borderColor: '#306998',
-            borderWidth: 2,
-            borderRadius: 4,
-          },{
-            label: 'rust',
-            data: [0,0],
-            backgroundColor: '#b33dc644',
-            borderColor: '#b33dc6',
             borderWidth: 2,
             borderRadius: 4,
           },{
@@ -1451,26 +1369,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>0%</td>
           <td>MacBook-Pro</td>
         </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>10</td>
-          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:5.168921836101565%"></div><span>4,106.08</span></div></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-          <td>jd</td>
-        </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>100</td>
-          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:63.79185939001264%"></div><span>50,674.85</span></div></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-          <td>jd</td>
-        </tr><tr>
           <td><strong>upstream-direct</strong></td>
           <td>10</td>
           <td><div class="rps-bar-cell"><div class="rps-bar" style="width:72.09425361191839%"></div><span>57,270.09</span></div></td>
@@ -1555,26 +1453,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>53.3</td>
           <td>0%</td>
           <td>MacBook-Pro</td>
-        </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>10</td>
-          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:5.047249298382801%"></div><span>4,068.20</span></div></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-          <td>jd</td>
-        </tr><tr>
-          <td><strong>rust</strong></td>
-          <td>100</td>
-          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:63.466801103874225%"></div><span>51,155.70</span></div></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>100.00%</td>
-          <td>jd</td>
         </tr><tr>
           <td><strong>upstream-direct</strong></td>
           <td>10</td>
@@ -1907,6 +1785,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </ul>
 </div>
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T03:06:30.694Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T03:09:23.471Z</footer>
 </body>
 </html>

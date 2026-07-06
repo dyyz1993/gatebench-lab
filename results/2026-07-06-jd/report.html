@@ -50,7 +50,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 
 <div class="header">
   <h1>🏗️ Gateway Benchmark Report</h1>
-  <p>Machine: <strong>jd</strong> — 8 data points across 2 scenarios · 2 implementations</p>
+  <p>Machine: <strong>jd</strong> — 4 data points across 2 scenarios · 1 implementations</p>
 </div>
 
 <div class="container">
@@ -59,48 +59,30 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
   <dl>
     <dt>Machine</dt><dd>jd</dd>
     <dt>Results directory</dt><dd>../results/2026-07-06-jd</dd>
-    <dt>Generated</dt><dd>2026-07-06T03:04:34.067Z</dd>
-    <dt>Implementations</dt><dd>go, rust</dd>
+    <dt>Generated</dt><dd>2026-07-06T03:09:15.367Z</dd>
+    <dt>Implementations</dt><dd>go</dd>
     <dt>Scenarios</dt><dd>H1, H2</dd>
-    <dt>Total records</dt><dd>8</dd>
+    <dt>Total records</dt><dd>4</dd>
     <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of runs, warm-up excluded, min/max retained. Cross-machine comparison not applicable.</dd>
   </dl>
 </div>
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
-    <div class="card"><span class="card-num">2</span><span class="card-label">Implementations</span></div>
+    <div class="card"><span class="card-num">1</span><span class="card-label">Implementations</span></div>
     <div class="card"><span class="card-num">2</span><span class="card-label">Scenarios</span></div>
-    <div class="card"><span class="card-num">8</span><span class="card-label">Data Points</span></div>
-    <div class="card"><span class="card-num">51,155.70</span><span class="card-label">Peak RPS (rust)</span></div>
+    <div class="card"><span class="card-num">4</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">48,587.79</span><span class="card-label">Peak RPS (go)</span></div>
   </div>
 
 <div class="toc">
   <h2>📋 Scenarios</h2>
-  <ul><li><a href="#scenario-H1">H1</a> (4 records)</li>
-<li><a href="#scenario-H2">H2</a> (4 records)</li></ul>
+  <ul><li><a href="#scenario-H1">H1</a> (2 records)</li>
+<li><a href="#scenario-H2">H2</a> (2 records)</li></ul>
 </div>
 
 <section id="scenario-H1">
 <h2>Scenario: H1</h2>
-<p>4 data point(s), 2 concurrency level(s), 2 implementation(s)</p><div class="ranking">
-      <h3>🏆 RPS Ranking at c=100 <span class="rank-subtitle">(Higher is better)</span></h3>
-      <table class="rank-table">
-        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th></tr></thead>
-        <tbody><tr class="rank-1">
-        <td class="rank-badge">🥇</td>
-        <td><strong>rust</strong></td>
-        <td class="num-highlight">50,674.85</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-2">
-        <td class="rank-badge">🥈</td>
-        <td><strong>go</strong></td>
-        <td class="num-highlight">47,138.69</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr></tbody></table></div><div class="chart-container">
+<p>2 data point(s), 2 concurrency level(s), 1 implementation(s)</p><div class="chart-container">
     <canvas id="chart-H1"></canvas>
   </div>
   <script>new Chart(document.getElementById('chart-H1'), {
@@ -112,13 +94,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         data: [4696.110960203043,47138.69081292588],
         backgroundColor: '#00add844',
         borderColor: '#00add8',
-        borderWidth: 2,
-        borderRadius: 4,
-      },{
-        label: "rust",
-        data: [4106.077935285759,50674.851467619636],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
         borderWidth: 2,
         borderRadius: 4,
       }]
@@ -148,13 +123,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         borderColor: '#00add8',
         borderWidth: 2,
         borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
-        borderWidth: 2,
-        borderRadius: 4,
       }]
     },
     options: {
@@ -180,13 +148,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         data: [0,0],
         backgroundColor: '#00add844',
         borderColor: '#00add8',
-        borderWidth: 2,
-        borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
         borderWidth: 2,
         borderRadius: 4,
       }]
@@ -216,13 +177,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         borderColor: '#00add8',
         borderWidth: 2,
         borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
-        borderWidth: 2,
-        borderRadius: 4,
       }]
     },
     options: {
@@ -244,7 +198,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
     </tr></thead><tbody><tr>
         <td><strong>go</strong></td>
         <td>10</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.267143019064946%"></div><span>4,696.11</span></div></td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.962327928961752%"></div><span>4,696.11</span></div></td>
         <td>0 MB/s</td>
         <td>0</td>
         <td>0</td>
@@ -253,25 +207,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       </tr><tr>
         <td><strong>go</strong></td>
         <td>100</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:93.02186281304978%"></div><span>47,138.69</span></div></td>
-        <td>0 MB/s</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.00%</td>
-      </tr><tr>
-        <td><strong>rust</strong></td>
-        <td>10</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:8.1027922457937%"></div><span>4,106.08</span></div></td>
-        <td>0 MB/s</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.00%</td>
-      </tr><tr>
-        <td><strong>rust</strong></td>
-        <td>100</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>50,674.85</span></div></td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>47,138.69</span></div></td>
         <td>0 MB/s</td>
         <td>0</td>
         <td>0</td>
@@ -280,25 +216,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       </tr></tbody></table></div></section>
 <section id="scenario-H2">
 <h2>Scenario: H2</h2>
-<p>4 data point(s), 2 concurrency level(s), 2 implementation(s)</p><div class="ranking">
-      <h3>🏆 RPS Ranking at c=100 <span class="rank-subtitle">(Higher is better)</span></h3>
-      <table class="rank-table">
-        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th></tr></thead>
-        <tbody><tr class="rank-1">
-        <td class="rank-badge">🥇</td>
-        <td><strong>rust</strong></td>
-        <td class="num-highlight">51,155.70</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr><tr class="rank-2">
-        <td class="rank-badge">🥈</td>
-        <td><strong>go</strong></td>
-        <td class="num-highlight">48,587.79</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.0%</td>
-      </tr></tbody></table></div><div class="chart-container">
+<p>2 data point(s), 2 concurrency level(s), 1 implementation(s)</p><div class="chart-container">
     <canvas id="chart-H2"></canvas>
   </div>
   <script>new Chart(document.getElementById('chart-H2'), {
@@ -310,13 +228,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         data: [4805.037490277805,48587.78920323049],
         backgroundColor: '#00add844',
         borderColor: '#00add8',
-        borderWidth: 2,
-        borderRadius: 4,
-      },{
-        label: "rust",
-        data: [4068.1986561905505,51155.69683594251],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
         borderWidth: 2,
         borderRadius: 4,
       }]
@@ -346,13 +257,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         borderColor: '#00add8',
         borderWidth: 2,
         borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
-        borderWidth: 2,
-        borderRadius: 4,
       }]
     },
     options: {
@@ -378,13 +282,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         data: [0,0],
         backgroundColor: '#00add844',
         borderColor: '#00add8',
-        borderWidth: 2,
-        borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
         borderWidth: 2,
         borderRadius: 4,
       }]
@@ -414,13 +311,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         borderColor: '#00add8',
         borderWidth: 2,
         borderRadius: 4,
-      },{
-        label: "rust",
-        data: [0,0],
-        backgroundColor: '#b33dc644',
-        borderColor: '#b33dc6',
-        borderWidth: 2,
-        borderRadius: 4,
       }]
     },
     options: {
@@ -442,7 +332,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
     </tr></thead><tbody><tr>
         <td><strong>go</strong></td>
         <td>10</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.392966546204365%"></div><span>4,805.04</span></div></td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.889393135751748%"></div><span>4,805.04</span></div></td>
         <td>0 MB/s</td>
         <td>0</td>
         <td>0</td>
@@ -451,25 +341,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       </tr><tr>
         <td><strong>go</strong></td>
         <td>100</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:94.98021180134177%"></div><span>48,587.79</span></div></td>
-        <td>0 MB/s</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.00%</td>
-      </tr><tr>
-        <td><strong>rust</strong></td>
-        <td>10</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:7.95258183900291%"></div><span>4,068.20</span></div></td>
-        <td>0 MB/s</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>100.00%</td>
-      </tr><tr>
-        <td><strong>rust</strong></td>
-        <td>100</td>
-        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>51,155.70</span></div></td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>48,587.79</span></div></td>
         <td>0 MB/s</td>
         <td>0</td>
         <td>0</td>
@@ -490,7 +362,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 <footer>
-  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:04:34.067Z</p>
+  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:09:15.367Z</p>
 </footer>
 
 </body>
