@@ -61,7 +61,9 @@
         "min": 0,
         "max": 0
       },
-      "notes": ""
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
     },
     {
       "impl": "go",
@@ -123,7 +125,9 @@
         "min": 0,
         "max": 0
       },
-      "notes": ""
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
     }
   ]
 }

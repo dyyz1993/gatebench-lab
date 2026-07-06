@@ -121,6 +121,9 @@ interface NormalizedRecord {
   gc_pause_ms: StatPoint;
   open_fds: StatPoint;
   notes: string;
+  /** Data validity: false if error_rate > 5% or p95/p99 = 0 */
+  valid: boolean;
+  invalid_reason: string;
 }
 
 /** Grouped raw values before aggregation. */
@@ -482,24 +485,34 @@ function main() {
     const { group, firstMeta, firstData } = entry;
     const aggregated = aggregateGroup(group);
 
-    const record: NormalizedRecord = {
-      impl: firstMeta.impl,
-      variant: firstMeta.variant,
-      scenario: firstMeta.scenario,
-      machine,
-      concurrency: firstMeta.concurrency,
-      duration_sec: firstData.durationSec,
-      runs: group.rawRps.length,
-      rps: aggregated.rps,
-      throughput_mbps: aggregated.throughput_mbps,
-      latency_ms: aggregated.latency_ms,
-      error_rate: aggregated.error_rate,
-      cpu_avg_pct: aggregated.cpu_avg_pct,
-      mem_rss_mb: aggregated.mem_rss_mb,
-      gc_pause_ms: aggregated.gc_pause_ms,
-      open_fds: aggregated.open_fds,
-      notes: '',
-    };
+	    const reasons: string[] = [];
+	    if (aggregated.error_rate.median >= 0.05) {
+	      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
+	    }
+	    if (aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
+	      reasons.push('p95/p99=0 (k6 data collection issue)');
+	    }
+
+	    const record: NormalizedRecord = {
+	      impl: firstMeta.impl,
+	      variant: firstMeta.variant,
+	      scenario: firstMeta.scenario,
+	      machine,
+	      concurrency: firstMeta.concurrency,
+	      duration_sec: firstData.durationSec,
+	      runs: group.rawRps.length,
+	      rps: aggregated.rps,
+	      throughput_mbps: aggregated.throughput_mbps,
+	      latency_ms: aggregated.latency_ms,
+	      error_rate: aggregated.error_rate,
+	      cpu_avg_pct: aggregated.cpu_avg_pct,
+	      mem_rss_mb: aggregated.mem_rss_mb,
+	      gc_pause_ms: aggregated.gc_pause_ms,
+	      open_fds: aggregated.open_fds,
+	      notes: '',
+	      valid: reasons.length === 0,
+	      invalid_reason: reasons.join('; '),
+	    };
 
     const scenario = firstMeta.scenario;
     if (!scenarioMap.has(scenario)) {
