@@ -1,0 +1,13 @@
+{
+  "name": "gatebench-lab-scripts",
+  "private": true,
+  "scripts": {
+    "normalize": "npx ts-node normalize-results.ts",
+    "report": "npx ts-node generate-report.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.14.0"
+  }
+}
