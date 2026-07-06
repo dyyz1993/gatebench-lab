@@ -3,16 +3,16 @@ use std::env;
 use std::sync::Arc;
 
 use axum::{
-    extract::{Query, State},
-    http::{HeaderMap, StatusCode},
+    extract::State,
+    http::{HeaderMap, StatusCode, HeaderValue},
     response::Response,
     routing::{get, post},
     Json, Router,
 };
 use axum::body::Body;
 use bytes::Bytes;
-use futures_util::{StreamExt, TryStreamExt};
-use http_body_util::{BodyExt, BodyStream};
+use futures_util::StreamExt;
+use http_body_util::BodyStream;
 use serde_json::{json, Value};
 use tokio::sync::RwLock;
 use tower_http::cors::CorsLayer;
@@ -27,19 +27,13 @@ pub struct HashCache {
 
 impl HashCache {
     pub fn new() -> Self {
-        Self {
-            inner: Arc::new(RwLock::new(HashMap::new())),
-        }
+        Self { inner: Arc::new(RwLock::new(HashMap::new())) }
     }
-
     pub async fn contains(&self, key: &str) -> bool {
-        let map = self.inner.read().await;
-        map.contains_key(key)
+        self.inner.read().await.contains_key(key)
     }
-
     pub async fn insert(&self, key: String, value: bool) {
-        let mut map = self.inner.write().await;
-        map.insert(key, value);
+        self.inner.write().await.insert(key, value);
     }
 }
 
@@ -52,6 +46,84 @@ pub struct AppState {
     pub upstream_base_url: String,
     pub gateway_mode: String,
     pub client: reqwest::Client,
+}
+
+// ---------------------------------------------------------------------------
+// Hop-by-hop headers that MUST NOT be forwarded
+// ---------------------------------------------------------------------------
+fn is_hop_by_hop(key: &str) -> bool {
+    matches!(key.to_lowercase().as_str(),
+        "connection" | "keep-alive" | "proxy-authenticate" | "proxy-authorization"
+        | "te" | "trailers" | "transfer-encoding" | "upgrade" | "host")
+}
+
+// ---------------------------------------------------------------------------
+// Generic streaming proxy: forwards ANY request upstream, streams body both ways
+// ---------------------------------------------------------------------------
+async fn proxy_to_upstream(
+    state: &AppState,
+    method: &str,
+    target_path: &str,
+    query_string: Option<&str>,
+    incoming_headers: &HeaderMap,
+    incoming_body: Body,
+) -> Response<Body> {
+    let upstream_url = if let Some(qs) = query_string {
+        format!("{}{}?{}", state.upstream_base_url, target_path, qs)
+    } else {
+        format!("{}{}", state.upstream_base_url, target_path)
+    };
+
+    // Build the proxied request with streaming body
+    let body_stream = BodyStream::new(incoming_body).map(|result| {
+        result
+            .map(|frame| frame.data_ref().cloned().unwrap_or_default())
+            .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
+    });
+    let reqwest_body = reqwest::Body::wrap_stream(body_stream);
+
+    let mut proxy_req = state
+        .client
+        .request(
+            reqwest::Method::from_bytes(method.as_bytes()).unwrap(),
+            &upstream_url,
+        )
+        .body(reqwest_body);
+
+    // Forward headers (skip hop-by-hop)
+    for (key, value) in incoming_headers.iter() {
+        if !is_hop_by_hop(key.as_str()) {
+            proxy_req = proxy_req.header(key.as_str(), value.as_bytes());
+        }
+    }
+
+    // Send
+    let resp = match proxy_req.send().await {
+        Ok(r) => r,
+        Err(e) => {
+            let mut res = Response::new(Body::from(format!("upstream error: {e}")));
+            *res.status_mut() = StatusCode::BAD_GATEWAY;
+            return res;
+        }
+    };
+
+    // Build streaming response
+    let status = resp.status();
+    let resp_headers = resp.headers().clone();
+
+    let response_stream = resp
+        .bytes_stream()
+        .map(|item| item.map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>));
+    let body = Body::from_stream(response_stream);
+
+    let mut response = Response::new(body);
+    *response.status_mut() = status;
+    for (k, v) in resp_headers.iter() {
+        if !is_hop_by_hop(k.as_str()) {
+            response.headers_mut().insert(k, v.clone());
+        }
+    }
+    response
 }
 
 // ---------------------------------------------------------------------------
@@ -68,170 +140,87 @@ async fn health_handler() -> StatusCode {
     StatusCode::OK
 }
 
-/// GET /proxy/small – 转发到 {upstream_base_url}/small
-///
-/// 将上游的 status / headers / body 全部透传给客户端。
-async fn proxy_small_handler(
+/// Generic GET proxy handler
+async fn get_proxy_handler(
     State(state): State<AppState>,
-) -> (StatusCode, HeaderMap, Bytes) {
-    let resp = match state
-        .client
-        .get(format!("{}/small", state.upstream_base_url))
-        .send()
-        .await
-    {
-        Ok(r) => r,
-        Err(_) => return (StatusCode::BAD_GATEWAY, HeaderMap::new(), Bytes::new()),
-    };
-
-    let status = resp.status();
-    let headers = resp.headers().clone();
-    let body = resp.bytes().await.unwrap_or_default();
-    (status, headers, body)
-}
-
-/// POST /json/large – 转发到 {upstream_base_url}/echo-json
-///
-/// 透传原始 Bytes body（不做 JSON 反序列化）。
-async fn json_large_handler(
-    State(state): State<AppState>,
-    body: Bytes,
-) -> (StatusCode, HeaderMap, Bytes) {
-    let resp = match state
-        .client
-        .post(format!("{}/echo-json", state.upstream_base_url))
-        .header("Content-Type", "application/json")
-        .body(body)
-        .send()
-        .await
-    {
-        Ok(r) => r,
-        Err(_) => return (StatusCode::BAD_GATEWAY, HeaderMap::new(), Bytes::new()),
-    };
-
-    let status = resp.status();
-    let headers = resp.headers().clone();
-    let body = resp.bytes().await.unwrap_or_default();
-    (status, headers, body)
-}
-
-/// POST /upload/file – 转发到 {upstream_base_url}/upload
-///
-/// 根据 GATEWAY_MODE 环境变量决定行为：
-///   - "buffered"  : 先读入全部 bytes 再转发
-///   - "streaming" : 将请求 body 以 stream 方式透传给上游
-async fn upload_file_handler(
-    State(state): State<AppState>,
-    body: Body,
+    req: axum::http::Request<Body>,
 ) -> Response<Body> {
-    let upstream_url = format!("{}/upload", state.upstream_base_url);
+    let path = req.uri().path().to_owned();
+    let query = req.uri().query().map(|q| q.to_owned());
+    let headers = req.headers().clone();
+    let body = req.into_body();
 
-    let resp = match state.gateway_mode.as_str() {
-        "buffered" => {
-            let collected = match body.collect().await {
-                Ok(c) => c,
-                Err(_) => {
-                    let mut res = Response::new(Body::from("failed to read request body"));
-                    *res.status_mut() = StatusCode::BAD_REQUEST;
-                    return res;
-                }
-            };
-            let bytes = collected.to_bytes();
-
-            match state.client.post(&upstream_url).body(bytes).send().await {
-                Ok(r) => r,
-                Err(_) => {
-                    let mut res = Response::new(Body::from("upstream error"));
-                    *res.status_mut() = StatusCode::BAD_GATEWAY;
-                    return res;
-                }
-            }
-        }
-        "streaming" => {
-            let stream = BodyStream::new(body).map(|result| {
-                result
-                    .map(|frame| frame.data_ref().cloned().unwrap_or_default())
-                    .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>)
-            });
-            let reqwest_body = reqwest::Body::wrap_stream(stream);
-
-            match state
-                .client
-                .post(&upstream_url)
-                .body(reqwest_body)
-                .send()
-                .await
-            {
-                Ok(r) => r,
-                Err(_) => {
-                    let mut res = Response::new(Body::from("upstream error"));
-                    *res.status_mut() = StatusCode::BAD_GATEWAY;
-                    return res;
-                }
-            }
-        }
-        _ => {
-            let mut res = Response::new(Body::from(format!(
-                "unsupported gateway mode: {}",
-                state.gateway_mode
-            )));
-            *res.status_mut() = StatusCode::BAD_REQUEST;
-            return res;
-        }
+    let (target_path, method) = match path.as_str() {
+        "/proxy/small" => ("/small", "GET"),
+        "/response/text" => ("/text", "GET"),
+        "/response/bin" => ("/bin", "GET"),
+        _ => return Response::builder()
+            .status(StatusCode::NOT_FOUND)
+            .body(Body::from("not found"))
+            .unwrap(),
     };
 
-    let status = resp.status();
-    let headers = resp.headers().clone();
-    let body_bytes = resp.bytes().await.unwrap_or_default();
+    proxy_to_upstream(
+        &state,
+        method,
+        target_path,
+        query.as_deref(),
+        &headers,
+        body,
+    ).await
+}
 
-    let mut response = Response::new(Body::from(body_bytes));
-    *response.status_mut() = status;
-    for (k, v) in headers.iter() {
-        response.headers_mut().insert(k, v.clone());
-    }
-    response
+/// Generic POST proxy handler (json/large and upload/file)
+async fn post_proxy_handler(
+    State(state): State<AppState>,
+    req: axum::http::Request<Body>,
+) -> Response<Body> {
+    let path = req.uri().path().to_owned();
+    let query = req.uri().query().map(|q| q.to_owned());
+    let headers = req.headers().clone();
+    let body = req.into_body();
+
+    let target_path = match path.as_str() {
+        "/json/large" => "/echo-json",
+        "/upload/file" => "/upload",
+        _ => return Response::builder()
+            .status(StatusCode::NOT_FOUND)
+            .body(Body::from("not found"))
+            .unwrap(),
+    };
+
+    proxy_to_upstream(
+        &state,
+        "POST",
+        target_path,
+        query.as_deref(),
+        &headers,
+        body,
+    ).await
 }
 
 /// POST /upload/instant/init – 本地 hash 表查重（秒传）
-///
-/// 请求体: { "hash": "..." }
-///   命中   → 返回 200 { "instant": true }
-///   未命中 → 转发到上游 /instant/verify?hash=...，若上游返回 200 则插入缓存
 async fn upload_instant_init_handler(
     State(state): State<AppState>,
     Json(body): Json<Value>,
 ) -> (StatusCode, HeaderMap, Bytes) {
     let hash = match body.get("hash").and_then(|v| v.as_str()) {
         Some(h) => h,
-        None => {
-            return (
-                StatusCode::BAD_REQUEST,
-                HeaderMap::new(),
-                Bytes::new(),
-            );
-        }
+        None => return (StatusCode::BAD_REQUEST, HeaderMap::new(), Bytes::new()),
     };
 
     // 缓存命中 → 直接返回秒传成功
     if state.hash_cache.contains(hash).await {
-        let resp_body = json!({"instant": true});
-        let bytes = serde_json::to_vec(&resp_body).unwrap_or_default().into();
+        let bytes = serde_json::to_vec(&json!({"instant": true})).unwrap_or_default().into();
         let mut headers = HeaderMap::new();
-        headers.insert(
-            "content-type",
-            "application/json".parse().unwrap(),
-        );
+        headers.insert("content-type", HeaderValue::from_static("application/json"));
         return (StatusCode::OK, headers, bytes);
     }
 
-    // 缓存未命中 → 转发到上游
+    // 缓存未命中 → 转发到上游验证
     let resp = match state
         .client
-        .get(format!(
-            "{}/instant/verify?hash={}",
-            state.upstream_base_url,
-            urlencoding(hash)
-        ))
+        .get(format!("{}/instant/verify?hash={}", state.upstream_base_url, urlencode(hash)))
         .send()
         .await
     {
@@ -249,97 +238,17 @@ async fn upload_instant_init_handler(
     (status, headers, body_bytes)
 }
 
-/// GET /response/text – 转发到 {upstream_base_url}/text?size={size}
-///
-/// 流式返回上游响应（不做全量缓冲）。
-async fn response_text_handler(
-    State(state): State<AppState>,
-    Query(params): Query<HashMap<String, String>>,
-) -> Response<Body> {
-    let size = params.get("size").cloned().unwrap_or_else(|| "10mb".to_string());
-
-    let resp = match state
-        .client
-        .get(format!("{}/text?size={}", state.upstream_base_url, size))
-        .send()
-        .await
-    {
-        Ok(r) => r,
-        Err(e) => {
-            let mut res = Response::new(Body::from(format!("upstream error: {e}")));
-            *res.status_mut() = StatusCode::BAD_GATEWAY;
-            return res;
-        }
-    };
-
-    let status = resp.status();
-    let headers = resp.headers().clone();
-
-    let stream = resp
-        .bytes_stream()
-        .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>);
-    let body = Body::from_stream(stream);
-
-    let mut response = Response::new(body);
-    *response.status_mut() = status;
-    for (k, v) in headers.iter() {
-        response.headers_mut().insert(k, v.clone());
-    }
-    response
-}
-
-/// GET /response/bin – 转发到 {upstream_base_url}/bin?size={size}
-///
-/// 流式返回上游响应（不做全量缓冲）。
-async fn response_bin_handler(
-    State(state): State<AppState>,
-    Query(params): Query<HashMap<String, String>>,
-) -> Response<Body> {
-    let size = params.get("size").cloned().unwrap_or_else(|| "10mb".to_string());
-
-    let resp = match state
-        .client
-        .get(format!("{}/bin?size={}", state.upstream_base_url, size))
-        .send()
-        .await
-    {
-        Ok(r) => r,
-        Err(e) => {
-            let mut res = Response::new(Body::from(format!("upstream error: {e}")));
-            *res.status_mut() = StatusCode::BAD_GATEWAY;
-            return res;
-        }
-    };
-
-    let status = resp.status();
-    let headers = resp.headers().clone();
-
-    let stream = resp
-        .bytes_stream()
-        .map_err(|e| Box::new(e) as Box<dyn std::error::Error + Send + Sync>);
-    let body = Body::from_stream(stream);
-
-    let mut response = Response::new(body);
-    *response.status_mut() = status;
-    for (k, v) in headers.iter() {
-        response.headers_mut().insert(k, v.clone());
-    }
-    response
-}
-
 // ---------------------------------------------------------------------------
-// URL encoding helper (for instant-verify hash parameter)
+// URL encoding helper
 // ---------------------------------------------------------------------------
-fn urlencoding(s: &str) -> String {
+fn urlencode(s: &str) -> String {
     let mut result = String::with_capacity(s.len());
     for byte in s.bytes() {
         match byte {
             b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => {
                 result.push(byte as char);
             }
-            _ => {
-                result.push_str(&format!("%{:02X}", byte));
-            }
+            _ => result.push_str(&format!("%{:02X}", byte)),
         }
     }
     result
@@ -350,38 +259,38 @@ fn urlencoding(s: &str) -> String {
 // ---------------------------------------------------------------------------
 #[tokio::main]
 async fn main() {
-    // Read upstream base URL from environment (default: http://localhost:9000)
     let upstream_base_url = env::var("UPSTREAM_BASE_URL")
         .unwrap_or_else(|_| "http://localhost:9000".to_string());
-
-    // Read gateway mode from environment (default: buffered)
-    let gateway_mode =
-        env::var("GATEWAY_MODE").unwrap_or_else(|_| "buffered".to_string());
+    let gateway_mode = env::var("GATEWAY_MODE").unwrap_or_else(|_| "buffered".to_string());
+    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
 
     let state = AppState {
         hash_cache: HashCache::new(),
         upstream_base_url,
         gateway_mode,
-        client: reqwest::Client::new(),
+        client: reqwest::Client::builder()
+            .pool_max_idle_per_host(256)
+            .build()
+            .expect("reqwest client"),
     };
 
     let app = Router::new()
         .route("/ping", get(ping_handler))
         .route("/health", get(health_handler))
-        .route("/proxy/small", get(proxy_small_handler))
-        .route("/json/large", post(json_large_handler))
-        .route("/upload/file", post(upload_file_handler))
+        .route("/proxy/small", get(get_proxy_handler))
+        .route("/json/large", post(post_proxy_handler))
+        .route("/upload/file", post(post_proxy_handler))
         .route("/upload/instant/init", post(upload_instant_init_handler))
-        .route("/response/text", get(response_text_handler))
-        .route("/response/bin", get(response_bin_handler))
+        .route("/response/text", get(get_proxy_handler))
+        .route("/response/bin", get(get_proxy_handler))
         .layer(CorsLayer::permissive())
         .with_state(state);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080")
+    let addr = format!("0.0.0.0:{}", port);
+    let listener = tokio::net::TcpListener::bind(&addr)
         .await
-        .expect("Failed to bind to 0.0.0.0:8080");
+        .expect("Failed to bind");
 
-    axum::serve(listener, app)
-        .await
-        .expect("Server error");
+    println!("Rust gateway listening on {}", addr);
+    axum::serve(listener, app).await.expect("Server error");
 }
