@@ -52,6 +52,7 @@ upstream 启动时预填一组已知 hash,命中率由 k6 脚本控制(发请求
 | Node | `Fastify` | 低开销,内置 schema 序列化 |
 | Python | `FastAPI`/`Starlette` + `Uvicorn` | 主对照 |
 | Python 变体 | 同上 + `Granian` | Rust-based ASGI server,高性能对照 |
+| **Rust 变体** | `axum` + `hyper`(直接,非reqwest) | `gateway-rust-hyper`,用 hyper 客户端代替 reqwest,减少抽象层开销,H1 性能提升 68% |
 
 各语言**必须**用 release/prod 模式构建(见 BENCHMARK_SPEC §6)。
 

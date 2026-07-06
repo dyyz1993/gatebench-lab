@@ -1,0 +1,67 @@
+{
+  "scenario": "H2",
+  "records": [
+    {
+      "impl": "rust-hyper",
+      "variant": "buffered",
+      "scenario": "H2",
+      "machine": "rust-hyper",
+      "concurrency": 100,
+      "duration_sec": 15,
+      "runs": 1,
+      "rps": {
+        "median": 24972.981223324892,
+        "min": 24972.981223324892,
+        "max": 24972.981223324892
+      },
+      "throughput_mbps": {
+        "median": 6.418056174394498,
+        "min": 6.418056174394498,
+        "max": 6.418056174394498
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 3.22,
+          "min": 3.22,
+          "max": 3.22
+        },
+        "p95": {
+          "median": 9.587,
+          "min": 9.587,
+          "max": 9.587
+        },
+        "p99": {
+          "median": 64.793,
+          "min": 64.793,
+          "max": 64.793
+        }
+      },
+      "error_rate": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": ""
+    }
+  ]
+}

@@ -77,7 +77,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <body>
 <div class="header">
   <h1>🏗️ Gateway Benchmark — 分组报告</h1>
-  <p>4 个实验组 · 82 条记录 · 5 实现 · 7 场景</p>
+  <p>5 个实验组 · 85 条记录 · 6 实现 · 7 场景</p>
 </div>
 <div class="container">
 
@@ -116,6 +116,13 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
       <div class="group-card-row"><span>施压机</span><strong>MacBook-Pro (local k6)</strong></div>
       <div class="group-card-row"><span>数据点</span><strong>12</strong></div>
       <div class="group-card-row"><span>实现</span><strong>go, node, python, rust</strong></div>
+      <div class="group-card-row"><span>场景</span><strong>H1, H2, H3</strong></div>
+    </div>
+<div class="group-card">
+      <h3>rust-hyper</h3>
+      <div class="group-card-row"><span>施压机</span><strong>MacBook-Pro (local k6)</strong></div>
+      <div class="group-card-row"><span>数据点</span><strong>3</strong></div>
+      <div class="group-card-row"><span>实现</span><strong>rust-hyper</strong></div>
       <div class="group-card-row"><span>场景</span><strong>H1, H2, H3</strong></div>
     </div>
 </div>
@@ -2253,6 +2260,118 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>287.7</td>
           <td>100.00%</td>
         </tr></tbody></table></div></section>
+<section class="group-section">
+    <h2 class="group-title">🔬 实验组:被压机 = rust-hyper</h2>
+    <div class="group-meta">
+      <span><strong>施压机:</strong> MacBook-Pro (local k6)</span>
+      <span><strong>被压机:</strong> rust-hyper</span>
+      <span><strong>数据点:</strong> 3</span>
+      <span><strong>实现:</strong> rust-hyper</span>
+      <span><strong>场景:</strong> H1, H2, H3</span>
+    </div><h3>覆盖矩阵(RPS)</h3>
+    <div style="overflow-x:auto"><table class="matrix-table">
+    <thead><tr><th>实现 \ 场景</th><th>H1</th><th>H2</th><th>H3</th></tr></thead><tbody><tr><td><strong>rust-hyper</strong></td><td><span class="rps-value">93,932.40</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">24,972.98</span><br><span class="machine-tag">c=100</span></td><td><span class="rps-value">997.98</span><br><span class="machine-tag">c=100</span></td></tr></tbody></table></div><h3>H1 — RPS 对比(被压机 rust-hyper)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-rust-hyper-H1"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-rust-hyper-H1'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'rust-hyper',
+            data: [93932.40298610038],
+            backgroundColor: '#e6194b44',
+            borderColor: '#e6194b',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H2 — RPS 对比(被压机 rust-hyper)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-rust-hyper-H2"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-rust-hyper-H2'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'rust-hyper',
+            data: [24972.981223324892],
+            backgroundColor: '#e6194b44',
+            borderColor: '#e6194b',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H3 — RPS 对比(被压机 rust-hyper)</h3>
+      <div class="chart-container"><canvas id="chart-2026-07-06-rust-hyper-H3"></canvas></div>
+      <script>
+      new Chart(document.getElementById('chart-2026-07-06-rust-hyper-H3'), {
+        type: 'bar',
+        data: {
+          labels: ["c=100"],
+          datasets: [{
+            label: 'rust-hyper',
+            data: [997.9803091615038],
+            backgroundColor: '#e6194b44',
+            borderColor: '#e6194b',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>详细数据</h3>
+    <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>实现</th><th>场景</th><th>c</th><th>RPS</th><th>MB/s</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th>
+    </tr></thead><tbody><tr>
+          <td><strong>rust-hyper</strong></td>
+          <td>H1</td>
+          <td>100</td>
+          <td>93,932.40</td>
+          <td>18.2</td>
+          <td>0.7</td>
+          <td>2.6</td>
+          <td>43.4</td>
+          <td>0%</td>
+        </tr><tr>
+          <td><strong>rust-hyper</strong></td>
+          <td>H2</td>
+          <td>100</td>
+          <td>24,972.98</td>
+          <td>6.4</td>
+          <td>3.2</td>
+          <td>9.6</td>
+          <td>64.8</td>
+          <td>100.00%</td>
+        </tr><tr>
+          <td><strong>rust-hyper</strong></td>
+          <td>H3</td>
+          <td>100</td>
+          <td>997.98</td>
+          <td>828.6</td>
+          <td>1.7</td>
+          <td>42.5</td>
+          <td>277.6</td>
+          <td>100.00%</td>
+        </tr></tbody></table></div></section>
 
 <h2>🌐 Phase 2: WebSocket 压测(待开通网络)</h2>
 <div class="warning">
@@ -2296,6 +2415,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T07:56:53.479Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T08:11:55.345Z</footer>
 </body>
 </html>

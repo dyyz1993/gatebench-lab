@@ -1,7 +1,8 @@
 # 🏗️ gatebench-lab
 
 [![Benchmark Report](https://img.shields.io/badge/📊-Benchmark%20Report-blue?style=for-the-badge)](https://dyyz1993.github.io/gatebench-lab/)
-[![Rust](https://img.shields.io/badge/Rust-1.92-purple?logo=rust)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-rust)
+[![Rust(reqwest)](https://img.shields.io/badge/Rust(reqwest)-1.92-purple?logo=rust)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-rust)
+[![Rust(hyper)](https://img.shields.io/badge/Rust(hyper)-1.92-blueviolet?logo=rust)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-rust-hyper)
 [![Go](https://img.shields.io/badge/Go-1.23-blue?logo=go)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-go)
 [![Node](https://img.shields.io/badge/Node-25-green?logo=nodedotjs)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-node)
 [![Python](https://img.shields.io/badge/Python-3.8-blue?logo=python)](https://github.com/dyyz1993/gatebench-lab/tree/master/apps/gateway-python)
@@ -111,7 +112,8 @@ npx ts-node combine-reports.ts <dir1> <dir2> ...
 | 语言 | 关键优化 | 效果 |
 |------|---------|------|
 | **Go** | 共享 ReverseProxy + `MaxIdleConns=1000` 连接池 | H1 +16%, H2 +1150%*(旧代码缺连接池) |
-| **Rust** | 流式代理(请求/响应体零缓冲透传) | H1 +34%, H2 +60%, H3 +8% |
+| **Rust(reqwest)** | 流式代理(请求/响应体零缓冲透传) | H1 +34%, H2 +60%, H3 +8% |
+| **Rust(hyper)** | 用 hyper 直接代替 reqwest,减少抽象层 | H1 **93,932** 🏆 (超reqwest版68%,超Go 2%) |
 | **Node** | undici 连接池 256 + pipelining 10 | 整体稳定 |
 | **Python** | httpx max_keepalive=256 | 整体稳定 |
 
