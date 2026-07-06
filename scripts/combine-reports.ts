@@ -188,61 +188,44 @@ function renderGroup(group: ExperimentGroup): string {
       </script>`;
   }
   
-  // ── 雷达图:各实现能力分布(被压机维度) ──
-  if (impls.length >= 2 && scenarios.length >= 3) {
-    const radarId = `radar-${group.name}`.replace(/[^a-zA-Z0-9-]/g, '_');
-    const bestConc = concurrencies[concurrencies.length - 1];
-    
-    // Normalize RPS per scenario: each scenario's max across impls = 100%
-    const radarLabels = scenarios.map(s => `${s}`);
-    const rawData: Record<string, number[]> = {};
-    for (const impl of impls) {
-      rawData[impl] = scenarios.map(s => {
-        const rec = records.find(r => r.impl === impl && r.scenario === s && r.concurrency === bestConc);
-        return rec ? rec.rps.median : 0;
-      });
-    }
-    const scenarioMaxes = scenarios.map((_, si) => Math.max(...impls.map(impl => rawData[impl][si]), 1));
-    
-    const radarDatasets = impls.map((impl, i) => ({
-      label: impl,
-      data: rawData[impl].map((v, si) => (v / scenarioMaxes[si]) * 100),
-      color: implColor(impl, i),
-    }));
+  // ── 全景对比图:横轴=场景,每组柱子=各实现 ──
+  if (impls.length >= 2 && scenarios.length >= 2) {
+    for (const c of concurrencies) {
+      const chartId = `overview-${group.name}-c${c}`.replace(/[^a-zA-Z0-9-]/g, '_');
+      const datasets = impls.map((impl, i) => ({
+        label: impl,
+        data: scenarios.map(s => records.find(r => r.impl === impl && r.scenario === s && r.concurrency === c)?.rps.median ?? 0),
+        color: implColor(impl, i),
+      }));
 
-    html += `<h3>📊 能力雷达图(被压机 ${esc(targetMachine)}, c=${bestConc})</h3>
-    <p style="color:#888;font-size:0.85em;margin-top:-0.5em">每个场景归一化到该组最高RPS=100%。越接近外圈越好。</p>
-    <div class="chart-container" style="height:400px"><canvas id="${radarId}"></canvas></div>
-    <script>
-    new Chart(document.getElementById('${radarId}'), {
-      type: 'radar',
-      data: {
-        labels: ${JSON.stringify(radarLabels)},
-        datasets: [${radarDatasets.map(d => `{
-          label: '${d.label}',
-          data: ${JSON.stringify(d.data)},
-          backgroundColor: '${d.color}22',
-          borderColor: '${d.color}',
-          borderWidth: 2,
-          pointRadius: 4,
-          pointBackgroundColor: '${d.color}',
-        }`).join(',')}]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'bottom' } },
-        scales: {
-          r: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { stepSize: 25, callback: v => v + '%' },
-            grid: { color: '#ddd' },
-            angleLines: { color: '#ddd' },
+      html += `<h3>📊 全景对比:被压机 ${esc(targetMachine)} — c=${c}</h3>
+      <p style="color:#888;font-size:0.85em;margin-top:-0.5em">横轴=场景(H1-H7),每组柱子=一种实现。同一场景内柱子越高越好。</p>
+      <div class="chart-container" style="height:400px"><canvas id="${chartId}"></canvas></div>
+      <script>
+      new Chart(document.getElementById('${chartId}'), {
+        type: 'bar',
+        data: {
+          labels: ${JSON.stringify(scenarios)},
+          datasets: [${datasets.map(d => `{
+            label: '${d.label}',
+            data: ${JSON.stringify(d.data)},
+            backgroundColor: '${d.color}88',
+            borderColor: '${d.color}',
+            borderWidth: 1,
+            borderRadius: 2,
+          }`).join(',')}]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'RPS (Requests/sec)' } },
+            x: { grid: { display: false }, title: { display: true, text: 'Scenario' } }
           }
         }
-      }
-    });
-    </script>`;
+      });
+      </script>`;
+    }
   }
 
   // ── 组内详细表 ──
