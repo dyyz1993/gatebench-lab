@@ -4,250 +4,493 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gateway Benchmark Report — jd</title>
-<style>body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  margin: 2em auto;
-  max-width: 1200px;
-  padding: 0 1em;
-  color: #1a1a1a;
-  background: #fafafa;
-}
-h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: 0.3em; }
-h2 { font-size: 1.4em; margin-top: 2em; color: #2c3e50; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
-h3 { font-size: 1.1em; margin-top: 1.5em; color: #34495e; }
-h4 { font-size: 1em; margin-top: 1em; color: #555; }
-table {
-  border-collapse: collapse;
-  margin: 0.8em 0 1.5em;
-  width: 100%;
-  font-size: 0.9em;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-th, td {
-  border: 1px solid #d0d0d0;
-  padding: 8px 12px;
-  text-align: right;
-  white-space: nowrap;
-}
-th {
-  background: #f0f4f8;
-  font-weight: 600;
-  color: #2c3e50;
-}
-td:first-child, th:first-child {
-  text-align: left;
-}
-tr:nth-child(even) td {
-  background: #f8f9fa;
-}
-tr:hover td {
-  background: #eef3f7;
-}
-.bar-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.bar {
-  display: inline-block;
-  height: 18px;
-  border-radius: 3px;
-  vertical-align: middle;
-  transition: width 0.2s;
-  min-width: 2px;
-}
-.range {
-  color: #888;
-  font-size: 0.85em;
-}
-.meta {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 1em 1.5em;
-  margin: 1em 0;
-}
-.meta dt { font-weight: 600; margin-top: 0.5em; }
-.meta dd { margin-left: 1em; color: #555; }
-footer {
-  margin-top: 3em;
-  padding-top: 1em;
-  border-top: 1px solid #ddd;
-  font-size: 0.85em;
-  color: #888;
-}
-.summary-card {
-  display: inline-block;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.8em 1.2em;
-  margin: 0.3em;
-  text-align: center;
-}
-.summary-card .num { font-size: 1.6em; font-weight: 700; color: #2c3e50; display: block; }
-.summary-card .label { font-size: 0.8em; color: #888; }</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background: #f5f7fa; color: #1a1a2e; }
+.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 2em 1.5em; }
+.header h1 { margin: 0; font-size: 2em; }
+.header p { opacity: 0.8; margin: 0.3em 0 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5em; }
+.toc { background: #fff; border-radius: 10px; padding: 1em 1.5em; margin-bottom: 2em; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.toc h2 { margin-top: 0; font-size: 1.1em; color: #555; }
+.toc ul { columns: 2; column-gap: 2em; margin: 0; padding-left: 1.5em; }
+.toc li { margin: 0.3em 0; }
+.toc a { color: #0f3460; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.card { background: #fff; border-radius: 10px; padding: 1em 1.5em; min-width: 120px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; flex: 1; }
+.card-num { display: block; font-size: 1.8em; font-weight: 700; color: #0f3460; }
+.card-label { font-size: 0.8em; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+section { background: #fff; border-radius: 10px; padding: 1.5em; margin: 1.5em 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+section h2 { margin: 0 0 0.3em; color: #0f3460; border-bottom: 2px solid #e8ecf1; padding-bottom: 0.5em; }
+section h3 { margin: 1em 0 0.5em; color: #333; }
+.ranking { background: #f8faff; border: 1px solid #dde5f0; border-radius: 8px; padding: 1em; margin: 1em 0; }
+.rank-subtitle { font-size: 0.8em; font-weight: normal; color: #888; }
+.rank-table { width: 100%; border-collapse: collapse; margin: 0.5em 0; }
+.rank-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid #ddd; font-weight: 600; color: #555; font-size: 0.85em; text-transform: uppercase; }
+.rank-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+.rank-1 { background: #fffde7; }
+.rank-2 { background: #f5f5f5; }
+.rank-3 { background: #fff3e0; }
+.rank-badge { font-size: 1.2em; text-align: center; width: 40px; }
+.num-highlight { font-size: 1.1em; font-weight: 700; color: #0f3460; }
+.chart-container { position: relative; height: 300px; margin: 1em 0; }
+.detail-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.detail-table th { text-align: left; padding: 8px 10px; background: #f0f4f8; border-bottom: 2px solid #dde5f0; font-weight: 600; color: #555; font-size: 0.85em; }
+.detail-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }
+.detail-table tr:hover td { background: #f8faff; }
+.rps-bar-cell { display: flex; align-items: center; gap: 8px; }
+.rps-bar { height: 16px; background: linear-gradient(90deg, #4caf50, #81c784); border-radius: 3px; min-width: 2px; transition: width 0.3s; }
+.meta { background: #fff; border-radius: 10px; padding: 1em 1.5em; margin: 1em 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.meta dt { font-weight: 600; margin-top: 0.5em; color: #555; }
+.meta dd { margin-left: 1em; color: #777; }
+footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
+</style>
 </head>
 <body>
 
-<h1>Gateway Benchmark Report</h1>
-
-<div class="meta">
-<dl>
-  <dt>Machine</dt><dd>jd</dd>
-  <dt>Results directory</dt><dd>../results/2026-07-06-jd</dd>
-  <dt>Generated</dt><dd>2026-07-06T02:45:07.369Z</dd>
-  <dt>Implementations</dt><dd>go, rust</dd>
-  <dt>Scenarios</dt><dd>2</dd>
-  <dt>Total records</dt><dd>8</dd>
-  <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of 5 runs, min/max retained. Warm-up 30s excluded. Cross-machine comparison not applicable.</dd>
-</dl>
+<div class="header">
+  <h1>🏗️ Gateway Benchmark Report</h1>
+  <p>Machine: <strong>jd</strong> — 8 data points across 2 scenarios · 2 implementations</p>
 </div>
 
-<h2>Executive Summary</h2>
-<p>
-  This report compares gateway implementations (go, rust)
-  across 2 benchmark scenarios on machine <strong>jd</strong>.
-  Each cell shows the median value across repeated runs, with min–max range in parentheses.
-  Bar lengths are scaled relative to the best (highest RPS / lowest latency) within each table.
-</p>
+<div class="container">
+
+<div class="meta">
+  <dl>
+    <dt>Machine</dt><dd>jd</dd>
+    <dt>Results directory</dt><dd>../results/2026-07-06-jd</dd>
+    <dt>Generated</dt><dd>2026-07-06T03:04:34.067Z</dd>
+    <dt>Implementations</dt><dd>go, rust</dd>
+    <dt>Scenarios</dt><dd>H1, H2</dd>
+    <dt>Total records</dt><dd>8</dd>
+    <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of runs, warm-up excluded, min/max retained. Cross-machine comparison not applicable.</dd>
+  </dl>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
+    <div class="card"><span class="card-num">2</span><span class="card-label">Implementations</span></div>
+    <div class="card"><span class="card-num">2</span><span class="card-label">Scenarios</span></div>
+    <div class="card"><span class="card-num">8</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">51,155.70</span><span class="card-label">Peak RPS (rust)</span></div>
+  </div>
+
+<div class="toc">
+  <h2>📋 Scenarios</h2>
+  <ul><li><a href="#scenario-H1">H1</a> (4 records)</li>
+<li><a href="#scenario-H2">H2</a> (4 records)</li></ul>
+</div>
+
 <section id="scenario-H1">
 <h2>Scenario: H1</h2>
-<p>4 record(s), 2 concurrency level(s), 2 implementation(s)</p>
-<h3>Streaming vs Buffered</h3>
-<p>Comparison of <code>buffered</code> (full in-memory) vs <code>streaming</code> (chunked) variants.</p><table>
-<thead>
-  <tr>
-    <th>Implementation</th>
-    <th>Concurrency</th>
-    <th colspan="2">RPS</th>
-    <th colspan="2">P95 Latency (ms)</th>
-    <th colspan="2">P99 Latency (ms)</th>
-  </tr>
-  <tr>
-    <th></th><th></th>
-    <th>Buffered</th><th>Streaming</th>
-    <th>Buffered</th><th>Streaming</th>
-    <th>Buffered</th><th>Streaming</th>
-  </tr>
-</thead>
-<tbody><tr>
-      <td><strong>go</strong></td>
-      <td>10</td>
-      <td>4,696.11</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>go</strong></td>
-      <td>100</td>
-      <td>47,138.69</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>rust</strong></td>
-      <td>10</td>
-      <td>4,106.08</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>rust</strong></td>
-      <td>100</td>
-      <td>50,674.85</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr></tbody></table><h3>Throughput (RPS) — Higher is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td><span class="bar" style="width:9.267141392623756%;background:#4caf50"></span>4,696.11</td><td><span class="bar" style="width:93.02186390290254%;background:#4caf50"></span>47,138.69</td></tr><tr><td><strong>rust</strong></td><td><span class="bar" style="width:8.102796554898536%;background:#4caf50"></span>4,106.08</td><td><span class="bar" style="width:100%;background:#4caf50"></span>50,674.85</td></tr></tbody></table><h3>P50 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>P95 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>P99 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>Error Rate — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>100.000%</td><td>100.000%</td></tr><tr><td><strong>rust</strong></td><td>100.000%</td><td>100.000%</td></tr></tbody></table></section><section id="scenario-H2">
+<p>4 data point(s), 2 concurrency level(s), 2 implementation(s)</p><div class="ranking">
+      <h3>🏆 RPS Ranking at c=100 <span class="rank-subtitle">(Higher is better)</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">50,674.85</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">47,138.69</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+      </tr></tbody></table></div><div class="chart-container">
+    <canvas id="chart-H1"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H1'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [4696.110960203043,47138.69081292588],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [4106.077935285759,50674.851467619636],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H1: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H1-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H1-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H1: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H1-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H1-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H1: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H1-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H1-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H1: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>go</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.267143019064946%"></div><span>4,696.11</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>go</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:93.02186281304978%"></div><span>47,138.69</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:8.1027922457937%"></div><span>4,106.08</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>50,674.85</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr></tbody></table></div></section>
+<section id="scenario-H2">
 <h2>Scenario: H2</h2>
-<p>4 record(s), 2 concurrency level(s), 2 implementation(s)</p>
-<h3>Streaming vs Buffered</h3>
-<p>Comparison of <code>buffered</code> (full in-memory) vs <code>streaming</code> (chunked) variants.</p><table>
-<thead>
-  <tr>
-    <th>Implementation</th>
-    <th>Concurrency</th>
-    <th colspan="2">RPS</th>
-    <th colspan="2">P95 Latency (ms)</th>
-    <th colspan="2">P99 Latency (ms)</th>
-  </tr>
-  <tr>
-    <th></th><th></th>
-    <th>Buffered</th><th>Streaming</th>
-    <th>Buffered</th><th>Streaming</th>
-    <th>Buffered</th><th>Streaming</th>
-  </tr>
-</thead>
-<tbody><tr>
-      <td><strong>go</strong></td>
-      <td>10</td>
-      <td>4,805.04</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>go</strong></td>
-      <td>100</td>
-      <td>48,587.79</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>rust</strong></td>
-      <td>10</td>
-      <td>4,068.20</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr><tr>
-      <td><strong>rust</strong></td>
-      <td>100</td>
-      <td>51,155.70</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-      <td>0</td>
-      <td>—</td>
-    </tr></tbody></table><h3>Throughput (RPS) — Higher is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td><span class="bar" style="width:9.392970871281205%;background:#4caf50"></span>4,805.04</td><td><span class="bar" style="width:94.98020748420998%;background:#4caf50"></span>48,587.79</td></tr><tr><td><strong>rust</strong></td><td><span class="bar" style="width:7.9525839740244%;background:#4caf50"></span>4,068.20</td><td><span class="bar" style="width:100%;background:#4caf50"></span>51,155.70</td></tr></tbody></table><h3>P50 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>P95 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>P99 Latency (ms) — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr><tr><td><strong>rust</strong></td><td>0 <span class="range">(0–0)</span></td><td>0 <span class="range">(0–0)</span></td></tr></tbody></table><h3>Error Rate — Lower is better</h3><table><thead><tr><th>Implementation</th><th>c=10</th><th>c=100</th></tr></thead><tbody><tr><td><strong>go</strong></td><td>100.000%</td><td>100.000%</td></tr><tr><td><strong>rust</strong></td><td>100.000%</td><td>100.000%</td></tr></tbody></table></section>
-<h2>Controlled Variables</h2>
-<ul>
-  <li>Worker count fixed to machine logical cores per BENCHMARK_SPEC §3</li>
-  <li>All builds in release/production mode</li>
-  <li>Dependency versions locked in env.lock</li>
-  <li>Warm-up period not counted in metrics</li>
-  <li>Each (impl × scenario × concurrency) run 5 times, median reported</li>
-</ul>
+<p>4 data point(s), 2 concurrency level(s), 2 implementation(s)</p><div class="ranking">
+      <h3>🏆 RPS Ranking at c=100 <span class="rank-subtitle">(Higher is better)</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">51,155.70</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">48,587.79</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+      </tr></tbody></table></div><div class="chart-container">
+    <canvas id="chart-H2"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H2'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [4805.037490277805,48587.78920323049],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [4068.1986561905505,51155.69683594251],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H2: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H2-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H2-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H2: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H2-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H2-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H2: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H2-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H2-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [0,0],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [0,0],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H2: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>go</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.392966546204365%"></div><span>4,805.04</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>go</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:94.98021180134177%"></div><span>48,587.79</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:7.95258183900291%"></div><span>4,068.20</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>51,155.70</span></div></td>
+        <td>0 MB/s</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.00%</td>
+      </tr></tbody></table></div></section>
 
-<h2>Known Limitations</h2>
+<h2 style="color:#0f3460;margin-top:2em">📌 Known Limitations</h2>
+<div class="meta">
 <ul>
-  <li><strong>Single-machine self-pressure</strong> (if applicable): k6 and gateway share resources;
-      absolute RPS values may be lower than cross-machine setup. Relative comparisons remain valid.</li>
-  <li><strong>CPU/MEM/GC/FD data</strong> depend on sidecar monitoring (pidstat, /proc) and may be absent
-      in early runs. These fields are filled as the monitoring pipeline matures.</li>
-  <li><strong>Cross-machine comparison:</strong> Reports from different machines are independent.
-      Only compare trends, not absolute values, across machines.</li>
+  <li><strong>Single-machine self-pressure:</strong> k6 and gateway on same machine may reduce absolute RPS. Relative comparisons remain valid.</li>
+  <li><strong>CPU/MEM/GC data</strong> depend on monitoring pipeline not yet attached.</li>
+  <li><strong>Cross-machine reports</strong> are independent; compare trends not absolute values across machines.</li>
+  <li><strong>N/A scenarios</strong> marked with — indicate environment constraints (e.g., no Node on xyz-mac, H4 upload timeout).</li>
 </ul>
+</div>
+
+</div>
 
 <footer>
-<p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T02:45:07.369Z</p>
-<p>Source: <code>../results/2026-07-06-jd</code></p>
+  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:04:34.067Z</p>
 </footer>
 
 </body>
