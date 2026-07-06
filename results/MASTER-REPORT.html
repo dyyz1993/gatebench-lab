@@ -49,7 +49,7 @@ h2 { color: #0f3460; margin-top: 2em; } h3 { color: #333; }
 <body>
 <div class="header">
   <h1>🏗️ GateBench Lab — 网关与网络服务语言选型报告</h1>
-  <p>6 条数据 · 6 条有效 · 0 条无效 · 1 种实现 · 3 个场景</p>
+  <p>24 条数据 · 24 条有效 · 0 条无效 · 4 种实现 · 3 个场景</p>
   <div class="subtitle">用统一 HTTP 场景对比 Rust / Go / Node.js / Python 的性能、延迟、资源占用和工程适配度</div>
 </div>
 <div class="container">
@@ -66,8 +66,8 @@ h2 { color: #0f3460; margin-top: 2em; } h3 { color: #333; }
 <h2>📊 实验组概览</h2>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:1em 0"><div class="group-card"><h3>valid</h3>
       <div class="group-card-row"><span>施压机</span><strong>MacBook-Pro (local k6)</strong></div>
-      <div class="group-card-row"><span>有效/总数</span><strong>6/6</strong></div>
-      <div class="group-card-row"><span>实现</span><strong>go</strong></div>
+      <div class="group-card-row"><span>有效/总数</span><strong>24/24</strong></div>
+      <div class="group-card-row"><span>实现</span><strong>go, node, python, rust-hyper</strong></div>
       <div class="group-card-row"><span>场景</span><strong>H1, H2, H3</strong></div>
     </div></div>
 
@@ -87,16 +87,133 @@ h2 { color: #0f3460; margin-top: 2em; } h3 { color: #333; }
     <div class="group-meta">
       <span><strong>施压机:</strong> MacBook-Pro (local k6)</span>
       <span><strong>被压机:</strong> valid</span>
-      <span><strong>数据点:</strong> 6 (有效: 6, 无效: 0)</span>
-      <span><strong>实现:</strong> go</span>
-    </div><h3>📊 有效数据全景对比 — c=10</h3>
+      <span><strong>数据点:</strong> 24 (有效: 24, 无效: 0)</span>
+      <span><strong>实现:</strong> go, node, python, rust-hyper</span>
+    </div><div class="ranking">
+        <h3>🏆 H1 有效数据排行榜 (c=100)</h3>
+        <table class="rank-table">
+          <thead><tr><th>Rank</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th><th>数据状态</th></tr></thead>
+          <tbody><tr class="rank-1">
+          <td class="rank-badge">🥇</td>
+          <td><strong>go</strong></td>
+          <td class="num-highlight">91,127.79</td>
+          <td>2.6</td>
+          <td>99.4</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-2">
+          <td class="rank-badge">🥈</td>
+          <td><strong>python</strong></td>
+          <td class="num-highlight">90,593.25</td>
+          <td>2.6</td>
+          <td>84.2</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-3">
+          <td class="rank-badge">🥉</td>
+          <td><strong>rust-hyper</strong></td>
+          <td class="num-highlight">80,256.14</td>
+          <td>3.0</td>
+          <td>63.7</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="">
+          <td class="rank-badge">#4</td>
+          <td><strong>node</strong></td>
+          <td class="num-highlight">75,538.92</td>
+          <td>3.2</td>
+          <td>55.2</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr></tbody></table></div><div class="ranking">
+        <h3>🏆 H2 有效数据排行榜 (c=100)</h3>
+        <table class="rank-table">
+          <thead><tr><th>Rank</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th><th>数据状态</th></tr></thead>
+          <tbody><tr class="rank-1">
+          <td class="rank-badge">🥇</td>
+          <td><strong>python</strong></td>
+          <td class="num-highlight">27,809.50</td>
+          <td>8.3</td>
+          <td>46.7</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-2">
+          <td class="rank-badge">🥈</td>
+          <td><strong>go</strong></td>
+          <td class="num-highlight">27,101.89</td>
+          <td>8.7</td>
+          <td>55.2</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-3">
+          <td class="rank-badge">🥉</td>
+          <td><strong>node</strong></td>
+          <td class="num-highlight">24,637.26</td>
+          <td>9.6</td>
+          <td>57.0</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="">
+          <td class="rank-badge">#4</td>
+          <td><strong>rust-hyper</strong></td>
+          <td class="num-highlight">23,919.58</td>
+          <td>10.1</td>
+          <td>84.1</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr></tbody></table></div><div class="ranking">
+        <h3>🏆 H3 有效数据排行榜 (c=100)</h3>
+        <table class="rank-table">
+          <thead><tr><th>Rank</th><th>实现</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>错误率</th><th>数据状态</th></tr></thead>
+          <tbody><tr class="rank-1">
+          <td class="rank-badge">🥇</td>
+          <td><strong>go</strong></td>
+          <td class="num-highlight">968.60</td>
+          <td>329.9</td>
+          <td>868.3</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-2">
+          <td class="rank-badge">🥈</td>
+          <td><strong>rust-hyper</strong></td>
+          <td class="num-highlight">902.13</td>
+          <td>352.9</td>
+          <td>1,556.6</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="rank-3">
+          <td class="rank-badge">🥉</td>
+          <td><strong>python</strong></td>
+          <td class="num-highlight">876.21</td>
+          <td>359.9</td>
+          <td>1,205.5</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr><tr class="">
+          <td class="rank-badge">#4</td>
+          <td><strong>node</strong></td>
+          <td class="num-highlight">817.06</td>
+          <td>386.6</td>
+          <td>1,160.1</td>
+          <td>0.0%</td>
+          <td><span class="valid-badge">✅ 有效</span></td>
+        </tr></tbody></table></div><h3>📊 有效数据全景对比 — c=10</h3>
       <div class="chart-container"><canvas id="chart-2026-07-06-valid-c10"></canvas></div>
       <script>
       new Chart(document.getElementById('chart-2026-07-06-valid-c10'), { type: 'bar', data: {
         labels: ["H1","H2","H3"],
         datasets: [{
-          label: 'go', data: [60967.8107723992,16363.779387932374,612.7192548491672],
+          label: 'go', data: [58335.34273906323,20758.335733256536,716.0873541291817],
           backgroundColor: '#00add888', borderColor: '#00add8', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'node', data: [59886.87013438347,18416.08264517127,740.2878860316471],
+          backgroundColor: '#68a06388', borderColor: '#68a063', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'python', data: [64893.23036316796,19632.308526828234,685.2009127662291],
+          backgroundColor: '#30699888', borderColor: '#306998', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'rust-hyper', data: [54609.864114826414,18103.140704254572,731.4573366197048],
+          backgroundColor: '#4363d888', borderColor: '#4363d8', borderWidth: 1, borderRadius: 2
         }]
       }, options: { responsive: true, plugins: { legend: { position: 'bottom' } },
         scales: { y: { beginAtZero: true, title: { display: true, text: 'RPS' } }, x: { grid: { display: false } } }
@@ -107,8 +224,17 @@ h2 { color: #0f3460; margin-top: 2em; } h3 { color: #333; }
       new Chart(document.getElementById('chart-2026-07-06-valid-c100'), { type: 'bar', data: {
         labels: ["H1","H2","H3"],
         datasets: [{
-          label: 'go', data: [83424.91047567861,25404.09238717119,831.861330354614],
+          label: 'go', data: [91127.79309600373,27101.89455708517,968.5958563970742],
           backgroundColor: '#00add888', borderColor: '#00add8', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'node', data: [75538.92395150918,24637.25535807099,817.0646954134896],
+          backgroundColor: '#68a06388', borderColor: '#68a063', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'python', data: [90593.25036970804,27809.50192252205,876.2080500889264],
+          backgroundColor: '#30699888', borderColor: '#306998', borderWidth: 1, borderRadius: 2
+        },{
+          label: 'rust-hyper', data: [80256.14376325694,23919.575564062212,902.1253077258873],
+          backgroundColor: '#4363d888', borderColor: '#4363d8', borderWidth: 1, borderRadius: 2
         }]
       }, options: { responsive: true, plugins: { legend: { position: 'bottom' } },
         scales: { y: { beginAtZero: true, title: { display: true, text: 'RPS' } }, x: { grid: { display: false } } }
@@ -154,5 +280,5 @@ h2 { color: #0f3460; margin-top: 2em; } h3 { color: #333; }
 </div>
 
 </div>
-<footer style="text-align:center;padding:2em;color:#aaa;font-size:0.85em">Generated by gatebench-lab combine-reports.ts on 2026-07-06T08:36:14.218Z · <a href="https://github.com/dyyz1993/gatebench-lab">GitHub</a></footer>
+<footer style="text-align:center;padding:2em;color:#aaa;font-size:0.85em">Generated by gatebench-lab combine-reports.ts on 2026-07-06T08:48:20.437Z · <a href="https://github.com/dyyz1993/gatebench-lab">GitHub</a></footer>
 </body></html>
