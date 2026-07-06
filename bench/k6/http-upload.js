@@ -8,17 +8,22 @@ export let options = {
 };
 
 const BASE = __ENV.TARGET_URL || 'http://localhost:8080';
+const FILE_SIZE = parseInt(__ENV.FILE_SIZE || '10485760'); // default 10MB
 
-// Generate 10MB of random data once per VU
-const fileContent = randomString(10 * 1024 * 1024);
-
-function randomString(size) {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+// Read pre-generated file from disk (fast, no string concat)
+// Generate with: dd if=/dev/urandom of=/tmp/test-10mb.bin bs=1M count=10
+// For no-file fallback, generate smaller payload inline
+let fileContent;
+try {
+  fileContent = open('/tmp/test-10mb.bin', 'b');
+} catch (e) {
+  // Fallback: generate smaller payload for testing
+  const size = Math.min(FILE_SIZE, 1024 * 1024); // max 1MB in fallback
+  const buf = new Uint8Array(size);
   for (let i = 0; i < size; i++) {
-    result += chars[Math.floor(Math.random() * chars.length)];
+    buf[i] = Math.floor(Math.random() * 256);
   }
-  return result;
+  fileContent = String.fromCharCode(...buf);
 }
 
 export default function () {

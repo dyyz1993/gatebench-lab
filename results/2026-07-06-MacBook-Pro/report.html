@@ -50,7 +50,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 
 <div class="header">
   <h1>🏗️ Gateway Benchmark Report</h1>
-  <p>Machine: <strong>MacBook-Pro</strong> — 24 data points across 3 scenarios · 4 implementations</p>
+  <p>Machine: <strong>MacBook-Pro</strong> — 32 data points across 4 scenarios · 4 implementations</p>
 </div>
 
 <div class="container">
@@ -59,18 +59,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
   <dl>
     <dt>Machine</dt><dd>MacBook-Pro</dd>
     <dt>Results directory</dt><dd>../results/2026-07-06-MacBook-Pro</dd>
-    <dt>Generated</dt><dd>2026-07-06T03:43:32.463Z</dd>
+    <dt>Generated</dt><dd>2026-07-06T03:57:51.003Z</dd>
     <dt>Implementations</dt><dd>go, node, python, rust</dd>
-    <dt>Scenarios</dt><dd>H1, H2, H3</dd>
-    <dt>Total records</dt><dd>24</dd>
+    <dt>Scenarios</dt><dd>H1, H2, H3, H4</dd>
+    <dt>Total records</dt><dd>32</dd>
     <dt>Methodology</dt><dd>Per BENCHMARK_SPEC.md — median of runs, warm-up excluded, min/max retained. Cross-machine comparison not applicable.</dd>
   </dl>
 </div>
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
     <div class="card"><span class="card-num">4</span><span class="card-label">Implementations</span></div>
-    <div class="card"><span class="card-num">3</span><span class="card-label">Scenarios</span></div>
-    <div class="card"><span class="card-num">24</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">4</span><span class="card-label">Scenarios</span></div>
+    <div class="card"><span class="card-num">32</span><span class="card-label">Data Points</span></div>
     <div class="card"><span class="card-num">79,437.80</span><span class="card-label">Peak RPS (go)</span></div>
   </div>
 
@@ -78,7 +78,8 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
   <h2>📋 Scenarios</h2>
   <ul><li><a href="#scenario-H1">H1</a> (8 records)</li>
 <li><a href="#scenario-H2">H2</a> (8 records)</li>
-<li><a href="#scenario-H3">H3</a> (8 records)</li></ul>
+<li><a href="#scenario-H3">H3</a> (8 records)</li>
+<li><a href="#scenario-H4">H4</a> (8 records)</li></ul>
 </div>
 
 <section id="scenario-H1">
@@ -993,6 +994,310 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>4,216.9</td>
         <td>100.00%</td>
       </tr></tbody></table></div></section>
+<section id="scenario-H4">
+<h2>Scenario: H4</h2>
+<p>8 data point(s), 2 concurrency level(s), 4 implementation(s)</p><div class="ranking">
+      <h3>🏆 RPS Ranking at c=100 <span class="rank-subtitle">(Higher is better)</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">340.03</td>
+        <td>140.0</td>
+        <td>1,462.0</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">231.43</td>
+        <td>1,112.9</td>
+        <td>1,814.1</td>
+        <td>100.0%</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">227.58</td>
+        <td>864.7</td>
+        <td>2,441.1</td>
+        <td>100.0%</td>
+      </tr><tr class="">
+        <td class="rank-badge">#4</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">58.76</td>
+        <td>5,884.1</td>
+        <td>9,219.4</td>
+        <td>0%</td>
+      </tr></tbody></table></div><div class="chart-container">
+    <canvas id="chart-H4"></canvas>
+  </div>
+  <script>new Chart(document.getElementById('chart-H4'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [192.31261402565875,227.58439853400046],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "node",
+        data: [345.9879306102575,340.02519927852256],
+        backgroundColor: '#68a06344',
+        borderColor: '#68a063',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "python",
+        data: [336.8718626978407,231.43082541625895],
+        backgroundColor: '#30699844',
+        borderColor: '#306998',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [121.77434402223719,58.76244198520516],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H4: RPS by Implementation", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "Requests/sec" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H4-p50"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H4-p50'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [51.245,83.771],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "node",
+        data: [31.341,86.542],
+        backgroundColor: '#68a06344',
+        borderColor: '#68a063',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "python",
+        data: [36.329499999999996,76.012],
+        backgroundColor: '#30699844',
+        borderColor: '#306998',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [48.2885,770.6455000000001],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H4: PP50 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H4-p95"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H4-p95'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [120.99639999999998,864.6514999999999],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "node",
+        data: [53.51414999999998,140.0198],
+        backgroundColor: '#68a06344',
+        borderColor: '#68a063',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "python",
+        data: [69.06034999999999,1112.9],
+        backgroundColor: '#30699844',
+        borderColor: '#306998',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [242.10854999999995,5884.112749999999],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H4: PP95 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><div class="chart-container">
+      <canvas id="chart-H4-p99"></canvas>
+    </div>
+    <script>new Chart(document.getElementById('chart-H4-p99'), {
+    type: 'bar',
+    data: {
+      labels: ["Concurrency 10","Concurrency 100"],
+      datasets: [{
+        label: "go",
+        data: [225.379,2441.088],
+        backgroundColor: '#00add844',
+        borderColor: '#00add8',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "node",
+        data: [164.21,1462.023],
+        backgroundColor: '#68a06344',
+        borderColor: '#68a063',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "python",
+        data: [156.229,1814.112],
+        backgroundColor: '#30699844',
+        borderColor: '#306998',
+        borderWidth: 2,
+        borderRadius: 4,
+      },{
+        label: "rust",
+        data: [739.322,9219.359],
+        backgroundColor: '#b33dc644',
+        borderColor: '#b33dc6',
+        borderWidth: 2,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: "H4: PP99 Latency", font: { size: 14 } },
+        legend: { position: 'bottom' },
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "ms" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });</script><h3>Detailed Results</h3>
+  <div style="overflow-x:auto"><table class="detail-table">
+    <thead><tr>
+      <th>Implementation</th><th>Concurrency</th><th>RPS</th><th>Throughput</th>
+      <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th>
+    </tr></thead><tbody><tr>
+        <td><strong>go</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:56.55834168576753%"></div><span>192.31</span></div></td>
+        <td>1,988.7 MB/s</td>
+        <td>51.2</td>
+        <td>121.0</td>
+        <td>225.4</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>go</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:66.9316271314294%"></div><span>227.58</span></div></td>
+        <td>2,021.3 MB/s</td>
+        <td>83.8</td>
+        <td>864.7</td>
+        <td>2,441.1</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>node</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:101.75361453927145%"></div><span>345.99</span></div></td>
+        <td>3,627.0 MB/s</td>
+        <td>31.3</td>
+        <td>53.5</td>
+        <td>164.2</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>node</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:100%"></div><span>340.03</span></div></td>
+        <td>3,327.5 MB/s</td>
+        <td>86.5</td>
+        <td>140.0</td>
+        <td>1,462.0</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>python</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:99.0726167979983%"></div><span>336.87</span></div></td>
+        <td>3,522.3 MB/s</td>
+        <td>36.3</td>
+        <td>69.1</td>
+        <td>156.2</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>python</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:68.06284531479344%"></div><span>231.43</span></div></td>
+        <td>2,139.5 MB/s</td>
+        <td>76.0</td>
+        <td>1,112.9</td>
+        <td>1,814.1</td>
+        <td>100.00%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>10</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:35.81332921225317%"></div><span>121.77</span></div></td>
+        <td>1,277.0 MB/s</td>
+        <td>48.3</td>
+        <td>242.1</td>
+        <td>739.3</td>
+        <td>0%</td>
+      </tr><tr>
+        <td><strong>rust</strong></td>
+        <td>100</td>
+        <td><div class="rps-bar-cell"><div class="rps-bar" style="width:17.281790323155278%"></div><span>58.76</span></div></td>
+        <td>616.2 MB/s</td>
+        <td>770.6</td>
+        <td>5,884.1</td>
+        <td>9,219.4</td>
+        <td>0%</td>
+      </tr></tbody></table></div></section>
 
 <h2 style="color:#0f3460;margin-top:2em">📌 Known Limitations</h2>
 <div class="meta">
@@ -1007,7 +1312,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 <footer>
-  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:43:32.463Z</p>
+  <p>Generated by gatebench-lab <code>generate-report.ts</code> on 2026-07-06T03:57:51.003Z</p>
 </footer>
 
 </body>

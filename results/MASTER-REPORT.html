@@ -48,13 +48,13 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <body>
 <div class="header">
   <h1>🏗️ Gateway Master Benchmark Report</h1>
-  <p>74 data points · 5 implementations · 6 scenarios · Machines: MacBook-Pro, jd, xyz-mac, local-direct</p>
+  <p>96 data points · 5 implementations · 7 scenarios · Machines: MacBook-Pro, jd, xyz-mac, local-direct</p>
 </div>
 <div class="container">
 <div class="meta">
   <dl>
     <dt>Implementations</dt><dd>go, node, python, rust, upstream-direct</dd>
-    <dt>Scenarios</dt><dd>H1, H2, H3, H5, H6, H7</dd>
+    <dt>Scenarios</dt><dd>H1, H2, H3, H4, H5, H6, H7</dd>
     <dt>Concurrency levels</dt><dd>10, 100</dd>
     <dt>Machines</dt><dd>MacBook-Pro, jd, xyz-mac, local-direct</dd>
     <dt>Methodology</dt><dd>Per BENCHMARK_SPEC. Grey — = not tested on that combination. Cross-machine comparisons are trends only.</dd>
@@ -62,8 +62,8 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin:1em 0">
     <div class="card"><span class="card-num">5</span><span class="card-label">Implementations</span></div>
-    <div class="card"><span class="card-num">6</span><span class="card-label">Scenarios</span></div>
-    <div class="card"><span class="card-num">74</span><span class="card-label">Data Points</span></div>
+    <div class="card"><span class="card-num">7</span><span class="card-label">Scenarios</span></div>
+    <div class="card"><span class="card-num">96</span><span class="card-label">Data Points</span></div>
     <div class="card"><span class="card-num">93,695.80</span><span class="card-label">Peak RPS (upstream-direct)</span></div>
   </div>
 <div class="na-legend">— = Not tested (machine limitation, skipped, or pending)</div>
@@ -72,7 +72,7 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <p style="color:#888;margin:-0.5em 0 1em">Cells show RPS. Grey — = untested. Machine annotation in parentheses.</p>
 <div style="overflow-x:auto"><table class="matrix-table">
 <thead><tr>
-  <th>Implementation</th><th>H1<br><small>c=10</small></th><th>H1<br><small>c=100</small></th><th>H2<br><small>c=10</small></th><th>H2<br><small>c=100</small></th><th>H3<br><small>c=10</small></th><th>H3<br><small>c=100</small></th><th>H5<br><small>c=10</small></th><th>H5<br><small>c=100</small></th><th>H6<br><small>c=10</small></th><th>H6<br><small>c=100</small></th><th>H7<br><small>c=10</small></th><th>H7<br><small>c=100</small></th></tr></thead><tbody><tr><td><strong>go</strong></td><td>
+  <th>Implementation</th><th>H1<br><small>c=10</small></th><th>H1<br><small>c=100</small></th><th>H2<br><small>c=10</small></th><th>H2<br><small>c=100</small></th><th>H3<br><small>c=10</small></th><th>H3<br><small>c=100</small></th><th>H4<br><small>c=10</small></th><th>H4<br><small>c=100</small></th><th>H5<br><small>c=10</small></th><th>H5<br><small>c=100</small></th><th>H6<br><small>c=10</small></th><th>H6<br><small>c=100</small></th><th>H7<br><small>c=10</small></th><th>H7<br><small>c=100</small></th></tr></thead><tbody><tr><td><strong>go</strong></td><td>
             <div class="rps-bar-cell">
               <div class="rps-bar" style="width:73.17464232749408%"></div>
               <span>58,128.33</span>
@@ -108,6 +108,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
               <span>18,680.20</span>
             </div>
             <span class="machine-tag">MacBook-Pro/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:78.17932651301302%"></div>
+              <span>1,983.59</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/jd/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:84.87537170077692%"></div>
+              <span>2,153.49</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/jd/xyz-mac</span>
           </td><td>
             <div class="rps-bar-cell">
               <div class="rps-bar" style="width:6.224905887221959%"></div>
@@ -182,6 +194,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             <span class="machine-tag">MacBook-Pro</span>
           </td><td>
             <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:77.70855474240932%"></div>
+              <span>1,971.65</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:79.38886849478884%"></div>
+              <span>2,014.28</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
               <div class="rps-bar" style="width:5.3993085619521635%"></div>
               <span>4,119.54</span>
             </div>
@@ -250,6 +274,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             <div class="rps-bar-cell">
               <div class="rps-bar" style="width:75.1301429762384%"></div>
               <span>14,034.46</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:70.40405637099573%"></div>
+              <span>1,786.31</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:51.606491259459695%"></div>
+              <span>1,309.38</span>
             </div>
             <span class="machine-tag">MacBook-Pro/xyz-mac</span>
           </td><td>
@@ -326,6 +362,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             <span class="machine-tag">MacBook-Pro/xyz-mac</span>
           </td><td>
             <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:66.52604357523514%"></div>
+              <span>1,687.92</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/jd/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:100%"></div>
+              <span>2,537.23</span>
+            </div>
+            <span class="machine-tag">MacBook-Pro/jd/xyz-mac</span>
+          </td><td>
+            <div class="rps-bar-cell">
               <div class="rps-bar" style="width:5.38947187792875%"></div>
               <span>4,112.04</span>
             </div>
@@ -394,6 +442,18 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
             <div class="rps-bar-cell">
               <div class="rps-bar" style="width:46.579542128526775%"></div>
               <span>8,701.15</span>
+            </div>
+            <span class="machine-tag">local-direct</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:60.451073203061526%"></div>
+              <span>1,533.78</span>
+            </div>
+            <span class="machine-tag">local-direct</span>
+          </td><td>
+            <div class="rps-bar-cell">
+              <div class="rps-bar" style="width:26.51321625566939%"></div>
+              <span>672.70</span>
             </div>
             <span class="machine-tag">local-direct</span>
           </td><td>
@@ -620,6 +680,98 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
         <td>0.0</td>
         <td>4,216.9</td>
         <td>100.0%</td>
+        <td>MacBook-Pro</td>
+      </tr></tbody></table></div><div class="ranking">
+      <h3>H4 <span class="rank-subtitle">sorted by RPS ↓</span></h3>
+      <table class="rank-table">
+        <thead><tr><th>Rank</th><th>Implementation</th><th>RPS</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th><th>Machine</th></tr></thead>
+        <tbody><tr class="rank-1">
+        <td class="rank-badge">🥇</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">2,537.23</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>xyz-mac</td>
+      </tr><tr class="rank-2">
+        <td class="rank-badge">🥈</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">2,153.49</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>jd</td>
+      </tr><tr class="rank-3">
+        <td class="rank-badge">🥉</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">2,046.24</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>jd</td>
+      </tr><tr class="">
+        <td class="rank-badge">#4</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">2,014.28</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>xyz-mac</td>
+      </tr><tr class="">
+        <td class="rank-badge">#5</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">1,457.91</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>xyz-mac</td>
+      </tr><tr class="">
+        <td class="rank-badge">#6</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">1,309.38</td>
+        <td>0</td>
+        <td>0</td>
+        <td>100.0%</td>
+        <td>xyz-mac</td>
+      </tr><tr class="">
+        <td class="rank-badge">#7</td>
+        <td><strong>upstream-direct</strong></td>
+        <td class="num-highlight">672.70</td>
+        <td>44.4</td>
+        <td>2,070.2</td>
+        <td>100.0%</td>
+        <td>local-direct</td>
+      </tr><tr class="">
+        <td class="rank-badge">#8</td>
+        <td><strong>node</strong></td>
+        <td class="num-highlight">340.03</td>
+        <td>140.0</td>
+        <td>1,462.0</td>
+        <td>100.0%</td>
+        <td>MacBook-Pro</td>
+      </tr><tr class="">
+        <td class="rank-badge">#9</td>
+        <td><strong>python</strong></td>
+        <td class="num-highlight">231.43</td>
+        <td>1,112.9</td>
+        <td>1,814.1</td>
+        <td>100.0%</td>
+        <td>MacBook-Pro</td>
+      </tr><tr class="">
+        <td class="rank-badge">#10</td>
+        <td><strong>go</strong></td>
+        <td class="num-highlight">227.58</td>
+        <td>864.7</td>
+        <td>2,441.1</td>
+        <td>100.0%</td>
+        <td>MacBook-Pro</td>
+      </tr><tr class="">
+        <td class="rank-badge">#11</td>
+        <td><strong>rust</strong></td>
+        <td class="num-highlight">58.76</td>
+        <td>5,884.1</td>
+        <td>9,219.4</td>
+        <td>0%</td>
         <td>MacBook-Pro</td>
       </tr></tbody></table></div><div class="ranking">
       <h3>H5 <span class="rank-subtitle">sorted by RPS ↓</span></h3>
@@ -1192,6 +1344,156 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           },{
             label: 'upstream-direct',
             data: [26.924,163.442],
+            backgroundColor: '#88844',
+            borderColor: '#888',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { title: { display: false }, legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'ms' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H4 — RPS</h3>
+    <div class="chart-container"><canvas id="master-chart-H4"></canvas></div>
+    <script>
+    new Chart(document.getElementById('master-chart-H4'), {
+      type: 'bar',
+      data: {
+        labels: ["c=10","c=100"],
+        datasets: [{
+          label: 'go',
+          data: [192.31261402565875,227.58439853400046],
+          backgroundColor: '#00add844',
+          borderColor: '#00add8',
+          borderWidth: 2,
+          borderRadius: 4,
+        },{
+          label: 'node',
+          data: [345.9879306102575,340.02519927852256],
+          backgroundColor: '#68a06344',
+          borderColor: '#68a063',
+          borderWidth: 2,
+          borderRadius: 4,
+        },{
+          label: 'python',
+          data: [336.8718626978407,231.43082541625895],
+          backgroundColor: '#30699844',
+          borderColor: '#306998',
+          borderWidth: 2,
+          borderRadius: 4,
+        },{
+          label: 'rust',
+          data: [121.77434402223719,58.76244198520516],
+          backgroundColor: '#b33dc644',
+          borderColor: '#b33dc6',
+          borderWidth: 2,
+          borderRadius: 4,
+        },{
+          label: 'upstream-direct',
+          data: [1533.7841345438428,672.7018776337643],
+          backgroundColor: '#88844',
+          borderColor: '#888',
+          borderWidth: 2,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { title: { display: false }, legend: { position: 'bottom' } },
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'Requests/sec' } }, x: { grid: { display: false } } }
+      }
+    });
+    </script><h3>H4 — PP95 Latency</h3>
+      <div class="chart-container"><canvas id="master-H4-p95"></canvas></div>
+      <script>
+      new Chart(document.getElementById('master-H4-p95'), {
+        type: 'bar',
+        data: {
+          labels: ["c=10","c=100"],
+          datasets: [{
+            label: 'go',
+            data: [120.99639999999998,864.6514999999999],
+            backgroundColor: '#00add844',
+            borderColor: '#00add8',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'node',
+            data: [53.51414999999998,140.0198],
+            backgroundColor: '#68a06344',
+            borderColor: '#68a063',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'python',
+            data: [69.06034999999999,1112.9],
+            backgroundColor: '#30699844',
+            borderColor: '#306998',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'rust',
+            data: [242.10854999999995,5884.112749999999],
+            backgroundColor: '#b33dc644',
+            borderColor: '#b33dc6',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'upstream-direct',
+            data: [0.538,44.37039999999998],
+            backgroundColor: '#88844',
+            borderColor: '#888',
+            borderWidth: 2,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { title: { display: false }, legend: { position: 'bottom' } },
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'ms' } }, x: { grid: { display: false } } }
+        }
+      });
+      </script><h3>H4 — PP99 Latency</h3>
+      <div class="chart-container"><canvas id="master-H4-p99"></canvas></div>
+      <script>
+      new Chart(document.getElementById('master-H4-p99'), {
+        type: 'bar',
+        data: {
+          labels: ["c=10","c=100"],
+          datasets: [{
+            label: 'go',
+            data: [225.379,2441.088],
+            backgroundColor: '#00add844',
+            borderColor: '#00add8',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'node',
+            data: [164.21,1462.023],
+            backgroundColor: '#68a06344',
+            borderColor: '#68a063',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'python',
+            data: [156.229,1814.112],
+            backgroundColor: '#30699844',
+            borderColor: '#306998',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'rust',
+            data: [739.322,9219.359],
+            backgroundColor: '#b33dc644',
+            borderColor: '#b33dc6',
+            borderWidth: 2,
+            borderRadius: 4,
+          },{
+            label: 'upstream-direct',
+            data: [23.75,2070.19],
             backgroundColor: '#88844',
             borderColor: '#888',
             borderWidth: 2,
@@ -1970,6 +2272,111 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
           <td>163.4</td>
           <td>100.00%</td>
           <td>local-direct</td>
+        </tr></tbody></table></div><h3>H4</h3>
+    <div style="overflow-x:auto"><table class="detail-table">
+      <thead><tr>
+        <th>Implementation</th><th>c</th><th>RPS</th><th>MB/s</th>
+        <th>P50 (ms)</th><th>P95 (ms)</th><th>P99 (ms)</th><th>Error %</th><th>Machine</th>
+      </tr></thead><tbody><tr>
+          <td><strong>go</strong></td>
+          <td>10</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:7.579621960162414%"></div><span>192.31</span></div></td>
+          <td>1,988.7</td>
+          <td>51.2</td>
+          <td>121.0</td>
+          <td>225.4</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>go</strong></td>
+          <td>100</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:8.969789702346363%"></div><span>227.58</span></div></td>
+          <td>2,021.3</td>
+          <td>83.8</td>
+          <td>864.7</td>
+          <td>2,441.1</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>node</strong></td>
+          <td>10</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:13.636431131110117%"></div><span>345.99</span></div></td>
+          <td>3,627.0</td>
+          <td>31.3</td>
+          <td>53.5</td>
+          <td>164.2</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>node</strong></td>
+          <td>100</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:13.40142184909528%"></div><span>340.03</span></div></td>
+          <td>3,327.5</td>
+          <td>86.5</td>
+          <td>140.0</td>
+          <td>1,462.0</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>python</strong></td>
+          <td>10</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:13.277139314037385%"></div><span>336.87</span></div></td>
+          <td>3,522.3</td>
+          <td>36.3</td>
+          <td>69.1</td>
+          <td>156.2</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>python</strong></td>
+          <td>100</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:9.121389023132652%"></div><span>231.43</span></div></td>
+          <td>2,139.5</td>
+          <td>76.0</td>
+          <td>1,112.9</td>
+          <td>1,814.1</td>
+          <td>100.00%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>rust</strong></td>
+          <td>10</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:4.799495325939319%"></div><span>121.77</span></div></td>
+          <td>1,277.0</td>
+          <td>48.3</td>
+          <td>242.1</td>
+          <td>739.3</td>
+          <td>0%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>rust</strong></td>
+          <td>100</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:2.316005624282165%"></div><span>58.76</span></div></td>
+          <td>616.2</td>
+          <td>770.6</td>
+          <td>5,884.1</td>
+          <td>9,219.4</td>
+          <td>0%</td>
+          <td>MacBook-Pro</td>
+        </tr><tr>
+          <td><strong>upstream-direct</strong></td>
+          <td>10</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:60.451073203061526%"></div><span>1,533.78</span></div></td>
+          <td>758.8</td>
+          <td>0.0</td>
+          <td>0.5</td>
+          <td>23.8</td>
+          <td>100.00%</td>
+          <td>local-direct</td>
+        </tr><tr>
+          <td><strong>upstream-direct</strong></td>
+          <td>100</td>
+          <td><div class="rps-bar-cell"><div class="rps-bar" style="width:26.51321625566939%"></div><span>672.70</span></div></td>
+          <td>407.5</td>
+          <td>0.1</td>
+          <td>44.4</td>
+          <td>2,070.2</td>
+          <td>100.00%</td>
+          <td>local-direct</td>
         </tr></tbody></table></div><h3>H5</h3>
     <div style="overflow-x:auto"><table class="detail-table">
       <thead><tr>
@@ -2297,6 +2704,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </ul>
 </div>
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T03:43:52.781Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T03:58:10.086Z</footer>
 </body>
 </html>
