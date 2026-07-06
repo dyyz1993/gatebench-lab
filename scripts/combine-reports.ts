@@ -230,7 +230,7 @@ function main() {
     process.exit(1);
   }
   
-  const groups = dirs.map(loadGroup).filter(g => g.records.length > 0);
+  const groups = dirs.map(loadGroup).filter(g => g.records.length > 0 && g.records !== null);
   console.log(`Loaded ${groups.length} experiment groups:`);
   for (const g of groups) {
     console.log(`  ${g.name}: ${g.records.length} records, target=${g.targetMachine}`);
@@ -253,6 +253,44 @@ function main() {
     </div>`;
   }).join('\n');
   
+  // ── 场景说明 ──
+  const scenarioDescHtml = `<h2>📖 场景说明(从简单到复杂)</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin:1em 0">
+    <div class="scene-card"><div class="scene-num">H1</div><div class="scene-title">GET /ping</div><div class="scene-desc">最简单的请求,空body。测框架和路由的基础开销,体现语言运行时的最小成本。</div></div>
+    <div class="scene-card"><div class="scene-num">H2</div><div class="scene-title">GET /proxy/small</div><div class="scene-desc">转发1KB小响应。测网关代理转发开销(Nginx反向代理也是干这个的)。</div></div>
+    <div class="scene-card"><div class="scene-num">H3</div><div class="scene-title">POST /json/large 1MB</div><div class="scene-desc">提交1MB JSON body。测body读取、JSON解析、内存分配。Python的json.loads vs Rust的serde vs Go的encoding/json。</div></div>
+    <div class="scene-card"><div class="scene-num">H4</div><div class="scene-title">POST /upload/file 10MB</div><div class="scene-desc">上传10MB文件(multipart)。测内存/磁盘缓冲策略、streaming能力。内存小的实现会先到瓶颈。</div></div>
+    <div class="scene-card"><div class="scene-num">H5</div><div class="scene-title">POST /upload/instant/init</div><div class="scene-desc">秒传hash查重。测内存缓存查询性能+业务逻辑开销。这里体现的是"算法实现"差异,不是语言本身。</div></div>
+    <div class="scene-card"><div class="scene-num">H6</div><div class="scene-title">GET /response/text 10MB</div><div class="scene-desc">返回10MB纯文本流。测response streaming、chunked transfer。这里瓶颈在网卡,语言差异会缩小。</div></div>
+    <div class="scene-card"><div class="scene-num">H7</div><div class="scene-title">GET /response/bin 10MB</div><div class="scene-desc">返回10MB随机二进制。测二进制吞吐、sendfile能力。和H6类似,但无字符编码开销。</div></div>
+  </div>`;
+
+  // ── 能力分析 ──
+  const analysisHtml = `<h2>🧠 能力总结</h2>
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <h3>🟢 Go — 均衡之王</h3>
+      <p>Go的<code>httputil.ReverseProxy</code>实现零拷贝代理转发,在简单请求(H1-H2)中表现最好。标准库HTTP支持成熟,部署简单(单二进制)。所有场景表现稳定,适合做通用网关。</p>
+    </div>
+    <div class="analysis-card">
+      <h3>🟣 Rust — 上限最高,但实现深度影响结果</h3>
+      <p>当前Rust实现用<code>reqwest</code>做逐请求代理转发,在简单请求上比Go的<code>ReverseProxy</code>慢(每次请求都开HTTP客户端)。但在大上传(H4)和大响应(H6-H7)场景,Rust逐渐追平甚至超过Go。<strong>这不是语言慢,是代理实现方式不同。</strong>用<code>hyper</code>直接做TCP隧道代理后会更强。</p>
+    </div>
+    <div class="analysis-card">
+      <h3>🟢 Node — 简单请求够用,大负载下滑</h3>
+      <p>Fastify的<code>reply.from()</code>流式转发在小请求上表现不错。但在高并发和大负载下,单进程event loop模型导致P99延迟升高。Node在I/O密集场景下可用,CPU密集场景不如Rust/Go。</p>
+    </div>
+    <div class="analysis-card">
+      <h3>🔵 Python — 上手最快,性能最低,但可用</h3>
+      <p>FastAPI+Uvicorn在低并发下可用,但高并发时worker模型和GC导致吞吐和延迟都差于其他语言。Python的优势是开发效率,不是运行时性能。<strong>但如果瓶颈在上游/网络,Python也能扛住</strong>(H6中Python RPS和Rust几乎一样,因为瓶颈不在网关)。</p>
+    </div>
+  </div>
+  <div class="warning">
+    <strong>⚠️ 重要:</strong> 以上排名是<strong>当前实现的排名</strong>,不是语言的绝对排名。
+    Rust用<code>reqwest</code>逐请求代理 vs Go的<code>ReverseProxy</code>零拷贝实现——同一语言换实现方式,结果可以差数倍。
+    结论应该读作"Go的ReverseProxy实现最成熟",而非"Go语言最快"。
+  </div>`;
+
   // ── 各组报告 ──
   const groupReports = groups.map(renderGroup).join('\n');
   
@@ -303,6 +341,15 @@ h3 { color: #333; margin: 1em 0 0.5em; }
 .warning { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 1em 1.5em; margin: 1em 0; }
 .warning strong { color: #856404; }
 footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
+.scene-card { background: #fff; border-left: 4px solid #0f3460; border-radius: 6px; padding: 0.8em 1em; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.scene-num { font-weight: 700; color: #0f3460; font-size: 0.85em; }
+.scene-title { font-weight: 600; margin: 0.2em 0; }
+.scene-desc { font-size: 0.85em; color: #666; }
+.analysis-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(350px,1fr)); gap: 12px; margin: 1em 0; }
+.analysis-card { background: #fff; border-radius: 10px; padding: 1em 1.2em; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.analysis-card h3 { margin: 0 0 0.5em; font-size: 1em; }
+.analysis-card p { margin: 0; font-size: 0.88em; line-height: 1.5; color: #555; }
+.analysis-card code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-size: 0.9em; }
 </style>
 </head>
 <body>
@@ -323,6 +370,9 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:1em 0">
 ${groupOverview}
 </div>
+
+${scenarioDescHtml}
+${analysisHtml}
 
 ${groupReports}
 

@@ -14,6 +14,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 // --- config ---
@@ -204,6 +206,94 @@ func instantVerifyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// --- WebSocket ---
+
+var wsUpgrader = websocket.Upgrader{
+	ReadBufferSize:  4096,
+	WriteBufferSize: 4096,
+	CheckOrigin:     func(r *http.Request) bool { return true },
+}
+
+// WS echo: echo back whatever is sent
+func wsEchoHandler(w http.ResponseWriter, r *http.Request) {
+	conn, err := wsUpgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Printf("ws upgrade error: %v", err)
+		return
+	}
+	defer conn.Close()
+	conn.SetPongHandler(func(string) error { return conn.WriteMessage(websocket.PongMessage, nil) })
+	for {
+		mt, msg, err := conn.ReadMessage()
+		if err != nil {
+			break
+		}
+		if err := conn.WriteMessage(mt, msg); err != nil {
+			break
+		}
+	}
+}
+
+// WS broadcast hub: maintains connections, broadcasts each message to all
+var (
+	mu         sync.Mutex
+	hubConns   []*websocket.Conn
+)
+
+func wsBroadcastHandler(w http.ResponseWriter, r *http.Request) {
+	conn, err := wsUpgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Printf("ws broadcast upgrade error: %v", err)
+		return
+	}
+	mu.Lock()
+	hubConns = append(hubConns, conn)
+	mu.Unlock()
+
+	defer func() {
+		mu.Lock()
+		for i, c := range hubConns {
+			if c == conn {
+				hubConns = append(hubConns[:i], hubConns[i+1:]...)
+				break
+			}
+		}
+		mu.Unlock()
+		conn.Close()
+	}()
+
+	for {
+		mt, msg, err := conn.ReadMessage()
+		if err != nil {
+			break
+		}
+		mu.Lock()
+		for _, c := range hubConns {
+			c.WriteMessage(mt, msg)
+		}
+		mu.Unlock()
+	}
+}
+
+// WS heartbeat: responds to ping with pong
+func wsHeartbeatHandler(w http.ResponseWriter, r *http.Request) {
+	conn, err := wsUpgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Printf("ws heartbeat upgrade error: %v", err)
+		return
+	}
+	defer conn.Close()
+	conn.SetPingHandler(func(string) error {
+		return conn.WriteMessage(websocket.PongMessage, nil)
+	})
+	for {
+		_, _, err := conn.ReadMessage()
+		if err != nil {
+			break
+		}
+	}
+}
+
 // --- health ---
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -230,7 +320,10 @@ func main() {
 	mux.HandleFunc("POST /upload", uploadHandler)
 	mux.HandleFunc("GET /text", textHandler)
 	mux.HandleFunc("GET /bin", binHandler)
-	mux.HandleFunc("GET /instant/verify", instantVerifyHandler)
+		mux.HandleFunc("GET /instant/verify", instantVerifyHandler)
+	mux.HandleFunc("GET /ws/echo", wsEchoHandler)
+	mux.HandleFunc("GET /ws/broadcast", wsBroadcastHandler)
+	mux.HandleFunc("GET /ws/heartbeat", wsHeartbeatHandler)
 
 	handler := loggingMiddleware(mux)
 
