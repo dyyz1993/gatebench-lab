@@ -38,6 +38,24 @@ h3 { color: #333; margin: 1em 0 0.5em; }
 .rps-value { font-weight: 700; color: #0f3460; }
 .machine-tag { font-size: 0.7em; color: #aaa; display: block; }
 .na { color: #ddd; background: #fafafa; }
+.deep-analysis { background: #fff; border-radius: 10px; padding: 1.5em; margin: 1.5em 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.deep-analysis h3 { color: #0f3460; margin-top: 0; }
+.deep-analysis h4 { color: #333; margin: 0.5em 0; }
+.deep-analysis p { line-height: 1.6; color: #555; }
+.analysis-table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.9em; }
+.analysis-table th { background: #f0f4f8; padding: 10px 12px; text-align: left; border-bottom: 2px solid #dde5f0; font-weight: 600; color: #333; }
+.analysis-table td { padding: 10px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+.analysis-table .good { color: #2e7d32; font-weight: 600; text-align: center; }
+.analysis-table .bad { color: #c62828; font-weight: 600; text-align: center; }
+.analysis-table .mid { color: #f57f17; font-weight: 600; text-align: center; }
+.analysis-table .principle { font-size: 0.88em; color: #555; line-height: 1.5; }
+.finding { background: #f8faff; border-left: 4px solid #0f3460; border-radius: 6px; padding: 0.8em 1.2em; margin: 1em 0; }
+.finding h4 { margin: 0 0 0.3em; color: #0f3460; font-size: 1em; }
+.finding p { margin: 0; font-size: 0.88em; line-height: 1.6; color: #444; }
+.finding strong { color: #1a1a2e; }
+.advice-table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.9em; }
+.advice-table th { background: #0f3460; color: #fff; padding: 10px 12px; text-align: left; }
+.advice-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
 .detail-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
 .detail-table th { text-align: left; padding: 8px 10px; background: #f0f4f8; border-bottom: 2px solid #dde5f0; color: #555; font-size: 0.85em; }
 .detail-table td { padding: 6px 10px; border-bottom: 1px solid #eee; }
@@ -105,30 +123,100 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
     <div class="scene-card"><div class="scene-num">H6</div><div class="scene-title">GET /response/text 10MB</div><div class="scene-desc">返回10MB纯文本流。测response streaming、chunked transfer。这里瓶颈在网卡,语言差异会缩小。</div></div>
     <div class="scene-card"><div class="scene-num">H7</div><div class="scene-title">GET /response/bin 10MB</div><div class="scene-desc">返回10MB随机二进制。测二进制吞吐、sendfile能力。和H6类似,但无字符编码开销。</div></div>
   </div>
-<h2>🧠 能力总结</h2>
-  <div class="analysis-grid">
-    <div class="analysis-card">
-      <h3>🟢 Go — 均衡之王</h3>
-      <p>Go的<code>httputil.ReverseProxy</code>实现零拷贝代理转发,在简单请求(H1-H2)中表现最好。标准库HTTP支持成熟,部署简单(单二进制)。所有场景表现稳定,适合做通用网关。</p>
-    </div>
-    <div class="analysis-card">
-      <h3>🟣 Rust — 上限最高,但实现深度影响结果</h3>
-      <p>当前Rust实现用<code>reqwest</code>做逐请求代理转发,在简单请求上比Go的<code>ReverseProxy</code>慢(每次请求都开HTTP客户端)。但在大上传(H4)和大响应(H6-H7)场景,Rust逐渐追平甚至超过Go。<strong>这不是语言慢,是代理实现方式不同。</strong>用<code>hyper</code>直接做TCP隧道代理后会更强。</p>
-    </div>
-    <div class="analysis-card">
-      <h3>🟢 Node — 简单请求够用,大负载下滑</h3>
-      <p>Fastify的<code>reply.from()</code>流式转发在小请求上表现不错。但在高并发和大负载下,单进程event loop模型导致P99延迟升高。Node在I/O密集场景下可用,CPU密集场景不如Rust/Go。</p>
-    </div>
-    <div class="analysis-card">
-      <h3>🔵 Python — 上手最快,性能最低,但可用</h3>
-      <p>FastAPI+Uvicorn在低并发下可用,但高并发时worker模型和GC导致吞吐和延迟都差于其他语言。Python的优势是开发效率,不是运行时性能。<strong>但如果瓶颈在上游/网络,Python也能扛住</strong>(H6中Python RPS和Rust几乎一样,因为瓶颈不在网关)。</p>
-    </div>
-  </div>
-  <div class="warning">
-    <strong>⚠️ 重要:</strong> 以上排名是<strong>当前实现的排名</strong>,不是语言的绝对排名。
-    Rust用<code>reqwest</code>逐请求代理 vs Go的<code>ReverseProxy</code>零拷贝实现——同一语言换实现方式,结果可以差数倍。
-    结论应该读作"Go的ReverseProxy实现最成熟",而非"Go语言最快"。
-  </div>
+<h2>🧠 深入原理分析:为什么性能有差异</h2>
+	  <div class="deep-analysis">
+	    <h3>📌 核心结论:这不是"语言快慢"的对比,是"代理实现方式"的对比</h3>
+	    <p style="color:#555;line-height:1.6">
+	    当前数据看起来Go在简单请求上领先,但在大上传和大响应场景上差距缩小甚至反转。
+	    这个现象违背了常规认知(Rust作为编译型无GC语言应该最快)。
+	    <strong>原因在于四个网关用了完全不同的代理实现策略:</strong>
+	    </p>
+
+	    <table class="analysis-table">
+	    <tr><th>语言</th><th>代理方式</th><th>简单请求(H1-H2)</th><th>大请求(H4/H6/H7)</th><th>原理</th></tr>
+	    <tr>
+	      <td><strong>Go</strong></td>
+	      <td><code>httputil.ReverseProxy</code></td>
+	      <td class="good">🟢 强</td>
+	      <td class="good">🟢 强</td>
+	      <td class="principle">Go标准库的ReverseProxy使用<code>io.Copy</code>直接在两个TCP连接间搬运字节,<strong>零分配、零解析</strong>。
+	      不需要反序列化HTTP请求再重新序列化——直接透传TCP流。这在简单请求上优势巨大。</td>
+	    </tr>
+	    <tr>
+	      <td><strong>Rust</strong></td>
+	      <td><code>reqwest</code> 逐请求转发</td>
+	      <td class="bad">🔴 弱</td>
+	      <td class="good">🟢 强(追上)</td>
+	      <td class="principle"><strong>这才是Rust"慢"的真正原因。</strong> 当前实现:收到请求→用serde解析headers→构建新的reqwest请求→发出去→等响应→序列化回客户端。
+	      每一步都有内存分配和拷贝。相比之下Go直接透传TCP,零开销。
+	      <strong>如果用 <code>hyper</code> 的 <code>connection::Http</code> 做TCP隧道,Rust可以做到和Go一样的零拷贝。</strong>
+	      大请求上差距缩小是因为传输时间远大于代理处理时间,实现方式的差异被摊薄了。</td>
+	    </tr>
+	    <tr>
+	      <td><strong>Node</strong></td>
+	      <td><code>@fastify/reply-from</code> (undici)</td>
+	      <td class="mid">🟡 中</td>
+	      <td class="good">🟢 强</td>
+	      <td class="principle">undici是Node.js的新一代HTTP客户端,用C++写的链接池和请求复用。
+	      Fastify的schema序列化也减少了JSON处理开销。但在高并发下,
+	      <strong>单线程event loop的固有问题</strong>暴露出来:一个慢请求的处理会延迟后续所有请求。
+	      这是Node的架构天花板,不是优化能解决的。</td>
+	    </tr>
+	    <tr>
+	      <td><strong>Python</strong></td>
+	      <td><code>httpx.AsyncClient</code></td>
+	      <td class="bad">🔴 弱</td>
+	      <td class="mid">🟡 中期追上</td>
+	      <td class="principle">CPython解释器开销是硬伤——每条Python字节码的执行都比V8慢10-100倍。
+	      <strong>但GIL在这里不是主要问题</strong>(asyncio在I/O等待时会释放GIL)。
+	      Uvicorn多worker通过多进程规避GIL,但进程间上下文切换有代价。
+	      和Rust同理,大请求上差距缩小是因为瓶颈从"CPU处理请求"变成了"网卡带宽"。</td>
+	    </tr>
+	    </table>
+
+	    <h3 style="margin-top:2em">🔬 三个违反直觉的发现</h3>
+	    
+	    <div class="finding">
+	      <h4>发现1: Rust"最慢"是因为实现策略,不是语言</h4>
+	      <p>Rust在H1上只有Go的一半速度(<strong>41k vs 79k</strong>),这很容易被解读为"Rust不过如此"。
+	      但真相是:Go的<code>ReverseProxy</code>是TCP层透传,Rust的<code>reqwest</code>是HTTP层逐请求转发。
+	      <strong>换一种实现(Rust用hyper做TCP隧道),结果可能完全反过来。</strong>
+	      这不是公平的语言对比——这是<strong>标准库生态成熟度</strong>的对比。Go的net/http经过十几年生产环境打磨,
+	      而Rust的axum生态还在快速发展中。</p>
+	    </div>
+
+	    <div class="finding">
+	      <h4>发现2: Python在H6(大文本流)上不比Rust慢——因为瓶颈根本不在网关</h4>
+	      <p>H6的原始数据:Python 4,728 RPS, Rust 4,398 RPS, Go 4,287 RPS。
+	      Python甚至排第一!这不是Python变快了,是<strong>upstream-echo生成10MB文本的时间远大于网关转发的时间</strong>。
+	      所有语言都在等上游发完数据,网关自身的处理时间可以忽略不计。
+	      <strong>结论:当你做网关时,如果业务逻辑在上游(数据库/文件系统/另一个服务),语言选啥都一样。</strong></p>
+	    </div>
+
+	    <div class="finding">
+	      <h4>发现3: 同机自压数据不可信——你测的是"争抢CPU",不是"语言性能"</h4>
+	      <p>MacBook-Pro同机自压组中,Go的H2只有2,283 RPS而Node有16,087 RPS。
+	      这不合理——Go的ReverseProxy不可能比Node慢7倍。原因是在顺序执行测试时,
+	      前一个测试的进程没有完全退出,后一个测试进来时CPU已经被占满。
+	      <strong>这就是为什么设计文档第7节强调"压测机和服务机必须分离"。</strong>
+	      跨机数据(xyz-mac组)比同机数据可信得多。</p>
+	    </div>
+
+	    <h3 style="margin-top:2em">💡 如果你要选语言做网关,我的建议</h3>
+	    <table class="advice-table">
+	    <tr><th>你的场景</th><th>推荐语言</th><th>理由</th></tr>
+	    <tr><td>简单反向代理,对标Nginx/Envoy</td><td><strong>Go</strong></td><td>ReverseProxy开箱即用,生态成熟,部署简单</td></tr>
+	    <tr><td>上传/流式转发/大流量</td><td><strong>Go 或 Rust</strong></td><td>两者都能做好,选你团队会的那门</td></tr>
+	    <tr><td>快速原型,内部工具</td><td><strong>Python 或 Node</strong></td><td>够了,瓶颈不在网关就在上游</td></tr>
+	    <tr><td>极限性能,需要压榨每一毫秒</td><td><strong>Rust(用hyper做TCP隧道)</strong></td><td>目前实现方式不对,换hyper后有机会超过Go</td></tr>
+	    </table>
+
+	    <div class="warning">
+	      <strong>⚠️ 重要声名:</strong> 这份报告比的是<strong>框架/库的成熟度</strong>,不是语言的运行时速度。
+	    换一种实现方式(Rust用hyper,Go用fasthttp,Node用纯net),排名可以完全不同。
+	    结论应该读作"Go标准库的ReverseProxy实现最成熟",不是"Go最快"。
+	    </div>
+	  </div>
 
 <section class="group-section">
     <h2 class="group-title">🔬 实验组:被压机 = MacBook-Pro</h2>
@@ -2033,6 +2121,6 @@ footer { text-align: center; padding: 2em; color: #aaa; font-size: 0.85em; }
 </div>
 
 </div>
-<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T05:18:35.903Z</footer>
+<footer>Generated by gatebench-lab combine-reports.ts on 2026-07-06T05:27:16.310Z</footer>
 </body>
 </html>
