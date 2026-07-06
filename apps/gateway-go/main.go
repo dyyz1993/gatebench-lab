@@ -44,14 +44,27 @@ func main() {
 		DisableKeepAlives:   false,
 	}
 
+	// Path mapping: gateway routes → upstream routes
+	var pathMap = map[string]string{
+		"/proxy/small":   "/small",
+		"/json/large":    "/echo-json",
+		"/upload/file":   "/upload",
+		"/response/text": "/text",
+		"/response/bin":  "/bin",
+	}
+
 	// Create shared reverse proxy
 	upstreamURL, _ := url.Parse(upstreamBaseURL)
 	sharedReverseProxy = &httputil.ReverseProxy{
 		Rewrite: func(r *httputil.ProxyRequest) {
 			r.SetURL(upstreamURL)
 			r.Out.Host = upstreamURL.Host
-			// Preserve original path and query
-			r.Out.URL.Path = r.In.URL.Path
+			// Map gateway path to upstream path
+			if mapped, ok := pathMap[r.In.URL.Path]; ok {
+				r.Out.URL.Path = mapped
+			} else {
+				r.Out.URL.Path = r.In.URL.Path
+			}
 			r.Out.URL.RawQuery = r.In.URL.RawQuery
 		},
 		Transport: transport,

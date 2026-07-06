@@ -2,44 +2,44 @@
   "scenario": "H3",
   "records": [
     {
-      "impl": "upstream-direct",
+      "impl": "go",
       "variant": "buffered",
       "scenario": "H3",
-      "machine": "local-direct",
+      "machine": "valid",
       "concurrency": 10,
       "duration_sec": 15,
       "runs": 1,
       "rps": {
-        "median": 3966.0858901890097,
-        "min": 3966.0858901890097,
-        "max": 3966.0858901890097
+        "median": 612.7192548491672,
+        "min": 612.7192548491672,
+        "max": 612.7192548491672
       },
       "throughput_mbps": {
-        "median": 988.7320206339132,
-        "min": 988.7320206339132,
-        "max": 988.7320206339132
+        "median": 1285.329978702076,
+        "min": 1285.329978702076,
+        "max": 1285.329978702076
       },
       "latency_ms": {
         "p50": {
-          "median": 0.013,
-          "min": 0.013,
-          "max": 0.013
+          "median": 14.9035,
+          "min": 14.9035,
+          "max": 14.9035
         },
         "p95": {
-          "median": 0.249,
-          "min": 0.249,
-          "max": 0.249
+          "median": 24.801499999999997,
+          "min": 24.801499999999997,
+          "max": 24.801499999999997
         },
         "p99": {
-          "median": 26.924,
-          "min": 26.924,
-          "max": 26.924
+          "median": 73.828,
+          "min": 73.828,
+          "max": 73.828
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0,
+        "min": 0,
+        "max": 0
       },
       "cpu_avg_pct": {
         "median": 0,
@@ -64,44 +64,44 @@
       "notes": ""
     },
     {
-      "impl": "upstream-direct",
+      "impl": "go",
       "variant": "buffered",
       "scenario": "H3",
-      "machine": "local-direct",
+      "machine": "valid",
       "concurrency": 100,
       "duration_sec": 15,
       "runs": 1,
       "rps": {
-        "median": 8701.152379140984,
-        "min": 8701.152379140984,
-        "max": 8701.152379140984
+        "median": 831.861330354614,
+        "min": 831.861330354614,
+        "max": 831.861330354614
       },
       "throughput_mbps": {
-        "median": 789.0197952791209,
-        "min": 789.0197952791209,
-        "max": 789.0197952791209
+        "median": 1745.0346101674004,
+        "min": 1745.0346101674004,
+        "max": 1745.0346101674004
       },
       "latency_ms": {
         "p50": {
-          "median": 0,
-          "min": 0,
-          "max": 0
+          "median": 72.858,
+          "min": 72.858,
+          "max": 72.858
         },
         "p95": {
-          "median": 0.426,
-          "min": 0.426,
-          "max": 0.426
+          "median": 377.144,
+          "min": 377.144,
+          "max": 377.144
         },
         "p99": {
-          "median": 163.442,
-          "min": 163.442,
-          "max": 163.442
+          "median": 1161.352,
+          "min": 1161.352,
+          "max": 1161.352
         }
       },
       "error_rate": {
-        "median": 1,
-        "min": 1,
-        "max": 1
+        "median": 0,
+        "min": 0,
+        "max": 0
       },
       "cpu_avg_pct": {
         "median": 0,
