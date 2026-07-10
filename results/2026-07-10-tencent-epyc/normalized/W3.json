@@ -1,0 +1,389 @@
+{
+  "scenario": "W3",
+  "records": [
+    {
+      "impl": "node",
+      "variant": "msg1024",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 15676.300376770616,
+        "min": 15676.300376770616,
+        "max": 15676.300376770616
+      },
+      "throughput_mbps": {
+        "median": 37.5767069037799,
+        "min": 37.5767069037799,
+        "max": 37.5767069037799
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "node",
+      "variant": "msg65536",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 4003.649273332627,
+        "min": 4003.649273332627,
+        "max": 4003.649273332627
+      },
+      "throughput_mbps": {
+        "median": 526.6682706786606,
+        "min": 526.6682706786606,
+        "max": 526.6682706786606
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "msg1024",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 15640.479703486515,
+        "min": 15640.479703486515,
+        "max": 15640.479703486515
+      },
+      "throughput_mbps": {
+        "median": 37.490868319168804,
+        "min": 37.490868319168804,
+        "max": 37.490868319168804
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "msg65536",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 4026.2181271581076,
+        "min": 4026.2181271581076,
+        "max": 4026.2181271581076
+      },
+      "throughput_mbps": {
+        "median": 529.6371372892744,
+        "min": 529.6371372892744,
+        "max": 529.6371372892744
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "upstream-direct",
+      "variant": "msg1024",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 15545.811350561415,
+        "min": 15545.811350561415,
+        "max": 15545.811350561415
+      },
+      "throughput_mbps": {
+        "median": 37.26390179503454,
+        "min": 37.26390179503454,
+        "max": 37.26390179503454
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "upstream-direct",
+      "variant": "msg65536",
+      "scenario": "W3",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 4025.437357330854,
+        "min": 4025.437357330854,
+        "max": 4025.437357330854
+      },
+      "throughput_mbps": {
+        "median": 529.5344335004924,
+        "min": 529.5344335004924,
+        "max": 529.5344335004924
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p95": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p99": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    }
+  ]
+}

@@ -59,3 +59,5 @@
 | 2026-07-06 | R2 | P1 | local | jd | go, rust | H1, H2 | 10/100 | ✅ | `results/2026-07-06-jd/report.html` | 跨机:本地打jd;4种实现×2场景 |
 | 2026-07-06 | R2 | P1 | local | xyz-mac | go, rust, python | H3, H5-H7 | 10/100 | ✅ | `results/2026-07-06-xyz-mac/report.html` | 跨机:本地打xyz-mac;8081端口;H4上传因内存跳过 |
 | 2026-07-06 | R2 | P1 | local | local | upstream-direct | H1-H3 | 10/100 | ✅ | `results/2026-07-06-local-direct/report.html` | 无网关基线对照 |
+| 2026-07-10 | R3 | P1+P2 | self(tencent-epyc) | self | go/rust/rust-hyper/node/python/upstream-direct | H1-H7+W1-W3 | 10/100 | ✅ | `results/2026-07-10-tencent-epyc/report.html` | **新机器基准**:AMD EPYC 8C/14G/Linux 同机自压测。6 impls × (7 HTTP + 3 WS) = 120+12 runs。131/131 valid。worker=8 for all impls。Python 用 miniforge3 3.10。WS 只 node/python/direct 支持。|
+	

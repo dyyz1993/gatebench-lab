@@ -269,8 +269,11 @@ function parseK6Summary(filePath: string): {
     return undefined;
   }
 
-  // --- RPS ---
-  const rps = v(m.http_reqs as Record<string, unknown>, 'rate') ?? 0;
+  // --- RPS: try http_reqs (HTTP) then ws_sessions (WS) ---
+  const httpReqs = m.http_reqs as Record<string, unknown> | undefined;
+  const wsSessions = m.ws_sessions as Record<string, unknown> | undefined;
+  const rps = v(httpReqs, 'rate') ?? v(wsSessions, 'rate') ?? 0;
+  const isWs = !httpReqs && !!wsSessions;
 
   // --- Throughput ---
   const sent = v(m.data_sent as Record<string, unknown>, 'count') ?? 0;
@@ -281,8 +284,13 @@ function parseK6Summary(filePath: string): {
   if (iterRate > 0 && iterCount > 0) {
     durationSec = iterCount / iterRate;
   } else if (rps > 0) {
-    const reqCount = v(m.http_reqs as Record<string, unknown>, 'count') ?? 0;
-    if (reqCount > 0) durationSec = reqCount / rps;
+    if (httpReqs) {
+      const reqCount = v(httpReqs, 'count') ?? 0;
+      if (reqCount > 0) durationSec = reqCount / rps;
+    } else if (wsSessions) {
+      const sessCount = v(wsSessions, 'count') ?? 0;
+      if (sessCount > 0) durationSec = sessCount / rps;
+    }
   }
   const totalBytes = sent + recv;
   const throughputMbps = durationSec > 0
@@ -301,10 +309,76 @@ function parseK6Summary(filePath: string): {
   const p99 = extractPercentile(durValues, 'p(99)') ?? numVal(durValues['max']) ?? 0;
 
   // --- Error rate ---
-  // k6 v1: http_req_failed.values.rate
-  // k6 v2: http_req_failed.value
-  const errRaw = m.http_req_failed as Record<string, unknown> | undefined;
-  const errorRate = v(errRaw, 'rate') ?? numVal(errRaw?.value) ?? 0;
+  // k6 v0.52+: root_group.checks is an OBJECT (keyed by check name), not an array.
+  // Prioritize checks data over http_req_failed metric for accuracy.
+  let errorRate = 0;
+  let checksUsed = false;
+  const rg = summary.root_group as Record<string, unknown> | undefined;
+  if (rg) {
+    const checksRaw = rg['checks'] as Record<string, unknown> | undefined;
+    if (checksRaw) {
+      // Try object format (k6 v0.52+)
+      if (!Array.isArray(checksRaw)) {
+        for (const key of Object.keys(checksRaw)) {
+          const check = checksRaw[key] as Record<string, unknown> | undefined;
+          if (check) {
+            const cp = numVal(check['passes']);
+            const cf = numVal(check['fails']);
+            if (cp + cf > 0) {
+              errorRate = cf / (cp + cf);
+              checksUsed = true;
+              break;
+            }
+          }
+        }
+      } else {
+        // Try array format (older k6 versions)
+        if (checksRaw.length > 0) {
+          const firstCheck = checksRaw[0] as Record<string, unknown> | undefined;
+          if (firstCheck) {
+            const cp = numVal(firstCheck['passes']);
+            const cf = numVal(firstCheck['fails']);
+            if (cp + cf > 0) {
+              errorRate = cf / (cp + cf);
+              checksUsed = true;
+            }
+          }
+        }
+      }
+    }
+  }
+  if (checksUsed && errorRate > 0.5) {
+    // Checks say 100% failure, but this might be a path/routing difference for
+    // upstream-direct (which bypasses the gateway and hits the upstream directly).
+    // Check http_req_failed as a tiebreaker.
+    const errRaw = m.http_req_failed as Record<string, unknown> | undefined;
+    if (errRaw) {
+      const passes = numVal(errRaw['passes']);
+      const fails = numVal(errRaw['fails']);
+      if (passes + fails > 0) {
+        const failRateFromMetric = fails / (passes + fails);
+        if (failRateFromMetric < 0.05) {
+          // http_req_failed says low error rate → trust it over checks
+          errorRate = failRateFromMetric;
+        }
+      }
+    }
+  }
+  if (!checksUsed) {
+    // Fallback: http_req_failed metric (k6 v0.52 format and legacy)
+    const errRaw = m.http_req_failed as Record<string, unknown> | undefined;
+    if (errRaw) {
+      const passes = numVal(errRaw['passes']);
+      const fails = numVal(errRaw['fails']);
+      if (passes + fails > 0) {
+        errorRate = fails / (passes + fails);
+      } else {
+        const values = errRaw['values'] as Record<string, unknown> | undefined;
+        errorRate = numVal(values?.rate) ?? 0;
+      }
+    }
+  }
+  // For WS scenarios with no checks or http_req_failed, errorRate stays 0.
 
   return {
     rps: numVal(rps),
@@ -485,19 +559,21 @@ function main() {
     const { group, firstMeta, firstData } = entry;
     const aggregated = aggregateGroup(group);
 
-		    const reasons: string[] = [];
-		    // H5 (instant upload) has intentional cache miss rate = error
-		    const errorThreshold = firstMeta.scenario === 'H5' ? 0.95 : 0.05;
-		    if (aggregated.error_rate.median >= errorThreshold) {
-		      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
+			    const reasons: string[] = [];
+			    const isWs = firstMeta.scenario.startsWith('W');
+			    // H5 (instant upload) has intentional cache miss rate = error
+			    const errorThreshold = firstMeta.scenario === 'H5' ? 0.95 : 0.05;
+			    if (aggregated.error_rate.median >= errorThreshold) {
+			      reasons.push(`error_rate=${(aggregated.error_rate.median * 100).toFixed(0)}%`);
+			    }
+			    // rps=0: no completed requests (hung gateway / timeout / mem pressure)
+			    if (aggregated.rps.median === 0) {
+			      reasons.push('rps=0 (no completed requests)');
+			    }
+			    // WS scenarios don't have http_req_duration (latency not applicable)
+			    if (!isWs && aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
+		      reasons.push('p95/p99=0 (k6 data collection issue)');
 		    }
-		    // rps=0: no completed requests (hung gateway / timeout / mem pressure)
-		    if (aggregated.rps.median === 0) {
-		      reasons.push('rps=0 (no completed requests)');
-		    }
-		    if (aggregated.latency_ms.p95.median === 0 && aggregated.latency_ms.p99.median === 0 && aggregated.rps.median > 0) {
-	      reasons.push('p95/p99=0 (k6 data collection issue)');
-	    }
 
 	    const record: NormalizedRecord = {
 	      impl: firstMeta.impl,

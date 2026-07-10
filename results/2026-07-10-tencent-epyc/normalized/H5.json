@@ -1,0 +1,773 @@
+{
+  "scenario": "H5",
+  "records": [
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 23121.81540466827,
+        "min": 23121.81540466827,
+        "max": 23121.81540466827
+      },
+      "throughput_mbps": {
+        "median": 8.19682889103284,
+        "min": 8.19682889103284,
+        "max": 8.19682889103284
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.28211,
+          "min": 0.28211,
+          "max": 0.28211
+        },
+        "p95": {
+          "median": 0.69928855,
+          "min": 0.69928855,
+          "max": 0.69928855
+        },
+        "p99": {
+          "median": 23.294022,
+          "min": 23.294022,
+          "max": 23.294022
+        }
+      },
+      "error_rate": {
+        "median": 0.5010494903916848,
+        "min": 0.5010494903916848,
+        "max": 0.5010494903916848
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "go",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 29877.742092829012,
+        "min": 29877.742092829012,
+        "max": 29877.742092829012
+      },
+      "throughput_mbps": {
+        "median": 10.59178280420844,
+        "min": 10.59178280420844,
+        "max": 10.59178280420844
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 2.150966,
+          "min": 2.150966,
+          "max": 2.150966
+        },
+        "p95": {
+          "median": 9.138988,
+          "min": 9.138988,
+          "max": 9.138988
+        },
+        "p99": {
+          "median": 139.620806,
+          "min": 139.620806,
+          "max": 139.620806
+        }
+      },
+      "error_rate": {
+        "median": 0.4993792256439488,
+        "min": 0.4993792256439488,
+        "max": 0.4993792256439488
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 5578.360442517266,
+        "min": 5578.360442517266,
+        "max": 5578.360442517266
+      },
+      "throughput_mbps": {
+        "median": 2.312231236720955,
+        "min": 2.312231236720955,
+        "max": 2.312231236720955
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 1.69943,
+          "min": 1.69943,
+          "max": 1.69943
+        },
+        "p95": {
+          "median": 3.4843038499999976,
+          "min": 3.4843038499999976,
+          "max": 3.4843038499999976
+        },
+        "p99": {
+          "median": 51.146782,
+          "min": 51.146782,
+          "max": 51.146782
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "node",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 5452.183312529093,
+        "min": 5452.183312529093,
+        "max": 5452.183312529093
+      },
+      "throughput_mbps": {
+        "median": 2.2599232694755758,
+        "min": 2.2599232694755758,
+        "max": 2.2599232694755758
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 18.300933,
+          "min": 18.300933,
+          "max": 18.300933
+        },
+        "p95": {
+          "median": 31.722568,
+          "min": 31.722568,
+          "max": 31.722568
+        },
+        "p99": {
+          "median": 1118.717145,
+          "min": 1118.717145,
+          "max": 1118.717145
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 1705.5731818495437,
+        "min": 1705.5731818495437,
+        "max": 1705.5731818495437
+      },
+      "throughput_mbps": {
+        "median": 0.6285084277523054,
+        "min": 0.6285084277523054,
+        "max": 0.6285084277523054
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 1.203312,
+          "min": 1.203312,
+          "max": 1.203312
+        },
+        "p95": {
+          "median": 43.680509,
+          "min": 43.680509,
+          "max": 43.680509
+        },
+        "p99": {
+          "median": 51.69818,
+          "min": 51.69818,
+          "max": 51.69818
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "python",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 3512.929263737703,
+        "min": 3512.929263737703,
+        "max": 3512.929263737703
+      },
+      "throughput_mbps": {
+        "median": 1.2945111767284607,
+        "min": 1.2945111767284607,
+        "max": 1.2945111767284607
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 6.5144795,
+          "min": 6.5144795,
+          "max": 6.5144795
+        },
+        "p95": {
+          "median": 95.81444129999997,
+          "min": 95.81444129999997,
+          "max": 95.81444129999997
+        },
+        "p99": {
+          "median": 2962.805768,
+          "min": 2962.805768,
+          "max": 2962.805768
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 22207.691128523944,
+        "min": 22207.691128523944,
+        "max": 22207.691128523944
+      },
+      "throughput_mbps": {
+        "median": 7.8725591732712585,
+        "min": 7.8725591732712585,
+        "max": 7.8725591732712585
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.27290000000000003,
+          "min": 0.27290000000000003,
+          "max": 0.27290000000000003
+        },
+        "p95": {
+          "median": 0.6760345,
+          "min": 0.6760345,
+          "max": 0.6760345
+        },
+        "p99": {
+          "median": 691.773638,
+          "min": 691.773638,
+          "max": 691.773638
+        }
+      },
+      "error_rate": {
+        "median": 0.4993936173725621,
+        "min": 0.4993936173725621,
+        "max": 0.4993936173725621
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 28579.0763046064,
+        "min": 28579.0763046064,
+        "max": 28579.0763046064
+      },
+      "throughput_mbps": {
+        "median": 10.131228240322095,
+        "min": 10.131228240322095,
+        "max": 10.131228240322095
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 2.143189,
+          "min": 2.143189,
+          "max": 2.143189
+        },
+        "p95": {
+          "median": 9.00444675,
+          "min": 9.00444675,
+          "max": 9.00444675
+        },
+        "p99": {
+          "median": 705.858329,
+          "min": 705.858329,
+          "max": 705.858329
+        }
+      },
+      "error_rate": {
+        "median": 0.4996199341063672,
+        "min": 0.4996199341063672,
+        "max": 0.4996199341063672
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust-hyper",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 25959.526868167475,
+        "min": 25959.526868167475,
+        "max": 25959.526868167475
+      },
+      "throughput_mbps": {
+        "median": 9.202608192518488,
+        "min": 9.202608192518488,
+        "max": 9.202608192518488
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.260075,
+          "min": 0.260075,
+          "max": 0.260075
+        },
+        "p95": {
+          "median": 0.592149,
+          "min": 0.592149,
+          "max": 0.592149
+        },
+        "p99": {
+          "median": 11.357434,
+          "min": 11.357434,
+          "max": 11.357434
+        }
+      },
+      "error_rate": {
+        "median": 0.4996603771162229,
+        "min": 0.4996603771162229,
+        "max": 0.4996603771162229
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "rust-hyper",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 33870.38374484145,
+        "min": 33870.38374484145,
+        "max": 33870.38374484145
+      },
+      "throughput_mbps": {
+        "median": 12.006970307368118,
+        "min": 12.006970307368118,
+        "max": 12.006970307368118
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 2.012841,
+          "min": 2.012841,
+          "max": 2.012841
+        },
+        "p95": {
+          "median": 7.924144,
+          "min": 7.924144,
+          "max": 7.924144
+        },
+        "p99": {
+          "median": 53.18457,
+          "min": 53.18457,
+          "max": 53.18457
+        }
+      },
+      "error_rate": {
+        "median": 0.4995232993001502,
+        "min": 0.4995232993001502,
+        "max": 0.4995232993001502
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "upstream-direct",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 10,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 42236.767064613465,
+        "min": 42236.767064613465,
+        "max": 42236.767064613465
+      },
+      "throughput_mbps": {
+        "median": 17.021417127039225,
+        "min": 17.021417127039225,
+        "max": 17.021417127039225
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 0.131538,
+          "min": 0.131538,
+          "max": 0.131538
+        },
+        "p95": {
+          "median": 0.305423,
+          "min": 0.305423,
+          "max": 0.305423
+        },
+        "p99": {
+          "median": 15.579983,
+          "min": 15.579983,
+          "max": 15.579983
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    },
+    {
+      "impl": "upstream-direct",
+      "variant": "buffered",
+      "scenario": "H5",
+      "machine": "tencent-epyc",
+      "concurrency": 100,
+      "duration_sec": 30,
+      "runs": 1,
+      "rps": {
+        "median": 44269.34314610822,
+        "min": 44269.34314610822,
+        "max": 44269.34314610822
+      },
+      "throughput_mbps": {
+        "median": 17.840545287881614,
+        "min": 17.840545287881614,
+        "max": 17.840545287881614
+      },
+      "latency_ms": {
+        "p50": {
+          "median": 1.323474,
+          "min": 1.323474,
+          "max": 1.323474
+        },
+        "p95": {
+          "median": 6.303736,
+          "min": 6.303736,
+          "max": 6.303736
+        },
+        "p99": {
+          "median": 60.581845,
+          "min": 60.581845,
+          "max": 60.581845
+        }
+      },
+      "error_rate": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "cpu_avg_pct": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "mem_rss_mb": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "gc_pause_ms": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "open_fds": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "notes": "",
+      "valid": true,
+      "invalid_reason": ""
+    }
+  ]
+}
